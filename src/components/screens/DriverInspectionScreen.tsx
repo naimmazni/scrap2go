@@ -78,13 +78,13 @@ const DriverInspectionScreen: React.FC = () => {
 
       {/* Main Content */}
       <div style={{
+        flex: 1,
         overflowY: 'auto',
-        paddingBottom: 140,
         display: 'flex',
         flexDirection: 'column',
         padding: `${theme.spacing.lg}`,
         gap: theme.spacing.lg,
-        position: 'relative',
+        paddingBottom: 100,
       }}>
         
         {/* Driver Info Section */}
@@ -295,10 +295,8 @@ const DriverInspectionScreen: React.FC = () => {
 
       {/* Fixed Bottom Button */}
       <div style={{
-        position: 'absolute',
+        position: 'sticky',
         bottom: 0,
-        left: 0,
-        right: 0,
         backgroundColor: theme.colors.backgroundLight,
         borderTop: `1px solid ${theme.colors.borderLight}`,
         padding: theme.spacing.lg,
