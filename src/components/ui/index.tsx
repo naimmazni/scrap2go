@@ -19,7 +19,6 @@ export * from './PageContainer';
 // Composite Components
 export * from './MenuItem';
 export * from './NotificationItem';
-export * from './HistoryCard';
 
 // Legacy components - temporarily import from ui-legacy
 // These will be migrated to separate files gradually

@@ -5,7 +5,7 @@ import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 // Assuming these paths exist based on your snippet
 import { theme } from '@/lib/theme'; 
-import { Icon, Button } from '@/components/ui'; 
+import { Icon, Button, PageContainer, ContentArea } from '@/components/ui'; 
 
 const LoginScreen: React.FC = () => {
   const router = useRouter();
@@ -36,15 +36,8 @@ const LoginScreen: React.FC = () => {
   };
 
   return (
-    <div style={{
-      display: 'flex',
-      flexDirection: 'column',
-      height: '100%',
-      minHeight: '100vh',
-      backgroundColor: theme.colors.backgroundLight,
-      overflowY: 'auto',
-      paddingTop: 54,
-    }}>
+    <PageContainer>
+      <ContentArea>
       {/* --- Header with Logo and Language Selector --- */}
       <div style={{
         display: 'flex',
@@ -347,7 +340,8 @@ const LoginScreen: React.FC = () => {
           </button>
         </div>
       </div>
-    </div>
+      </ContentArea>
+    </PageContainer>
   );
 };
 

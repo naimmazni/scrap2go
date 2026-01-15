@@ -4,7 +4,7 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { theme, withOpacity } from '@/lib/theme';
-import { Icon, Button, PageIndicator } from '@/components/ui';
+import { Icon, Button, PageIndicator, PageContainer, ContentArea } from '@/components/ui';
 
 const onboardingData = [
   {
@@ -56,13 +56,7 @@ const OnboardingScreen: React.FC = () => {
   const data = onboardingData[currentPage];
 
   return (
-    <div style={{
-      display: 'flex',
-      flexDirection: 'column',
-      height: '100%',
-      backgroundColor: theme.colors.surfaceLight,
-      paddingTop: 54,
-    }}>
+    <PageContainer>
       {/* Skip Button */}
       <div style={{
         display: 'flex',
@@ -83,8 +77,7 @@ const OnboardingScreen: React.FC = () => {
       </div>
 
       {/* Main Content */}
-      <div style={{
-        flex: 1,
+      <ContentArea style={{
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
@@ -154,7 +147,7 @@ const OnboardingScreen: React.FC = () => {
         }}>
           {data.description}
         </p>
-      </div>
+      </ContentArea>
 
       {/* Bottom Section */}
       <div style={{
@@ -182,7 +175,7 @@ const OnboardingScreen: React.FC = () => {
           {currentPage === onboardingData.length - 1 ? 'Get Started' : 'Next'}
         </Button>
       </div>
-    </div>
+    </PageContainer>
   );
 };
 

@@ -4,7 +4,7 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { theme, withOpacity } from '@/lib/theme';
-import { Icon, Button } from '@/components/ui';
+import { Icon, Button, PageContainer, PageHeader, ContentArea } from '@/components/ui';
 
 const photoSteps = [
   {
@@ -39,48 +39,12 @@ const PhotoGuidanceScreen: React.FC = () => {
   const step = photoSteps[currentStep];
 
   return (
-    <div style={{
-      display: 'flex',
-      flexDirection: 'column',
-      height: '100%',
-      backgroundColor: theme.colors.backgroundLight,
-      paddingTop: 54,
-    }}>
-      {/* Header */}
-      <header style={{
-        display: 'flex',
-        alignItems: 'center',
-        padding: `${theme.spacing.sm} ${theme.spacing.md}`,
-        backgroundColor: theme.colors.surfaceLight,
-        borderBottom: `1px solid ${theme.colors.borderLight}`,
-        boxShadow: theme.shadows.sm,
-        position: 'sticky',
-        top: 0,
-        zIndex: 50,
-      }}>
-        <button
-          onClick={() => router.back()}
-          style={{
-            width: 48,
-            height: 48,
-            borderRadius: theme.borderRadius.full,
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}
-        >
-          <Icon name="close" size={24} />
-        </button>
-        <h2 style={{
-          flex: 1,
-          textAlign: 'center',
-          fontSize: theme.fontSizes.xl,
-          fontWeight: theme.fontWeights.bold,
-          paddingRight: 48,
-        }}>
-          Photo Guide
-        </h2>
-      </header>
+    <PageContainer>
+      <PageHeader
+        title="Photo Guide"
+        showBack
+        onBack={() => router.back()}
+      />
 
       {/* Progress */}
       <div style={{
@@ -107,12 +71,10 @@ const PhotoGuidanceScreen: React.FC = () => {
       </div>
 
       {/* Content */}
-      <main style={{
-        flex: 1,
+      <ContentArea style={{
         display: 'flex',
         flexDirection: 'column',
         padding: theme.spacing.md,
-        overflowY: 'auto',
       }}>
         {/* Step Indicator */}
         <div style={{
@@ -249,7 +211,7 @@ const PhotoGuidanceScreen: React.FC = () => {
             ))}
           </ul>
         </div>
-      </main>
+      </ContentArea>
 
       {/* Bottom Actions */}
       <div style={{
@@ -286,7 +248,7 @@ const PhotoGuidanceScreen: React.FC = () => {
           </Button>
         </div>
       </div>
-    </div>
+    </PageContainer>
   );
 };
 

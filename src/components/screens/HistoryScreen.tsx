@@ -154,11 +154,9 @@ const VehicleHistoryCard = ({
         flexShrink: 0, // Prevents shrinking
       }}
       onMouseEnter={(e) => {
-        e.currentTarget.style.transform = 'translateY(-4px)';
         e.currentTarget.style.boxShadow = theme.shadows.lg;
       }}
       onMouseLeave={(e) => {
-        e.currentTarget.style.transform = 'translateY(0)';
         e.currentTarget.style.boxShadow = theme.shadows.card;
       }}
     >

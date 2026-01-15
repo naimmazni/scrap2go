@@ -8,10 +8,9 @@ import {
   Icon, 
   Button, 
   Card, 
-  Header,
-  ScreenContainer,
-  ScrollableContent,
-  FixedBottomContainer,
+  PageHeader,
+  PageContainer,
+  ContentArea,
   WarningBox
 } from '@/components/ui';
 
@@ -41,14 +40,14 @@ const DocumentPreviewScreen: React.FC = () => {
   const currentDoc = documents.find(d => d.id === selectedDocument);
 
   return (
-    <ScreenContainer>
-      <Header
+    <PageContainer>
+      <PageHeader
         title="Document Preview"
         showBack
         onBack={() => router.back()}
       />
 
-      <ScrollableContent bottomPadding={120}>
+      <ContentArea>
         {/* Document Tabs */}
         <div style={{
           display: 'flex',
@@ -251,9 +250,14 @@ const DocumentPreviewScreen: React.FC = () => {
             </Button>
           </div>
         </div>
-      </ScrollableContent>
+      </ContentArea>
 
-      <FixedBottomContainer>
+      <div style={{
+          padding: theme.spacing.md,
+          paddingBottom: theme.spacing.lg,
+          backgroundColor: theme.colors.surfaceLight,
+          borderTop: `1px solid ${theme.colors.borderLight}`,
+      }}>
         <Button
           variant="primary"
           size="lg"
@@ -262,8 +266,8 @@ const DocumentPreviewScreen: React.FC = () => {
         >
           Looks Good
         </Button>
-      </FixedBottomContainer>
-    </ScreenContainer>
+      </div>
+    </PageContainer>
   );
 };
 

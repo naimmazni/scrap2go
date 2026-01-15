@@ -8,10 +8,9 @@ import {
   Icon, 
   Button, 
   Card, 
-  Header,
-  ScreenContainer,
-  ScrollableContent,
-  FixedBottomContainer
+  PageHeader,
+  PageContainer,
+  ContentArea
 } from '@/components/ui';
 
 const LanguageSettingsScreen: React.FC = () => {
@@ -60,14 +59,14 @@ const LanguageSettingsScreen: React.FC = () => {
   };
 
   return (
-    <ScreenContainer>
-      <Header
+    <PageContainer>
+      <PageHeader
         title="Language"
         showBack
         onBack={() => router.back()}
       />
 
-      <ScrollableContent bottomPadding={hasChanges ? 120 : 20}>
+      <ContentArea>
         {/* Current Language Info */}
         <div style={{ padding: theme.spacing.md }}>
           <Card style={{
@@ -293,10 +292,15 @@ const LanguageSettingsScreen: React.FC = () => {
             </button>
           </Card>
         </div>
-      </ScrollableContent>
+      </ContentArea>
 
       {hasChanges && (
-        <FixedBottomContainer>
+        <div style={{
+          padding: theme.spacing.md,
+          paddingBottom: theme.spacing.lg,
+          backgroundColor: theme.colors.surfaceLight,
+          borderTop: `1px solid ${theme.colors.borderLight}`,
+        }}>
           <Button
             variant="primary"
             size="lg"
@@ -306,9 +310,9 @@ const LanguageSettingsScreen: React.FC = () => {
           >
             Apply Changes
           </Button>
-        </FixedBottomContainer>
+        </div>
       )}
-    </ScreenContainer>
+    </PageContainer>
   );
 };
 

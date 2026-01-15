@@ -8,11 +8,11 @@ import {
   Icon, 
   Button, 
   Card, 
-  Header, 
+  PageHeader, 
   Input, 
   BottomNav,
-  ScreenContainer,
-  ScrollableContent,
+  PageContainer,
+  ContentArea,
   SectionTitle,
   Avatar,
   ToggleSwitch,
@@ -40,16 +40,16 @@ const ProfileSettingsScreen: React.FC = () => {
   };
 
   return (
-    <ScreenContainer>
+    <PageContainer>
       {/* Header */}
-      <Header
+      <PageHeader
         title="Profile Settings"
         showBack
         onBack={() => router.back()}
       />
 
       {/* Scrollable Content */}
-      <ScrollableContent bottomPadding={180}>
+      <ContentArea style={{ paddingBottom: 180 }}>
         {/* Profile Avatar Section */}
         <div style={{
           display: 'flex',
@@ -275,11 +275,11 @@ const ProfileSettingsScreen: React.FC = () => {
             Save Changes
           </Button>
         </div>
-      </ScrollableContent>
+      </ContentArea>
 
       {/* Bottom Navigation */}
       <BottomNav activeTab={activeTab} onTabChange={handleTabChange} />
-    </ScreenContainer>
+    </PageContainer>
   );
 };
 

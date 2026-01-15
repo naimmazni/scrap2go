@@ -8,9 +8,9 @@ import {
   Icon, 
   Button, 
   Card, 
-  Header,
-  ScreenContainer,
-  ScrollableContent
+  PageHeader,
+  PageContainer,
+  ContentArea
 } from '@/components/ui';
 
 const AppearanceSettingsScreen: React.FC = () => {
@@ -43,14 +43,14 @@ const AppearanceSettingsScreen: React.FC = () => {
   ];
 
   return (
-    <ScreenContainer>
-      <Header
+    <PageContainer>
+      <PageHeader
         title="Appearance"
         showBack
         onBack={() => router.back()}
       />
 
-      <ScrollableContent bottomPadding={20}>
+      <ContentArea>
         {/* Theme Selection */}
         <div style={{ padding: theme.spacing.md }}>
           <p style={{
@@ -240,8 +240,8 @@ const AppearanceSettingsScreen: React.FC = () => {
             </div>
           </Card>
         </div>
-      </ScrollableContent>
-    </ScreenContainer>
+      </ContentArea>
+    </PageContainer>
   );
 };
 

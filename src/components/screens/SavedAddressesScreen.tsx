@@ -8,10 +8,9 @@ import {
   Icon, 
   Button, 
   Card, 
-  Header,
-  ScreenContainer,
-  ScrollableContent,
-  FixedBottomContainer,
+  PageHeader,
+  PageContainer,
+  ContentArea,
   SectionTitle,
   ListItem
 } from '@/components/ui';
@@ -39,29 +38,29 @@ const SavedAddressesScreen: React.FC = () => {
     router.push('/location');
   };
 
-  const handleEditAddress = (addressId) => {
+  const handleEditAddress = (addressId: number) => {
     alert(`Edit address ${addressId}`);
   };
 
-  const handleSetDefault = (addressId) => {
+  const handleSetDefault = (addressId: number) => {
     alert(`Set address ${addressId} as default`);
   };
 
-  const handleDeleteAddress = (addressId) => {
+  const handleDeleteAddress = (addressId: number) => {
     if (confirm('Are you sure you want to remove this address?')) {
       alert(`Address ${addressId} removed`);
     }
   };
 
   return (
-    <ScreenContainer>
-      <Header
+    <PageContainer>
+      <PageHeader
         title="Saved Addresses"
         showBack
         onBack={() => router.back()}
       />
 
-      <ScrollableContent bottomPadding={120}>
+      <ContentArea>
         {/* Info Card */}
         <div style={{ padding: theme.spacing.md }}>
           <Card style={{
@@ -246,9 +245,14 @@ const SavedAddressesScreen: React.FC = () => {
             </div>
           </Card>
         </div>
-      </ScrollableContent>
+      </ContentArea>
 
-      <FixedBottomContainer>
+      <div style={{
+          padding: theme.spacing.md,
+          paddingBottom: theme.spacing.lg,
+          backgroundColor: theme.colors.surfaceLight,
+          borderTop: `1px solid ${theme.colors.borderLight}`,
+      }}>
         <Button
           variant="primary"
           size="lg"
@@ -258,8 +262,8 @@ const SavedAddressesScreen: React.FC = () => {
         >
           Add New Address
         </Button>
-      </FixedBottomContainer>
-    </ScreenContainer>
+      </div>
+    </PageContainer>
   );
 };
 

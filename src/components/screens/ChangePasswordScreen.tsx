@@ -8,11 +8,10 @@ import {
   Icon, 
   Button, 
   Card, 
-  Header,
+  PageHeader,
   Input,
-  ScreenContainer,
-  ScrollableContent,
-  FixedBottomContainer,
+  PageContainer,
+  ContentArea,
   WarningBox
 } from '@/components/ui';
 
@@ -82,14 +81,14 @@ const ChangePasswordScreen: React.FC = () => {
                       formData.newPassword === formData.confirmPassword;
 
   return (
-    <ScreenContainer>
-      <Header
+    <PageContainer>
+      <PageHeader
         title="Change Password"
         showBack
         onBack={() => router.back()}
       />
 
-      <ScrollableContent bottomPadding={120}>
+      <ContentArea>
         {/* Info Card */}
         <div style={{ padding: theme.spacing.md }}>
           <Card style={{
@@ -269,9 +268,14 @@ const ChangePasswordScreen: React.FC = () => {
             />
           </div>
         )}
-      </ScrollableContent>
+      </ContentArea>
 
-      <FixedBottomContainer>
+      <div style={{
+          padding: theme.spacing.md,
+          paddingBottom: theme.spacing.lg,
+          backgroundColor: theme.colors.surfaceLight,
+          borderTop: `1px solid ${theme.colors.borderLight}`,
+      }}>
         <Button
           variant="primary"
           size="lg"
@@ -282,8 +286,8 @@ const ChangePasswordScreen: React.FC = () => {
         >
           Update Password
         </Button>
-      </FixedBottomContainer>
-    </ScreenContainer>
+      </div>
+    </PageContainer>
   );
 };
 

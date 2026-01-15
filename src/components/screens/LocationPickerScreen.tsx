@@ -4,19 +4,13 @@
 import React from 'react';
 import { useRouter } from 'next/navigation';
 import { theme, withOpacity } from '@/lib/theme';
-import { Icon, Button, Input } from '@/components/ui';
+import { Icon, Button, Input, PageContainer, ContentArea } from '@/components/ui';
 
 const LocationPickerScreen: React.FC = () => {
   const router = useRouter();
 
   return (
-    <div style={{
-      position: 'relative',
-      height: '100%',
-      width: '100%',
-      overflow: 'hidden',
-      paddingTop: 54,
-    }}>
+    <PageContainer style={{ overflow: 'hidden' }}>
       {/* Map Background */}
       <div style={{
         position: 'absolute',
@@ -279,7 +273,7 @@ const LocationPickerScreen: React.FC = () => {
           </Button>
         </div>
       </div>
-    </div>
+    </PageContainer>
   );
 };
 

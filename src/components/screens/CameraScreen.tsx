@@ -4,7 +4,7 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { theme, withOpacity } from '@/lib/theme';
-import { Icon, Badge, ProgressBar } from '@/components/ui';
+import { Icon, Badge, ProgressBar, PageContainer } from '@/components/ui';
 
 const CameraScreen: React.FC = () => {
   const router = useRouter();
@@ -28,14 +28,7 @@ const CameraScreen: React.FC = () => {
   };
 
   return (
-    <div style={{
-      position: 'relative',
-      height: '100%',
-      width: '100%',
-      backgroundColor: theme.colors.black,
-      overflow: 'hidden',
-      paddingTop: 54,
-    }}>
+    <PageContainer style={{ backgroundColor: theme.colors.black, overflow: 'hidden' }}>
       {/* Camera Background */}
       <div style={{
         position: 'absolute',
@@ -402,7 +395,7 @@ const CameraScreen: React.FC = () => {
           </button>
         </div>
       </div>
-    </div>
+    </PageContainer>
   );
 };
 

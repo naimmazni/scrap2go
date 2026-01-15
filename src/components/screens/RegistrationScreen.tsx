@@ -4,7 +4,7 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { theme, withOpacity } from '@/lib/theme';
-import { Icon, Button } from '@/components/ui';
+import { Icon, Button, PageContainer, PageHeader, ContentArea } from '@/components/ui';
 
 const RegistrationScreen: React.FC = () => {
   const router = useRouter();
@@ -84,50 +84,13 @@ const RegistrationScreen: React.FC = () => {
   };
 
   return (
-    <div style={{
-      display: 'flex',
-      flexDirection: 'column',
-      height: '100%',
-      minHeight: '100vh',
-      backgroundColor: theme.colors.backgroundLight,
-      overflowY: 'auto',
-      paddingTop: 54,
-    }}>
-      {/* Header with Back Button */}
-      <div style={{
-        display: 'flex',
-        alignItems: 'center',
-        padding: theme.spacing.md,
-        paddingBottom: theme.spacing.lg,
-      }}>
-        <button
-          onClick={() => router.back()}
-          style={{
-            width: 40,
-            height: 40,
-            borderRadius: theme.borderRadius.full,
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            color: theme.colors.textPrimary,
-            backgroundColor: theme.colors.surfaceLight,
-            border: `1px solid ${theme.colors.borderLight}`,
-          }}
-        >
-          <Icon name="arrow_back" size={24} />
-        </button>
-        <h1 style={{
-          flex: 1,
-          textAlign: 'center',
-          fontSize: theme.fontSizes.xl,
-          fontWeight: theme.fontWeights.bold,
-          marginRight: 40, // Balance the back button
-        }}>
-          Create Account
-        </h1>
-      </div>
-
-      {/* Main Content */}
+    <PageContainer>
+      <PageHeader
+        title="Create Account"
+        showBack
+        onBack={() => router.back()}
+      />
+      <ContentArea>
       <main style={{
         flex: 1,
         padding: theme.spacing.lg,
@@ -626,7 +589,8 @@ const RegistrationScreen: React.FC = () => {
           </button>
         </div>
       </main>
-    </div>
+      </ContentArea>
+    </PageContainer>
   );
 };
 

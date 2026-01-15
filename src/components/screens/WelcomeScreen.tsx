@@ -4,21 +4,13 @@
 import React from 'react';
 import { useRouter } from 'next/navigation';
 import { theme, withOpacity } from '@/lib/theme';
-import { Icon, Button, Badge } from '@/components/ui';
+import { Icon, Button, Badge, PageContainer, ContentArea } from '@/components/ui';
 
 const WelcomeScreen: React.FC = () => {
   const router = useRouter();
 
   return (
-    <div style={{
-      display: 'flex',
-      flexDirection: 'column',
-      height: '100%',
-      backgroundColor: theme.colors.backgroundLight,
-      position: 'relative',
-      overflow: 'hidden',
-      paddingTop: 54,
-    }}>
+    <PageContainer style={{ overflow: 'hidden' }}>
       {/* Header */}
       <header style={{
         display: 'flex',
@@ -69,8 +61,7 @@ const WelcomeScreen: React.FC = () => {
       </header>
 
       {/* Main Content */}
-      <main style={{
-        flex: 1,
+      <ContentArea style={{
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
@@ -201,7 +192,7 @@ const WelcomeScreen: React.FC = () => {
             </div>
           </div>
         </div>
-      </main>
+      </ContentArea>
 
       {/* Footer */}
       <footer style={{
@@ -231,7 +222,7 @@ const WelcomeScreen: React.FC = () => {
           No hidden fees. 100% Free Service.
         </p>
       </footer>
-    </div>
+    </PageContainer>
   );
 };
 

@@ -8,11 +8,10 @@ import {
   Icon, 
   Button, 
   Card, 
-  Header, 
+  PageHeader, 
   Input,
-  ScreenContainer,
-  ScrollableContent,
-  FixedBottomContainer,
+  PageContainer,
+  ContentArea,
   SectionTitle,
   StepIndicator
 } from '@/components/ui';
@@ -40,8 +39,8 @@ const VehicleDetailsScreen: React.FC = () => {
   };
 
   return (
-    <ScreenContainer>
-      <Header
+    <PageContainer>
+      <PageHeader
         title="Vehicle Details"
         showBack
         onBack={() => router.back()}
@@ -49,7 +48,7 @@ const VehicleDetailsScreen: React.FC = () => {
 
       <StepIndicator currentStep={1} totalSteps={4} />
 
-      <ScrollableContent bottomPadding={120}>
+      <ContentArea>
         {/* Vehicle Plate Hero */}
         <div style={{
           display: 'flex',
@@ -249,9 +248,14 @@ const VehicleDetailsScreen: React.FC = () => {
             </div>
           </Card>
         </div>
-      </ScrollableContent>
+      </ContentArea>
 
-      <FixedBottomContainer>
+      <div style={{
+          padding: theme.spacing.md,
+          paddingBottom: theme.spacing.lg,
+          backgroundColor: theme.colors.surfaceLight,
+          borderTop: `1px solid ${theme.colors.borderLight}`,
+      }}>
         <Button
           variant="primary"
           size="lg"
@@ -262,8 +266,8 @@ const VehicleDetailsScreen: React.FC = () => {
         >
           Continue to Verification
         </Button>
-      </FixedBottomContainer>
-    </ScreenContainer>
+      </div>
+    </PageContainer>
   );
 };
 

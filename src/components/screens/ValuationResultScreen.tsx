@@ -4,64 +4,21 @@
 import React from 'react';
 import { useRouter } from 'next/navigation';
 import { theme, withOpacity } from '@/lib/theme';
-import { Icon, Button, Card, Badge, Divider } from '@/components/ui';
+import { Icon, Button, Card, Badge, Divider, PageContainer, PageHeader, ContentArea } from '@/components/ui';
 
 const ValuationResultScreen: React.FC = () => {
   const router = useRouter();
 
   return (
-    <div style={{
-      display: 'flex',
-      flexDirection: 'column',
-      height: '100%',
-      backgroundColor: theme.colors.backgroundLight,
-      position: 'relative',
-      paddingTop: 54,
-    }}>
-      {/* Header */}
-      <header style={{
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        padding: `${theme.spacing.sm} ${theme.spacing.md}`,
-        backgroundColor: withOpacity(theme.colors.backgroundLight, 0.95),
-        backdropFilter: 'blur(12px)',
-        position: 'sticky',
-        top: 0,
-        zIndex: 20,
-        borderBottom: `1px solid ${theme.colors.borderLight}`,
-      }}>
-        <button
-          onClick={() => router.back()}
-          style={{
-            width: 48,
-            height: 48,
-            borderRadius: theme.borderRadius.full,
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}
-        >
-          <Icon name="arrow_back" size={24} />
-        </button>
-        <h2 style={{
-          flex: 1,
-          textAlign: 'center',
-          fontSize: theme.fontSizes.lg,
-          fontWeight: theme.fontWeights.bold,
-          paddingRight: 48,
-        }}>
-          Valuation Result
-        </h2>
-      </header>
+    <PageContainer>
+      <PageHeader
+        title="Valuation Result"
+        showBack
+        onBack={() => router.back()}
+      />
 
       {/* Main Content */}
-      <main style={{
-        flex: 1,
-        padding: theme.spacing.md,
-        paddingBottom: 130,
-        overflowY: 'auto',
-      }}>
+      <ContentArea>
         {/* Price Card */}
         <Card
           padding="lg"
@@ -272,20 +229,15 @@ const ValuationResultScreen: React.FC = () => {
             <Icon name="expand_more" size={20} color={theme.colors.textMuted} />
           </button>
         </div>
-      </main>
+      </ContentArea>
 
       {/* Bottom Actions */}
       <div style={{
-        position: 'absolute',
-        bottom: 0,
-        left: 0,
-        right: 0,
         padding: theme.spacing.md,
         paddingBottom: theme.spacing.lg,
         backgroundColor: theme.colors.surfaceLight,
         borderTop: `1px solid ${theme.colors.borderLight}`,
         boxShadow: '0 -4px 20px rgba(0,0,0,0.05)',
-        zIndex: 50,
       }}>
         <div style={{
           display: 'flex',
@@ -318,7 +270,7 @@ const ValuationResultScreen: React.FC = () => {
           By accepting, you agree to our Terms of Service
         </p>
       </div>
-    </div>
+    </PageContainer>
   );
 };
 

@@ -89,6 +89,7 @@ interface ListItemProps {
   label: string;
   onClick?: () => void;
   showArrow?: boolean;
+  showBorder?: boolean;
   rightElement?: ReactNode;
   style?: CSSProperties;
 }
@@ -236,8 +237,8 @@ export const ToggleSwitch: React.FC<ToggleSwitchProps> = ({ enabled, onToggle, s
 );
 
 // LIST ITEM
-export const ListItem: React.FC<ListItemProps> = ({ icon, label, onClick, showArrow = true, rightElement, style }) => (
-  <button onClick={onClick} style={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: theme.spacing.md, backgroundColor: 'transparent', border: 'none', cursor: onClick ? 'pointer' : 'default', ...style }}>
+export const ListItem: React.FC<ListItemProps> = ({ icon, label, onClick, showArrow = true, showBorder = false, rightElement, style }) => (
+  <button onClick={onClick} style={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: theme.spacing.md, backgroundColor: 'transparent', border: 'none', borderBottom: showBorder ? `1px solid ${theme.colors.borderLight}` : 'none', cursor: onClick ? 'pointer' : 'default', ...style }}>
     <div style={{ display: 'flex', alignItems: 'center', gap: theme.spacing.sm }}>
       {icon && <Icon name={icon} size={20} color={theme.colors.textSecondary} />}
       <span style={{ fontSize: theme.fontSizes.base, fontWeight: theme.fontWeights.medium, color: theme.colors.textPrimary }}>{label}</span>
