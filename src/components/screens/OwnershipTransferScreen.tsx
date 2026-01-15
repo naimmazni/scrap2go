@@ -113,7 +113,7 @@ const OwnershipTransferScreen: React.FC = () => {
     if (canSubmit) {
       // In real app: save signature blob and transfer data
       console.log('Ownership transfer authorized');
-      router.push('/jpj-deregistration-success');
+      router.push('/jpj-success');
     }
   };
 
