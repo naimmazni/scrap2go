@@ -81,6 +81,7 @@ const JPJDeregistrationSuccessScreen: React.FC = () => {
           width: '100%',
           maxWidth: 448, // max-w-md
           margin: '0 auto',
+          overflowY: 'auto',
        }}>
           {/* Main Status Animation */}
           <div style={{
