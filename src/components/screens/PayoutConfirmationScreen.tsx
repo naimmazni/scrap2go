@@ -1,128 +1,103 @@
 ﻿'use client';
 
-// Payout Confirmation / All Done Screen
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { theme, withOpacity } from '@/lib/theme';
 import { Icon, Button, PageContainer } from '@/components/ui';
 
-const PayoutConfirmationScreen: React.FC = () => {
+interface PayoutConfirmationScreenProps {
+  amount?: number;
+}
+
+const PayoutConfirmationScreen: React.FC<PayoutConfirmationScreenProps> = ({ amount = 1200 }) => {
   const router = useRouter();
   const [isDownloading, setIsDownloading] = useState(false);
 
-  // Mock handlers
-  const handleShare = async () => {
-    if (navigator.share) {
-      try {
-        await navigator.share({
-          title: 'Payment Receipt',
-          text: 'Receipt for vehicle scrappage payment.',
-          url: window.location.href,
-        });
-      } catch (error) {
-        console.log('Error sharing:', error);
-      }
-    } else {
-      console.log('Web Share API not supported');
-      // Fallback logic here
-    }
-  };
-
-  const handleDownload = () => {
+  const handleDownloadDocument = () => {
     setIsDownloading(true);
-    // Simulate API call for PDF generation
+    // Simulate PDF download for JPJ deregistration document
     setTimeout(() => {
       setIsDownloading(false);
-      console.log('Download certificate triggered');
+      console.log('JPJ Deregistration Certificate downloaded');
+      // In real implementation, trigger actual PDF download
     }, 1500);
   };
 
   return (
     <PageContainer>
-      {/* Background: Subtle Pattern */}
+      {/* Confetti Particles */}
       <div style={{
         position: 'absolute',
-        inset: 0,
-        backgroundImage: `
-          radial-gradient(circle at 20% 20%, ${withOpacity(theme.colors.success, 0.05)} 0%, transparent 40%),
-          radial-gradient(circle, ${theme.colors.primary} 1.5px, transparent 1.5px), 
-          radial-gradient(circle, ${theme.colors.success} 1.5px, transparent 1.5px)
-        `,
-        backgroundSize: '100% 100%, 40px 40px, 40px 40px',
-        backgroundPosition: '0 0, 0 0, 20px 20px',
-        opacity: 0.1,
-        pointerEvents: 'none',
-        zIndex: 0,
-      }} />
-
-      {/* --- Header --- */}
-      <header style={{
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        padding: `${theme.spacing.md} ${theme.spacing.lg}`,
-        backgroundColor: 'rgba(255, 255, 255, 0.9)',
-        backdropFilter: 'blur(8px)',
-        borderBottom: `1px solid ${theme.colors.gray100}`,
-        position: 'sticky',
         top: 0,
-        zIndex: 50,
+        left: 0,
+        right: 0,
+        height: 240,
+        pointerEvents: 'none',
+        overflow: 'hidden',
+        zIndex: 10,
       }}>
-        {/* Placeholder for balance/alignment */}
-        <div style={{ width: 40 }} />
-        
-        <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-          <Icon name="check_circle" size={24} filled color={theme.colors.success} />
-          <h2 style={{
-            fontSize: theme.fontSizes.lg,
-            fontWeight: theme.fontWeights.bold,
-            color: theme.colors.textPrimary,
-          }}>
-            All Done!
-          </h2>
-        </div>
+        <div style={{ position: 'absolute', width: 8, height: 8, backgroundColor: theme.colors.primary, borderRadius: '50%', top: 40, left: '10%', opacity: 0.6 }} />
+        <div style={{ position: 'absolute', width: 8, height: 8, backgroundColor: theme.colors.success, borderRadius: '2px', top: 80, left: '25%', opacity: 0.6 }} />
+        <div style={{ position: 'absolute', width: 8, height: 8, backgroundColor: '#90CAF9', borderRadius: '50%', top: 56, left: '60%', opacity: 0.6 }} />
+        <div style={{ position: 'absolute', width: 8, height: 8, backgroundColor: '#FDD835', borderRadius: '2px', top: 96, left: '85%', opacity: 0.6 }} />
+      </div>
 
-        <button 
-          onClick={() => router.push('/home')}
-          aria-label="Close"
-          style={{ 
-            width: 40,
-            height: 40,
-            padding: 0, 
-            border: 'none', 
-            background: 'none',
-            display: 'flex', 
-            alignItems: 'center', 
-            justifyContent: 'flex-end',
-            cursor: 'pointer'
-          }}
-        >
-          <Icon name="close" size={24} color={theme.colors.textSecondary} />
-        </button>
-      </header>
-
-      {/* --- Main Content --- */}
       <main style={{
         flex: 1,
         display: 'flex',
         flexDirection: 'column',
+        alignItems: 'center',
+        padding: `${theme.spacing.md} ${theme.spacing.lg} ${theme.spacing.lg}`,
+        width: '100%',
+        maxWidth: 448,
+        margin: '0 auto',
+        gap: 24,
         position: 'relative',
-        paddingBottom: 40,
+        zIndex: 20,
         overflowY: 'auto',
       }}>
-        
-        {/* Hero Headline */}
-        <div style={{ 
-          position: 'relative', 
-          zIndex: 10, 
-          padding: '32px 24px 24px', 
-          textAlign: 'center' 
+        {/* Back Button */}
+        <div style={{
+          alignSelf: 'flex-start',
+          marginBottom: 8,
         }}>
+          <Button
+            variant="ghost"
+            onClick={() => router.back()}
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: 8,
+              padding: `${theme.spacing.xs} ${theme.spacing.sm}`,
+            }}
+          >
+            <Icon name="chevron_left" size={24} color={theme.colors.primary} />
+          </Button>
+        </div>
+
+        {/* Success Icon */}
+        <div style={{
+          width: 80,
+          height: 80,
+          borderRadius: theme.borderRadius.full,
+          backgroundColor: theme.colors.success,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          color: '#fff',
+          boxShadow: `0 20px 25px -5px ${withOpacity(theme.colors.success, 0.3)}`,
+          border: `8px solid ${withOpacity(theme.colors.success, 0.15)}`,
+        }}>
+          <Icon name="check_circle" size={48} color="#fff" filled />
+        </div>
+
+        {/* Heading */}
+        <div style={{ textAlign: 'center' }}>
           <h1 style={{
-            fontSize: '28px',
-            fontWeight: 800,
-            letterSpacing: '-0.02em',
+            fontSize: theme.fontSizes['2xl'],
+            fontWeight: theme.fontWeights.extrabold || 800,
             color: theme.colors.textPrimary,
+            margin: 0,
             marginBottom: 8,
           }}>
             Payment Released
@@ -130,231 +105,317 @@ const PayoutConfirmationScreen: React.FC = () => {
           <p style={{
             fontSize: theme.fontSizes.base,
             color: theme.colors.textSecondary,
-            maxWidth: '280px',
-            margin: '0 auto',
-            lineHeight: 1.5,
+            margin: 0,
+            fontWeight: theme.fontWeights.medium,
           }}>
-            Your scrap car transaction has been successfully processed.
+            Transaction completed successfully
           </p>
         </div>
 
-        <div style={{ padding: '0 16px', display: 'flex', flexDirection: 'column', gap: 16, position: 'relative', zIndex: 10 }}>
-          
-          {/* Card 1: Bank Transfer Receipt */}
+        {/* Receipt Card */}
+        <div style={{
+          width: '100%',
+          backgroundColor: '#fff',
+          borderRadius: theme.borderRadius['2xl'],
+          overflow: 'hidden',
+          boxShadow: theme.shadows.lg,
+          border: `1px solid #fff`,
+        }}>
+          {/* Receipt Top - Amount */}
           <div style={{
-            backgroundColor: '#fff',
-            borderRadius: theme.borderRadius['2xl'],
-            boxShadow: theme.shadows.md,
-            border: `1px solid ${theme.colors.gray100}`,
-            overflow: 'hidden',
+            padding: 32,
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            borderBottom: `2px dashed ${withOpacity(theme.colors.gray200, 0.6)}`,
+            position: 'relative',
           }}>
-            {/* Visual Header */}
+            {/* Dashed border cutouts */}
             <div style={{
-              width: '100%',
-              height: 100,
-              background: `linear-gradient(135deg, ${withOpacity(theme.colors.primary, 0.08)} 0%, ${withOpacity(theme.colors.success, 0.05)} 100%)`,
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              position: 'relative',
+              position: 'absolute',
+              left: -12,
+              bottom: -12,
+              width: 24,
+              height: 24,
+              borderRadius: theme.borderRadius.full,
+              backgroundColor: theme.colors.backgroundLight,
+            }} />
+            <div style={{
+              position: 'absolute',
+              right: -12,
+              bottom: -12,
+              width: 24,
+              height: 24,
+              borderRadius: theme.borderRadius.full,
+              backgroundColor: theme.colors.backgroundLight,
+            }} />
+
+            <span style={{
+              fontSize: 11,
+              fontWeight: 700,
+              textTransform: 'uppercase',
+              color: theme.colors.textSecondary,
+              letterSpacing: '0.08em',
+              marginBottom: 8,
             }}>
-              <div style={{
-                width: 56,
-                height: 56,
-                borderRadius: '50%',
-                backgroundColor: '#fff',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                boxShadow: theme.shadows.sm,
-              }}>
-                 <Icon name="account_balance_wallet" size={32} color={theme.colors.primary} />
-              </div>
-            </div>
+              Amount Paid
+            </span>
 
-            {/* Receipt Details */}
-            <div style={{ padding: 24, display: 'flex', flexDirection: 'column', gap: 6 }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 8 }}>
-                <span style={{ fontSize: 11, fontWeight: 700, textTransform: 'uppercase', color: theme.colors.textSecondary, letterSpacing: '0.05em' }}>
-                  Total Amount
-                </span>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 4, padding: '4px 8px', backgroundColor: withOpacity(theme.colors.success, 0.1), borderRadius: 100 }}>
-                  <Icon name="verified" size={14} filled color={theme.colors.success} />
-                  <span style={{ fontSize: 11, fontWeight: 700, color: theme.colors.success, textTransform: 'uppercase' }}>Paid</span>
-                </div>
-              </div>
+            <span style={{
+              fontSize: 48,
+              fontWeight: 900,
+              color: theme.colors.success,
+              lineHeight: 1.2,
+              letterSpacing: '-0.02em',
+              wordWrap: 'break-word',
+              overflow: 'visible',
+            }}>
+              RM {amount.toLocaleString('en-MY', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+            </span>
 
-              <div style={{ fontSize: 36, fontWeight: 800, color: theme.colors.textPrimary, letterSpacing: '-0.02em' }}>
-                RM 1,200.00
+            {/* Bank Details */}
+            <div style={{
+              marginTop: 24,
+              padding: 12,
+              backgroundColor: withOpacity(theme.colors.gray200, 0.3),
+              borderRadius: theme.borderRadius['2xl'],
+              width: '100%',
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              gap: 4,
+            }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: theme.fontSizes.base, fontWeight: 700, color: theme.colors.textPrimary }}>
+                <Icon name="account_balance" size={18} />
+                <span>Maybank</span>
               </div>
-
-              <div style={{ marginTop: 12, padding: 16, backgroundColor: theme.colors.backgroundLight, borderRadius: theme.borderRadius.lg, display: 'flex', flexDirection: 'column', gap: 12 }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                   <span style={{ fontSize: theme.fontSizes.sm, color: theme.colors.textSecondary }}>To</span>
-                   <span style={{ fontSize: theme.fontSizes.sm, fontWeight: 600, color: theme.colors.textPrimary }}>Maybank •••• 8829</span>
-                </div>
-                <div style={{ width: '100%', height: 1, backgroundColor: theme.colors.gray200 }} />
-                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                   <span style={{ fontSize: theme.fontSizes.sm, color: theme.colors.textSecondary }}>Ref ID</span>
-                   <span style={{ fontSize: theme.fontSizes.sm, fontWeight: 600, color: theme.colors.textPrimary }}>#TRX-8829-X2</span>
-                </div>
-              </div>
-              
-              <button
-                onClick={handleShare}
-                style={{
-                  marginTop: 8,
-                  width: '100%',
-                  height: 44,
-                  borderRadius: theme.borderRadius.lg,
-                  border: `1px solid ${theme.colors.gray200}`,
-                  backgroundColor: '#fff',
-                  color: theme.colors.textPrimary,
-                  fontSize: theme.fontSizes.sm,
-                  fontWeight: 600,
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  gap: 8,
-                  cursor: 'pointer',
-                  transition: 'background-color 0.2s',
-                }}
-              >
-                <Icon name="share" size={18} />
-                Share Receipt
-              </button>
+              <span style={{ fontSize: theme.fontSizes.xs, color: theme.colors.textSecondary }}>
+                Account ending in •••• 1234
+              </span>
             </div>
           </div>
 
-          {/* Card 2: Legal Completion */}
+          {/* Receipt Details */}
           <div style={{
-            padding: 20,
+            padding: 24,
+            backgroundColor: '#fff',
+            display: 'flex',
+            flexDirection: 'column',
+            gap: 12,
+          }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: theme.fontSizes.sm }}>
+              <span style={{ color: theme.colors.textSecondary }}>Transaction Date</span>
+              <span style={{ fontWeight: 700, color: theme.colors.textPrimary }}>24 May 2024, 14:35</span>
+            </div>
+            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: theme.fontSizes.sm }}>
+              <span style={{ color: theme.colors.textSecondary }}>Reference ID</span>
+              <span style={{ fontWeight: 700, color: theme.colors.textPrimary }}>S2G-8829-XJ9</span>
+            </div>
+          </div>
+        </div>
+
+        {/* Document Cards Section */}
+        <div style={{ width: '100%', display: 'flex', flexDirection: 'column', gap: 12 }}>
+          {/* Ownership Transfer Certification */}
+          <div style={{
+            width: '100%',
+            padding: 16,
             backgroundColor: '#fff',
             borderRadius: theme.borderRadius['2xl'],
-            boxShadow: theme.shadows.sm,
             border: `1px solid ${theme.colors.gray100}`,
             display: 'flex',
             alignItems: 'center',
             gap: 16,
+            boxShadow: theme.shadows.sm,
           }}>
             <div style={{
               width: 48,
               height: 48,
               borderRadius: theme.borderRadius.xl,
-              backgroundColor: withOpacity('#6366f1', 0.1),
+              backgroundColor: withOpacity(theme.colors.primary, 0.1),
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
               flexShrink: 0,
             }}>
-              <Icon name="description" size={24} color="#6366f1" />
+              <Icon name="description" size={24} color={theme.colors.primary} />
             </div>
 
             <div style={{ flex: 1 }}>
-              <h3 style={{ fontSize: theme.fontSizes.base, fontWeight: 700, color: theme.colors.textPrimary, marginBottom: 2 }}>
-                Official Certificate
+              <h3 style={{
+                fontSize: theme.fontSizes.base,
+                fontWeight: theme.fontWeights.bold,
+                color: theme.colors.textPrimary,
+                margin: 0,
+                marginBottom: 2,
+              }}>
+                Legal Completion
               </h3>
-              <p style={{ fontSize: theme.fontSizes.xs, color: theme.colors.textSecondary, lineHeight: 1.4 }}>
-                JPJ Deregistration Proof
+              <p style={{
+                fontSize: theme.fontSizes.xs,
+                color: theme.colors.textSecondary,
+                margin: 0,
+              }}>
+                Ownership Transfer Certification
               </p>
             </div>
 
             <button
-              onClick={handleDownload}
-              disabled={isDownloading}
+              onClick={handleDownloadDocument}
               style={{
                 padding: '8px 12px',
                 borderRadius: theme.borderRadius.lg,
-                backgroundColor: isDownloading ? theme.colors.gray100 : '#f0f2f5',
-                color: isDownloading ? theme.colors.textSecondary : theme.colors.textPrimary,
-                fontSize: theme.fontSizes.xs,
-                fontWeight: 700,
+                backgroundColor: isDownloading ? theme.colors.gray100 : withOpacity(theme.colors.primary, 0.08),
+                color: theme.colors.primary,
                 border: 'none',
                 display: 'flex',
                 alignItems: 'center',
-                gap: 6,
+                justifyContent: 'center',
                 cursor: isDownloading ? 'default' : 'pointer',
+                transition: 'background-color 0.2s',
               }}
             >
-              {isDownloading ? (
-                <span>Loading...</span>
-              ) : (
-                <>
-                  <Icon name="download" size={16} />
-                  <span>PDF</span>
-                </>
-              )}
+              <Icon name="download" size={18} />
             </button>
           </div>
 
-        </div>
-      </main>
-
-      {/* --- Footer / Bottom Actions --- */}
-      <div style={{
-        padding: 24,
-        paddingBottom: 32,
-        backgroundColor: '#fff',
-        borderTop: `1px solid ${theme.colors.gray100}`,
-        display: 'flex',
-        flexDirection: 'column',
-        gap: 16,
-        boxShadow: '0 -4px 20px rgba(0,0,0,0.03)',
-      }}>
-        <div style={{ textAlign: 'center', marginBottom: 4 }}>
-          <p style={{ fontSize: theme.fontSizes.sm, fontWeight: 600, color: theme.colors.textPrimary }}>
-             Thank you for recycling responsibly!
-          </p>
-        </div>
-
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-          <Button
-            fullWidth
-            size="lg"
-            onClick={() => router.push('/home')}
-            style={{
-              height: 52,
+          {/* JPJ Deregistration Documentation */}
+          <div style={{
+            width: '100%',
+            padding: 16,
+            backgroundColor: '#fff',
+            borderRadius: theme.borderRadius['2xl'],
+            border: `1px solid ${theme.colors.gray100}`,
+            display: 'flex',
+            alignItems: 'center',
+            gap: 16,
+            boxShadow: theme.shadows.sm,
+          }}>
+            <div style={{
+              width: 48,
+              height: 48,
               borderRadius: theme.borderRadius.xl,
-              fontSize: theme.fontSizes.base,
-              fontWeight: 700,
-              boxShadow: theme.shadows.primary,
-            }}
-          >
-            Back to Home
-          </Button>
-          
-          <button
-            style={{
-              width: '100%',
-              height: 44,
+              backgroundColor: withOpacity(theme.colors.success, 0.1),
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              color: theme.colors.textSecondary,
-              fontWeight: 600,
-              fontSize: theme.fontSizes.sm,
-              background: 'none',
-              border: 'none',
-              cursor: 'pointer',
-              transition: 'color 0.2s',
-            }}
-            onMouseOver={(e) => e.currentTarget.style.color = theme.colors.primary}
-            onMouseOut={(e) => e.currentTarget.style.color = theme.colors.textSecondary}
-          >
-            View Transaction History
-          </button>
+              flexShrink: 0,
+            }}>
+              <Icon name="description" size={24} color={theme.colors.success} />
+            </div>
+
+            <div style={{ flex: 1 }}>
+              <h3 style={{
+                fontSize: theme.fontSizes.base,
+                fontWeight: theme.fontWeights.bold,
+                color: theme.colors.textPrimary,
+                margin: 0,
+                marginBottom: 2,
+              }}>
+                Official Documentation
+              </h3>
+              <p style={{
+                fontSize: theme.fontSizes.xs,
+                color: theme.colors.textSecondary,
+                margin: 0,
+              }}>
+                JPJ Deregistration Official Documentation
+              </p>
+            </div>
+
+            <button
+              onClick={handleDownloadDocument}
+              style={{
+                padding: '8px 12px',
+                borderRadius: theme.borderRadius.lg,
+                backgroundColor: isDownloading ? theme.colors.gray100 : withOpacity(theme.colors.success, 0.08),
+                color: theme.colors.success,
+                border: 'none',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                cursor: isDownloading ? 'default' : 'pointer',
+                transition: 'background-color 0.2s',
+              }}
+            >
+              <Icon name="download" size={18} />
+            </button>
+          </div>
         </div>
 
-        {/* Secure Badge */}
-        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: 6, opacity: 0.5 }}>
-          <Icon name="lock" size={12} />
-          <span style={{ fontSize: 10, textTransform: 'uppercase', fontWeight: 800, letterSpacing: '0.05em' }}>
-            Processed via FPX Secure Gateway
+        {/* Download PDF Button */}
+        <button
+          style={{
+            width: '100%',
+            padding: '16px',
+            borderRadius: theme.borderRadius['2xl'],
+            border: `1px solid ${theme.colors.gray100}`,
+            backgroundColor: '#fff',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            fontSize: theme.fontSizes.base,
+            fontWeight: theme.fontWeights.bold,
+            color: theme.colors.textPrimary,
+            cursor: 'pointer',
+            transition: 'background-color 0.2s',
+          }}
+          onMouseOver={(e) => e.currentTarget.style.backgroundColor = theme.colors.backgroundLight}
+          onMouseOut={(e) => e.currentTarget.style.backgroundColor = '#fff'}
+        >
+          <span style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+            <Icon name="picture_as_pdf" size={20} color={theme.colors.primary} />
+            Download Certificate (PDF)
           </span>
-        </div>
-      </div>
+          <Icon name="chevron_right" size={20} color={theme.colors.textSecondary} />
+        </button>
+      </main>
+
+      {/* Footer */}
+      <footer style={{
+        width: '100%',
+        maxWidth: 448,
+        margin: '0 auto',
+        padding: `16px ${theme.spacing.lg} 32px`,
+      }}>
+        <Button
+          fullWidth
+          size="lg"
+          onClick={() => router.push('/home')}
+          style={{
+            height: 56,
+            borderRadius: theme.borderRadius['2xl'],
+            boxShadow: `0 10px 15px -3px ${withOpacity(theme.colors.primary, 0.3)}`,
+            textTransform: 'uppercase',
+            fontWeight: theme.fontWeights.bold,
+            letterSpacing: '0.05em',
+          }}
+        >
+          Back to Home
+        </Button>
+
+        <p style={{
+          marginTop: 16,
+          textAlign: 'center',
+          fontSize: theme.fontSizes.xs,
+          color: theme.colors.textSecondary,
+          lineHeight: 1.6,
+        }}>
+          Thank you for choosing us for your vehicle disposal. Your records will be kept for 7 years.
+        </p>
+      </footer>
     </PageContainer>
   );
+};
+
+const handleShare = () => {
+  if (navigator.share) {
+    navigator.share({
+      title: 'Payment Receipt',
+      text: 'My scrap car payment has been released!',
+      url: window.location.href,
+    }).catch(() => console.log('Share cancelled'));
+  }
 };
 
 export default PayoutConfirmationScreen;
