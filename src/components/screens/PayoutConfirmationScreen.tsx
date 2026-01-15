@@ -25,6 +25,30 @@ const PayoutConfirmationScreen: React.FC<PayoutConfirmationScreenProps> = ({ amo
 
   return (
     <PageContainer>
+      {/* Sticky Header with Back Button */}
+      <header style={{
+        position: 'sticky',
+        top: 0,
+        zIndex: 30,
+        backgroundColor: withOpacity(theme.colors.backgroundLight, 0.8),
+        backdropFilter: 'blur(10px)',
+        padding: `${theme.spacing.md} ${theme.spacing.lg}`,
+        width: '100%',
+      }}>
+        <Button
+          variant="ghost"
+          onClick={() => router.back()}
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: 8,
+            padding: `${theme.spacing.xs} ${theme.spacing.sm}`,
+          }}
+        >
+          <Icon name="chevron_left" size={24} color={theme.colors.textPrimary} />
+        </Button>
+      </header>
+
       {/* Confetti Particles */}
       <div style={{
         position: 'absolute',
@@ -56,24 +80,6 @@ const PayoutConfirmationScreen: React.FC<PayoutConfirmationScreenProps> = ({ amo
         zIndex: 20,
         overflowY: 'auto',
       }}>
-        {/* Back Button */}
-        <div style={{
-          alignSelf: 'flex-start',
-          marginBottom: 8,
-        }}>
-          <Button
-            variant="ghost"
-            onClick={() => router.back()}
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: 8,
-              padding: `${theme.spacing.xs} ${theme.spacing.sm}`,
-            }}
-          >
-            <Icon name="chevron_left" size={24} color={theme.colors.primary} />
-          </Button>
-        </div>
 
         {/* Success Icon */}
         <div style={{
@@ -110,6 +116,38 @@ const PayoutConfirmationScreen: React.FC<PayoutConfirmationScreenProps> = ({ amo
           }}>
             Transaction completed successfully
           </p>
+        </div>
+
+        {/* Amount Received */}
+        <div style={{
+          width: '100%',
+          backgroundColor: withOpacity(theme.colors.success, 0.08),
+          border: `1px solid ${withOpacity(theme.colors.success, 0.2)}`,
+          borderRadius: theme.borderRadius['2xl'],
+          padding: theme.spacing.lg,
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          gap: theme.spacing.sm,
+        }}>
+          <p style={{
+            fontSize: theme.fontSizes.xs,
+            fontWeight: theme.fontWeights.bold,
+            color: theme.colors.textSecondary,
+            textTransform: 'uppercase',
+            letterSpacing: '0.05em',
+            margin: 0,
+          }}>
+            You Received
+          </p>
+          <h3 style={{
+            fontSize: theme.fontSizes['3xl'],
+            fontWeight: theme.fontWeights.extrabold || 800,
+            color: theme.colors.success,
+            margin: 0,
+          }}>
+            RM {amount.toLocaleString('en-MY', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+          </h3>
         </div>
 
         {/* Receipt Card */}
@@ -342,33 +380,6 @@ const PayoutConfirmationScreen: React.FC<PayoutConfirmationScreenProps> = ({ amo
             </button>
           </div>
         </div>
-
-        {/* Download PDF Button */}
-        <button
-          style={{
-            width: '100%',
-            padding: '16px',
-            borderRadius: theme.borderRadius['2xl'],
-            border: `1px solid ${theme.colors.gray100}`,
-            backgroundColor: '#fff',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            fontSize: theme.fontSizes.base,
-            fontWeight: theme.fontWeights.bold,
-            color: theme.colors.textPrimary,
-            cursor: 'pointer',
-            transition: 'background-color 0.2s',
-          }}
-          onMouseOver={(e) => e.currentTarget.style.backgroundColor = theme.colors.backgroundLight}
-          onMouseOut={(e) => e.currentTarget.style.backgroundColor = '#fff'}
-        >
-          <span style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-            <Icon name="picture_as_pdf" size={20} color={theme.colors.primary} />
-            Download Certificate (PDF)
-          </span>
-          <Icon name="chevron_right" size={20} color={theme.colors.textSecondary} />
-        </button>
       </main>
 
       {/* Footer */}
