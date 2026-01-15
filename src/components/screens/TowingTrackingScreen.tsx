@@ -321,7 +321,7 @@ const TowingTrackingScreen: React.FC = () => {
             size="lg"
             variant="primary" // Changed to primary to be prominent
             icon="arrow_forward"
-            onClick={() => router.push('/ownership-transfer')}
+            onClick={() => router.push('/driver-inspection')}
             style={{
                backgroundColor: theme.colors.success, // Distinguish from Call
             }}
