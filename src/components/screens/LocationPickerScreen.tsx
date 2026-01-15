@@ -124,7 +124,7 @@ const LocationPickerScreen: React.FC = () => {
         }}>
           {/* Back Button */}
           <button
-            onClick={() => router.back()}
+            onClick={() => router.push('/identity-verification')}
             style={{
               width: 40,
               height: 40,
