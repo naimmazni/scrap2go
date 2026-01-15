@@ -48,7 +48,7 @@ const CameraScreen: React.FC = () => {
       {/* Top Bar */}
       <div style={{
         position: 'relative',
-        zIndex: 10,
+        zIndex: 30,
         display: 'flex',
         justifyContent: 'space-between',
         alignItems: 'flex-start',
@@ -66,6 +66,8 @@ const CameraScreen: React.FC = () => {
             alignItems: 'center',
             justifyContent: 'center',
             color: theme.colors.textLight,
+            border: 'none',
+            cursor: 'pointer',
           }}
         >
           <Icon name="close" size={24} />
