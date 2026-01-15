@@ -26,10 +26,10 @@ const TimePickerScreen: React.FC = () => {
       {/* Header */}
       <div style={{
         padding: `${theme.spacing.sm} ${theme.spacing.md}`,
-        borderBottom: `1px solid ${theme.colors.borderLight}`,
+        borderBottom: 'none',
         position: 'sticky',
         top: 0,
-        backgroundColor: theme.colors.surfaceLight,
+        backgroundColor: 'transparent',
         zIndex: 20,
       }}>
         <div style={{

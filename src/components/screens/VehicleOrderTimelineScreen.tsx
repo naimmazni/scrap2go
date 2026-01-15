@@ -140,11 +140,11 @@ export default function VehicleOrderTimelineScreen() {
       <ContentArea>
         {/* Vehicle Info Card */}
         <div style={{
-          backgroundColor: theme.colors.surfaceLight,
+          backgroundColor: 'transparent',
           borderRadius: theme.borderRadius.xl,
           padding: theme.spacing.lg,
           marginBottom: theme.spacing.xl,
-          boxShadow: theme.shadows.card,
+          boxShadow: 'none',
         }}>
           <div style={{
             display: 'flex',

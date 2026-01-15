@@ -247,7 +247,7 @@ const ReferralCard = ({ onClick }: { onClick: () => void }) => (
       <h3 style={{ fontSize: theme.fontSizes.lg, fontWeight: theme.fontWeights.bold, marginBottom: 4 }}>
         Refer Friends, Earn RM 50!
       </h3>
-      <p style={{ fontSize: theme.fontSizes.sm, opacity: 0.9, marginBottom: theme.spacing.sm }}>
+      <p style={{ fontSize: theme.fontSizes.sm, color: theme.colors.textLight, marginBottom: theme.spacing.sm }}>
         Share your code and get rewarded for each friend
       </p>
       <div style={{ display: 'flex', alignItems: 'center', gap: theme.spacing.xs }}>
