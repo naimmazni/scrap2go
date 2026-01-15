@@ -12,20 +12,24 @@ const LocationPickerScreen: React.FC = () => {
 
   return (
     <PageContainer style={{ overflow: 'hidden' }}>
-      {/* Map Background */}
+      {/* Google Map Background */}
       <div style={{
         position: 'absolute',
         inset: 0,
-        backgroundImage: `url("${IMAGES.MAP_LOCATION_PICKER}")`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        filter: 'grayscale(20%)',
       }}>
-        <div style={{
-          position: 'absolute',
-          inset: 0,
-          backgroundColor: withOpacity('#fff', 0.1),
-        }} />
+        <iframe
+          style={{
+            width: '100%',
+            height: '100%',
+            border: 'none',
+            position: 'absolute',
+          } as React.CSSProperties}
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3983.95374486788!2d101.6263!3d3.1337!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31cc49f7e3c0001d%3A0x8dc0d6b69efb7!2sKuala%20Lumpur!5e0!3m2!1sen!2smy!4v1234567890"
+          allowFullScreen={true}
+          loading="lazy"
+          referrerPolicy="no-referrer-when-downgrade"
+          title="Location Map"
+        />
       </div>
 
       {/* Center Pin */}
@@ -104,53 +108,74 @@ const LocationPickerScreen: React.FC = () => {
       {/* Search Bar */}
       <div style={{
         position: 'absolute',
-        top: 0,
+        top: 60,
         left: 0,
         right: 0,
         padding: theme.spacing.md,
-        background: 'linear-gradient(to bottom, rgba(255,255,255,0.9), rgba(255,255,255,0.5), transparent)',
         zIndex: 20,
       }}>
         <div style={{
           position: 'relative',
           maxWidth: 400,
           margin: '0 auto',
+          display: 'flex',
+          gap: theme.spacing.sm,
+          alignItems: 'center',
         }}>
-          <div style={{
-            position: 'absolute',
-            left: 16,
-            top: '50%',
-            transform: 'translateY(-50%)',
-          }}>
-            <Icon name="search" size={24} color={theme.colors.primary} />
-          </div>
-          <input
-            type="text"
-            placeholder="Enter pickup address..."
+          {/* Back Button */}
+          <button
+            onClick={() => router.back()}
             style={{
-              width: '100%',
-              height: 56,
-              paddingLeft: 48,
-              paddingRight: 48,
-              fontSize: theme.fontSizes.base,
-              fontWeight: theme.fontWeights.medium,
-              border: 'none',
-              borderRadius: theme.borderRadius.xl,
+              width: 40,
+              height: 40,
+              borderRadius: theme.borderRadius.lg,
               backgroundColor: theme.colors.surfaceLight,
               boxShadow: theme.shadows.floating,
-              outline: 'none',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              border: 'none',
+              cursor: 'pointer',
+              flexShrink: 0,
             }}
-          />
-          <button style={{
-            position: 'absolute',
-            right: 8,
-            top: '50%',
-            transform: 'translateY(-50%)',
-            padding: theme.spacing.sm,
-            color: theme.colors.textMuted,
-          }}>
-            <Icon name="mic" size={20} />
+          >
+            <Icon name="chevron_left" size={24} color={theme.colors.textPrimary} />
           </button>
+
+          {/* Search Input */}
+          <div style={{
+            position: 'relative',
+            flex: 1,
+          }}>
+            <input
+              type="text"
+              placeholder="Enter pickup address..."
+              style={{
+                width: '100%',
+                height: 40,
+                paddingRight: 40,
+                fontSize: theme.fontSizes.base,
+                fontWeight: theme.fontWeights.medium,
+                border: 'none',
+                borderRadius: theme.borderRadius.xl,
+                backgroundColor: theme.colors.surfaceLight,
+                boxShadow: theme.shadows.floating,
+                outline: 'none',
+                paddingLeft: 16,
+              }}
+            />
+            <div style={{
+              position: 'absolute',
+              right: 12,
+              top: '50%',
+              transform: 'translateY(-50%)',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}>
+              <Icon name="search" size={20} color={theme.colors.primary} />
+            </div>
+          </div>
         </div>
       </div>
 
