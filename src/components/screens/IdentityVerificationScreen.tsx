@@ -12,7 +12,6 @@ import {
   ScrollableContent,
   FixedBottomContainer,
   SectionTitle,
-  StepIndicator,
   UploadCard,
   SecurityNotice
 } from '@/components/ui';
@@ -38,10 +37,9 @@ const IdentityVerificationScreen: React.FC = () => {
       <Header
         title="Identity Verification"
         showBack
-        onBack={() => router.back()}
+        onBack={() => router.push('/bank-details')}
+        transparent
       />
-
-      <StepIndicator steps={4} currentStep={1} />
 
       <ScrollableContent bottomPadding={100}>
         <SectionTitle
