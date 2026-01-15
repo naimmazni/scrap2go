@@ -4,6 +4,7 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { theme, withOpacity } from '@/lib/theme';
+import { IMAGES } from '@/constants/images';
 import { 
   Icon, 
   Button, 
@@ -59,7 +60,7 @@ const ProfileSettingsScreen: React.FC = () => {
           paddingBottom: theme.spacing.md,
         }}>
           <Avatar
-            src="https://lh3.googleusercontent.com/aida-public/AB6AXuDQjEBNW5A0uOo3JmSwiGeNKT39ZWATMA55q7V9U2_pSB3FPeTPF_ZMPvuLVdbQcrYMWtnsRrQCTnT-MbAV-ZlKGNAoMU9pRhG9OXZIPqLjlJnD8LFqUCCfmX7DSd3EIVYSZIMIMHMCnmlDyD-c0b3yFu2we2FE1K2AIbQPffRrHQH7Sx03ytZhPLVdpdqbpV-2CNHfeYdMIH4wifzYXP_g00X4wHexjVUSFtylGXH2QS3Bjsmz0kCzkF_lbLMqHohNa-eY8SARzZfm"
+            src={IMAGES.PROFILE_AVATAR}
             size={112}
             editable
             onEdit={() => alert('Edit avatar')}

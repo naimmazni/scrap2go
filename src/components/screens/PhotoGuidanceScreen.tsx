@@ -4,6 +4,7 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { theme, withOpacity } from '@/lib/theme';
+import { IMAGES } from '@/constants/images';
 import { Icon, Button, PageContainer, PageHeader, ContentArea } from '@/components/ui';
 
 const photoSteps = [
@@ -13,7 +14,7 @@ const photoSteps = [
     icon: 'directions_car',
     description: 'Position yourself 3 meters in front of the vehicle. Capture the full front including license plate.',
     tips: ['Include full bumper', 'Ensure license plate is visible', 'Good lighting on headlights'],
-    image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAesUFmzjMMr0LU5hKyzB0EcJeBpr1MyLs3iZF18wHNH1l2PzVEnS1DFSTb4wQVMExWgLf4ADzRRJFlo4SXyDu6nA_aPBvWba5L5PRlUOjUy7iJOpHlmTYFWwwzyfS8U_7GFvOQOn4SXfyzQGqdhfGXT1c_gAiu5M5AdLSkA254ZtmXEphFvOOrlxiov9HnhAsh_4KnZ0K2CiNQcLxv4WOS8A4WCvksVK3_a71mBbqjjzLbOoMsc6-VkFawn4PZ1OBhNc-xQHVABbaA',
+    image: IMAGES.CAR_FRONT,
   },
   {
     id: 2,
@@ -21,7 +22,7 @@ const photoSteps = [
     icon: 'panorama_horizontal',
     description: 'Stand 4 meters from the side. Capture the entire length of the vehicle.',
     tips: ['Full vehicle length', 'Show door condition', 'Include all wheels'],
-    image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDOm0PqIn8e2JTb12p86u2EKJSG4q2SrRekuG03sOjAmHHkxePz775XYv-EMN8azcRusBTJehpjK0Qef2VkAh--CBsEAu-THyhBR34_oOJ39Z0WwflFSwVn0Xx5CxEo20ehHvGU_Y5G_yF5B8oGYpyRGiiqayaaZAkVtosNBDthZT_kNzR2mZCmbnDL-QKagxv5S8-9kvYBJVBQe4RrI_TMEs2pgP0xFJzrRIt8GecJm0wIy_NJozhGDvKy-bEI0NYRAdMtuo8-JxyW',
+    image: IMAGES.CAR_SIDE,
   },
   {
     id: 3,
@@ -29,7 +30,7 @@ const photoSteps = [
     icon: 'airline_seat_recline_normal',
     description: 'Open the driver door and capture the full dashboard and front seats.',
     tips: ['Show dashboard condition', 'Include steering wheel', 'Capture seat wear'],
-    image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAnPvFtmbNZJwbRlZjDzKUP_O9tjlNTGYjgPdBwQXJiWjRJAHEEDzbAMgx6QjDUPDYRy3jZbjUmUcK7IOISnl_dCEOundCqeS3k-mE07nbCq1XusSHLJ4eZAliuBIhDnjIc4A2wnXRD262_KF8PMNdoXs_wulk04HAdm5CnljxMK1upEx5AssgVMuTJCzK84311YoNBlbpHAhBuWjJZp8_MECk4w_c7411xYTecW0_jtvxs0-M0H8_vgwlojf_QpmzsP4-Ytfzp9hIZ',
+    image: IMAGES.CAR_INTERIOR,
   },
 ];
 

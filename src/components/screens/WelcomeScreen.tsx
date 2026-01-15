@@ -4,6 +4,7 @@
 import React from 'react';
 import { useRouter } from 'next/navigation';
 import { theme, withOpacity } from '@/lib/theme';
+import { IMAGES } from '@/constants/images';
 import { Icon, Button, Badge, PageContainer, ContentArea } from '@/components/ui';
 
 const WelcomeScreen: React.FC = () => {
@@ -92,7 +93,7 @@ const WelcomeScreen: React.FC = () => {
             position: 'relative',
             width: '100%',
             height: '100%',
-            backgroundImage: 'url("https://lh3.googleusercontent.com/aida-public/AB6AXuAFYi3Qqh-3_QHJlGvKF_pUmRrx5kQd4yNUYtJduqS_xTaj_MpRZBL5xDvZj1pVn2vJWkpN_Mo8LeAEw0pWo0h_Pz9xANVFnTt23lLxCVBm6tDbP_fa61cINFY7o2fgKYq9-VjAar5r0XWF15vPemwqDAoG7jYLn9KGBdC-sG0Jn-t6Yzm31do1cywUx7ZRfgZhf0Tmp9hfPxKv-cI35t4nB-JyPQXguqJCw30MYF6_PWBZ31XQn-buTdo9hKZlk6w9DCQH-mXvkRea")',
+            backgroundImage: `url("${IMAGES.HERO_LOWER_OPACITY}")`,
             backgroundSize: 'contain',
             backgroundPosition: 'center',
             backgroundRepeat: 'no-repeat',

@@ -3,6 +3,7 @@
 import React from 'react';
 import { useRouter } from 'next/navigation';
 import { theme, withOpacity } from '@/lib/theme';
+import { IMAGES } from '@/constants/images';
 import { Icon, Button, Card, Badge, BottomNav, PageContainer, ContentArea } from '@/components/ui';
 
 // --- Sub-Components ---
@@ -100,7 +101,7 @@ const HeroSection = () => (
     <div style={{
       position: 'relative',
       height: 160,
-      backgroundImage: 'url("https://lh3.googleusercontent.com/aida-public/AB6AXuBebkL09-7Jf3h0fAFOl2_jFyK7bqqy8h6rJY9bmugyN513yNrWx8b2NIdBjGna3ge6I9-2jS1mO-wvyD9MtLWWRt5P4c1fznJqHBPT6RFXq1Ib2VsHmhIXQXpgByV8Denyfo6Imm8-7DyypKDShRsrfm2zc7qTzSkR9g95rbIFbXWnj9cJP0WIcc10csL1rTnYGgpUDHKtnZLSatFBm7Ioat1UWNk9gAiWIotH8zBsqR4J65ebSn1t7Zy5I-XcNytJn0ZIUdjiHo3Y")',
+      backgroundImage: `url("${IMAGES.HERO_FULL_COLOR}")`,
       backgroundSize: 'cover',
       backgroundPosition: 'center',
     }}>

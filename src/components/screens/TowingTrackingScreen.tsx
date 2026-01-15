@@ -4,6 +4,7 @@
 import React from 'react';
 import { useRouter } from 'next/navigation';
 import { theme, withOpacity } from '@/lib/theme';
+import { IMAGES } from '@/constants/images';
 import { Icon, Button } from '@/components/ui';
 
 const TowingTrackingScreen: React.FC = () => {
@@ -22,7 +23,7 @@ const TowingTrackingScreen: React.FC = () => {
       <div style={{
         position: 'absolute',
         inset: 0,
-        backgroundImage: 'url("https://lh3.googleusercontent.com/aida-public/AB6AXuAkC-Fnnozj3wbipVqyyfwm85zJcRcTg0CevhIqW-aQCI3rhQWhVRIZCphqAeFASbywUQKsnhAiUXJgpqbT57qjtPIcBEHoKyFoIb-RLqXF1-7AJfitFLpdGsU0SKK6V9S8eA1KjwDYyhXUlJu6d03XPI2FPqNHmkWczb5JKaERmPYgC0X7gxvgxg4PQ62xwNZgEADzOpIh1a4MYgX-E3J6P7TJXSaKZDZscpo3uVxvgv0a9d0Pg7Ze4yLKeQQQMU1Hl880WDmwGogi")',
+        backgroundImage: `url("${IMAGES.MAP_TRACKING}")`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         opacity: 0.8,
@@ -235,7 +236,7 @@ const TowingTrackingScreen: React.FC = () => {
               width: 64,
               height: 64,
               borderRadius: theme.borderRadius.full,
-              backgroundImage: 'url("https://lh3.googleusercontent.com/aida-public/AB6AXuCn4MRTSzOLz4AXPh-YREAbeGtq6l5qYJwr_riEt-D4y_9g0JiB6BTwov83vz3qOc4ZotgkUPuvMAFAVtaC1I8sYIm0BdSZOITcV8Fj-BEF83dEZIuyZ8IprTULbGeHUK5YMMSXOB3ljlUIepgGYZvTxF-hPUlm2zDdD_mCtQyx_HgPleL9Nef5xRC7tvSHEg2FYgPb0M2oGcZKAG_qdPFUDs9Sj-vzsZMhsZNx9YPuq-z8fSiZr5DytKIOo7A1jk-mrA-Cy9nKTwCN")',
+              backgroundImage: `url("${IMAGES.DRIVER_AVATAR}")`,
               backgroundSize: 'cover',
               backgroundPosition: 'center',
               border: `2px solid ${theme.colors.surfaceLight}`,

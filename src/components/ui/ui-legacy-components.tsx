@@ -313,7 +313,7 @@ export const UploadCard: React.FC<UploadCardProps> = ({ title, description, icon
           }}
         >
           <Icon name={uploaded ? 'check' : 'add_a_photo'} size={20} />
-          {uploaded ? 'Uploaded ✓' : buttonText}
+          {uploaded ? 'Uploaded' : buttonText}
         </button>
       </div>
     </div>

@@ -4,6 +4,7 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { theme } from '@/lib/theme';
+import { IMAGES } from '@/constants/images';
 import { 
   Button, 
   Header, 
@@ -52,7 +53,7 @@ const IdentityVerificationScreen: React.FC = () => {
           title="MyKad - Front (Identity Card)"
           description="Ensure your name and IC number are clearly visible."
           icon="id_card"
-          imageUrl="https://lh3.googleusercontent.com/aida-public/AB6AXuDeDUcyTcjJxKP3QVshGIf7Oc_NLvjoZUY5cK70ZP5_CqAzDWDVkB7AkCATop-ayc5Tg9HsLWsGyJ58q-hJGWBrbHX1X7D6MLWxch1OsrDQdRbqDxSVoUr3-3RG7PHFrz3IFSFxRGrO5My79YgmxJyvLAbEHzofpwi0hdQ53i8JmsbVTPVQ_d6tK5kfEt2jdl9aju_Gi2DiZ-6XsnlBzk1YMnOmpC5DTjY9tmcq3uFz1-WO_Ap707agr5nKff_2ZhXitsCubNRODjZ0"
+          imageUrl={IMAGES.SAMPLE_MYKAD}
           imageHint="Example: Clear text & photo"
           uploaded={myKadFrontUploaded}
           warning="Avoid glare or shadows covering the text."
@@ -65,7 +66,7 @@ const IdentityVerificationScreen: React.FC = () => {
           title="MyKad - Back (Identity Card)"
           description="Upload the back side with address details."
           icon="id_card"
-          imageUrl="https://lh3.googleusercontent.com/aida-public/AB6AXuDeDUcyTcjJxKP3QVshGIf7Oc_NLvjoZUY5cK70ZP5_CqAzDWDVkB7AkCATop-ayc5Tg9HsLWsGyJ58q-hJGWBrbHX1X7D6MLWxch1OsrDQdRbqDxSVoUr3-3RG7PHFrz3IFSFxRGrO5My79YgmxJyvLAbEHzofpwi0hdQ53i8JmsbVTPVQ_d6tK5kfEt2jdl9aju_Gi2DiZ-6XsnlBzk1YMnOmpC5DTjY9tmcq3uFz1-WO_Ap707agr5nKff_2ZhXitsCubNRODjZ0"
+          imageUrl={IMAGES.SAMPLE_MYKAD}
           imageHint="Example: Back side with address"
           uploaded={myKadBackUploaded}
           buttonText="Upload MyKad Back"
@@ -77,7 +78,7 @@ const IdentityVerificationScreen: React.FC = () => {
           title="Vehicle Grant (VOC)"
           description="Upload the original Vehicle Ownership Certificate front page."
           icon="description"
-          imageUrl="https://lh3.googleusercontent.com/aida-public/AB6AXuDpM1w82SK7Va03tXbgXhHbF84MYZZbtUivj155xhFIhftU6QiL_O60LclEuWBP_AVihpX2gjmD6F2lY64X8h8ws4h5NMd1R21C_CVgzhWn_vP_AeTQUVMIzh8mW5tLU2ko_lbmYPhT6Cj_ZS-yjeEb5xzLjwOLu__BzMwUOZYJOYKRgP44MvME7iPwHrOnuKtnB2KISfS7f1AxUnPyXY3Jn9FCpvUdLzRdvh2-M6u_GsM2-hWfYY9UrSU6hQQFnjMOKQ4EfgLEwkqA"
+          imageUrl={IMAGES.SAMPLE_VOC}
           imageHint="Example: Front page only"
           uploaded={vocUploaded}
           buttonText="Upload VOC"
@@ -90,7 +91,7 @@ const IdentityVerificationScreen: React.FC = () => {
           title="Vehicle Number Plate"
           description="Clear photo of your vehicle's registration number plate."
           icon="pin"
-          imageUrl="https://lh3.googleusercontent.com/aida-public/AB6AXuAesUFmzjMMr0LU5hKyzB0EcJeBpr1MyLs3iZF18wHNH1l2PzVEnS1DFSTb4wQVMExWgLf4ADzRRJFlo4SXyDu6nA_aPBvWba5L5PRlUOjUy7iJOpHlmTYFWwwzyfS8U_7GFvOQOn4SXfyzQGqdhfGXT1c_gAiu5M5AdLSkA254ZtmXEphFvOOrlxiov9HnhAsh_4KnZ0K2CiNQcLxv4WOS8A4WCvksVK3_a71mBbqjjzLbOoMsc6-VkFawn4PZ1OBhNc-xQHVABbaA"
+          imageUrl={IMAGES.CAR_FRONT}
           imageHint="Example: Clear plate number"
           uploaded={numberPlateUploaded}
           buttonText="Upload Number Plate"
@@ -102,7 +103,7 @@ const IdentityVerificationScreen: React.FC = () => {
           title="Driving License (Optional)"
           description="Upload your driving license if available for additional verification."
           icon="credit_card"
-          imageUrl="https://lh3.googleusercontent.com/aida-public/AB6AXuDeDUcyTcjJxKP3QVshGIf7Oc_NLvjoZUY5cK70ZP5_CqAzDWDVkB7AkCATop-ayc5Tg9HsLWsGyJ58q-hJGWBrbHX1X7D6MLWxch1OsrDQdRbqDxSVoUr3-3RG7PHFrz3IFSFxRGrO5My79YgmxJyvLAbEHzofpwi0hdQ53i8JmsbVTPVQ_d6tK5kfEt2jdl9aju_Gi2DiZ-6XsnlBzk1YMnOmpC5DTjY9tmcq3uFz1-WO_Ap707agr5nKff_2ZhXitsCubNRODjZ0"
+          imageUrl={IMAGES.SAMPLE_MYKAD}
           imageHint="Optional: Driving license"
           uploaded={drivingLicenseUploaded}
           buttonText="Upload License (Optional)"

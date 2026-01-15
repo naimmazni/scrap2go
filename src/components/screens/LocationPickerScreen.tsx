@@ -4,6 +4,7 @@
 import React from 'react';
 import { useRouter } from 'next/navigation';
 import { theme, withOpacity } from '@/lib/theme';
+import { IMAGES } from '@/constants/images';
 import { Icon, Button, Input, PageContainer, ContentArea } from '@/components/ui';
 
 const LocationPickerScreen: React.FC = () => {
@@ -15,7 +16,7 @@ const LocationPickerScreen: React.FC = () => {
       <div style={{
         position: 'absolute',
         inset: 0,
-        backgroundImage: 'url("https://lh3.googleusercontent.com/aida-public/AB6AXuAunzqwogoBz379WYGDykhwrAS0oObtp4Wl6QZ0sO4Gvx5aqxR_F9dGmE4c8kbo3ZMGMi7Lulh8jFi4JiI3sDw7lLQrvNybll-e-3xSARzcpQriZxnsTvuZklI5EmvV2Y8jcEAgo6jsGu7lW12lgWbFxrkvsnHeMU6Rlixl1reeBHBUzzxsf6EwXUqPRz3XhjjPki5klSZ7OtgVB6mi35UobyKHDLOOAbYHq2---wf_czy0_rpB0m22vhStYjjzVbeJQ_rHtHvJH4Ii")',
+        backgroundImage: `url("${IMAGES.MAP_LOCATION_PICKER}")`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         filter: 'grayscale(20%)',
