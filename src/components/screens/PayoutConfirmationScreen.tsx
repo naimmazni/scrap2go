@@ -128,7 +128,7 @@ const PayoutConfirmationScreen: React.FC = () => {
             Payment Released
           </h1>
           <p style={{
-            fontSize: theme.fontSizes.md,
+            fontSize: theme.fontSizes.base,
             color: theme.colors.textSecondary,
             maxWidth: '280px',
             margin: '0 auto',
@@ -241,17 +241,17 @@ const PayoutConfirmationScreen: React.FC = () => {
               width: 48,
               height: 48,
               borderRadius: theme.borderRadius.xl,
-              backgroundColor: withOpacity(theme.colors.secondary || '#6366f1', 0.1),
+              backgroundColor: withOpacity('#6366f1', 0.1),
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
               flexShrink: 0,
             }}>
-              <Icon name="description" size={24} color={theme.colors.secondary || '#6366f1'} />
+              <Icon name="description" size={24} color="#6366f1" />
             </div>
 
             <div style={{ flex: 1 }}>
-              <h3 style={{ fontSize: theme.fontSizes.md, fontWeight: 700, color: theme.colors.textPrimary, marginBottom: 2 }}>
+              <h3 style={{ fontSize: theme.fontSizes.base, fontWeight: 700, color: theme.colors.textPrimary, marginBottom: 2 }}>
                 Official Certificate
               </h3>
               <p style={{ fontSize: theme.fontSizes.xs, color: theme.colors.textSecondary, lineHeight: 1.4 }}>
@@ -315,7 +315,7 @@ const PayoutConfirmationScreen: React.FC = () => {
             style={{
               height: 52,
               borderRadius: theme.borderRadius.xl,
-              fontSize: theme.fontSizes.md,
+              fontSize: theme.fontSizes.base,
               fontWeight: 700,
               boxShadow: theme.shadows.primary,
             }}

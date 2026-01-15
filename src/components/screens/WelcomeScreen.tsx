@@ -101,7 +101,6 @@ const WelcomeScreen: React.FC = () => {
             borderRadius: theme.borderRadius.full,
             backgroundColor: theme.colors.surfaceLight,
             boxShadow: theme.shadows.lg,
-            animation: 'bounce 3s ease-in-out infinite',
           }}>
             <Icon name="bolt" size={20} color={theme.colors.alertOrange} />
             <span style={{ 
