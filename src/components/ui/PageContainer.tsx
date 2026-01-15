@@ -21,6 +21,7 @@ export const PageContainer: React.FC<PageContainerProps> = ({ children, style })
         backgroundColor: theme.colors.backgroundLight,
         position: 'relative',
         paddingTop: 54, // Consistent top padding for all pages
+        minHeight: '100%',
         ...style,
       }}
     >
