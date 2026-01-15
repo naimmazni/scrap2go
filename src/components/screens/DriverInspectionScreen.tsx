@@ -308,7 +308,7 @@ const DriverInspectionScreen: React.FC = () => {
           variant="primary"
           size="lg"
           fullWidth
-          onClick={() => router.push('/digital-signature-handover')}
+          onClick={() => router.push('/ownership-transfer')}
           style={{
             height: 48,
             display: 'flex',
