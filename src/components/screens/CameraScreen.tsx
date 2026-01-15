@@ -55,7 +55,7 @@ const CameraScreen: React.FC = () => {
         padding: theme.spacing.md,
       }}>
         <button
-          onClick={() => router.back()}
+          onClick={() => router.push('/home')}
           style={{
             width: 40,
             height: 40,
