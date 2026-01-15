@@ -163,35 +163,94 @@ const OwnershipTransferScreen: React.FC = () => {
         <div style={{ padding: theme.spacing.lg, paddingTop: theme.spacing.sm, display: 'flex', flexDirection: 'column', gap: theme.spacing.lg }}>
           
           {/* Vehicle Info Card */}
-          <Card style={{ padding: theme.spacing.md, borderRadius: theme.borderRadius.xl }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: theme.spacing.md }}>
-               <div style={{
-                 height: 56,
-                 width: 56,
-                 display: 'flex',
-                 alignItems: 'center',
-                 justifyContent: 'center',
-                 borderRadius: theme.borderRadius.lg,
-                 backgroundColor: withOpacity(theme.colors.primary, 0.08),
-                 color: theme.colors.primary,
-               }}>
-                 <Icon name="directions_car" size={28} />
-               </div>
-               <div style={{ flex: 1 }}>
-                 <h2 style={{
-                   fontSize: theme.fontSizes.lg,
-                   fontWeight: theme.fontWeights.bold,
-                   color: theme.colors.textPrimary,
-                   lineHeight: 1.1,
-                   margin: 0,
-                 }}>
-                   Proton Wira - WAB 1234
-                 </h2>
-                 <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: 6 }}>
-                   <span style={{ fontSize: theme.fontSizes.xs, color: theme.colors.textSecondary }}>Agreed Payout</span>
-                   <span style={{ fontSize: theme.fontSizes.lg, fontWeight: theme.fontWeights.extrabold, color: theme.colors.primary }}>RM 1,200</span>
-                 </div>
-               </div>
+          <Card style={{ 
+            padding: theme.spacing.lg, 
+            borderRadius: theme.borderRadius.xl,
+            background: `linear-gradient(135deg, ${withOpacity(theme.colors.primary, 0.05)} 0%, ${withOpacity(theme.colors.primary, 0.02)} 100%)`,
+            border: `1px solid ${withOpacity(theme.colors.primary, 0.1)}`,
+          }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: theme.spacing.lg }}>
+              {/* Top section with icon and vehicle name */}
+              <div style={{ display: 'flex', alignItems: 'flex-start', gap: theme.spacing.md }}>
+                <div style={{
+                  height: 72,
+                  width: 72,
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  borderRadius: theme.borderRadius.xl,
+                  backgroundColor: theme.colors.primary,
+                  color: '#fff',
+                  flexShrink: 0,
+                }}>
+                  <Icon name="directions_car" size={40} filled />
+                </div>
+                <div style={{ flex: 1 }}>
+                  <p style={{
+                    fontSize: theme.fontSizes.xs,
+                    fontWeight: theme.fontWeights.bold,
+                    color: theme.colors.textSecondary,
+                    textTransform: 'uppercase',
+                    letterSpacing: '0.05em',
+                    margin: 0,
+                    marginBottom: 4,
+                  }}>
+                    Vehicle Details
+                  </p>
+                  <h2 style={{
+                    fontSize: theme.fontSizes['2xl'],
+                    fontWeight: theme.fontWeights.extrabold || 800,
+                    color: theme.colors.textPrimary,
+                    lineHeight: 1.2,
+                    margin: 0,
+                    marginBottom: 8,
+                  }}>
+                    Proton Wira
+                  </h2>
+                  <div style={{
+                    display: 'inline-block',
+                    backgroundColor: '#000',
+                    color: '#fff',
+                    padding: '6px 12px',
+                    borderRadius: '4px',
+                    fontSize: theme.fontSizes.base,
+                    fontWeight: theme.fontWeights.extrabold,
+                    letterSpacing: '0.1em',
+                    fontFamily: 'monospace',
+                  }}>
+                    WAB 1234
+                  </div>
+                </div>
+              </div>
+
+              {/* Bottom section with payment amount */}
+              <div style={{
+                backgroundColor: withOpacity(theme.colors.primary, 0.08),
+                borderRadius: theme.borderRadius.lg,
+                padding: theme.spacing.md,
+                display: 'flex',
+                flexDirection: 'column',
+                gap: theme.spacing.sm,
+              }}>
+                <p style={{
+                  fontSize: theme.fontSizes.xs,
+                  fontWeight: theme.fontWeights.bold,
+                  color: theme.colors.textSecondary,
+                  textTransform: 'uppercase',
+                  letterSpacing: '0.05em',
+                  margin: 0,
+                }}>
+                  Payment Amount
+                </p>
+                <h3 style={{
+                  fontSize: theme.fontSizes['3xl'],
+                  fontWeight: theme.fontWeights.extrabold || 800,
+                  color: theme.colors.primary,
+                  margin: 0,
+                }}>
+                  RM 1,200.00
+                </h3>
+              </div>
             </div>
           </Card>
 
