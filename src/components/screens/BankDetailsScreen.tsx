@@ -40,7 +40,7 @@ const BankDetailsScreen: React.FC = () => {
         zIndex: 20,
       }}>
         <button
-          onClick={() => router.back()}
+          onClick={() => router.push('/vehicle-details')}
           style={{
             position: 'absolute',
             left: theme.spacing.xl,

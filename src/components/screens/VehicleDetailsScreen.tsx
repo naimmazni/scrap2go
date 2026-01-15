@@ -12,8 +12,7 @@ import {
   Input,
   PageContainer,
   ContentArea,
-  SectionTitle,
-  StepIndicator
+  SectionTitle
 } from '@/components/ui';
 
 const VehicleDetailsScreen: React.FC = () => {
@@ -43,10 +42,13 @@ const VehicleDetailsScreen: React.FC = () => {
       <PageHeader
         title="Vehicle Details"
         showBack
-        onBack={() => router.back()}
+        onBack={() => router.push('/valuation')}
+        style={{
+          backgroundColor: 'transparent',
+          boxShadow: 'none',
+          borderBottom: 'none',
+        }}
       />
-
-      <StepIndicator currentStep={1} steps={4} />
 
       <ContentArea>
         {/* Vehicle Plate Hero */}
