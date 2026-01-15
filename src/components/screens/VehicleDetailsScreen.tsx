@@ -34,7 +34,7 @@ const VehicleDetailsScreen: React.FC = () => {
 
   const handleContinue = () => {
     if (isFormValid) {
-      router.push('/identity-verification');
+      router.push('/bank-details');
     }
   };
 
