@@ -54,7 +54,6 @@ const IdentityVerificationScreen: React.FC = () => {
           description="Ensure your name and IC number are clearly visible."
           icon="id_card"
           imageUrl={IMAGES.SAMPLE_MYKAD}
-          imageHint="Example: Clear text & photo"
           uploaded={myKadFrontUploaded}
           warning="Avoid glare or shadows covering the text."
           buttonText="Upload MyKad Front"
@@ -67,7 +66,6 @@ const IdentityVerificationScreen: React.FC = () => {
           description="Upload the back side with address details."
           icon="id_card"
           imageUrl={IMAGES.SAMPLE_MYKAD}
-          imageHint="Example: Back side with address"
           uploaded={myKadBackUploaded}
           buttonText="Upload MyKad Back"
           onUpload={() => setMyKadBackUploaded(true)}
@@ -79,7 +77,6 @@ const IdentityVerificationScreen: React.FC = () => {
           description="Upload the original Vehicle Ownership Certificate front page."
           icon="description"
           imageUrl={IMAGES.SAMPLE_VOC}
-          imageHint="Example: Front page only"
           uploaded={vocUploaded}
           buttonText="Upload VOC"
           buttonVariant="secondary"
@@ -92,7 +89,6 @@ const IdentityVerificationScreen: React.FC = () => {
           description="Clear photo of your vehicle's registration number plate."
           icon="pin"
           imageUrl={IMAGES.CAR_FRONT}
-          imageHint="Example: Clear plate number"
           uploaded={numberPlateUploaded}
           buttonText="Upload Number Plate"
           onUpload={() => setNumberPlateUploaded(true)}
@@ -104,7 +100,6 @@ const IdentityVerificationScreen: React.FC = () => {
           description="Upload your driving license if available for additional verification."
           icon="credit_card"
           imageUrl={IMAGES.SAMPLE_MYKAD}
-          imageHint="Optional: Driving license"
           uploaded={drivingLicenseUploaded}
           buttonText="Upload License (Optional)"
           buttonVariant="outline"
