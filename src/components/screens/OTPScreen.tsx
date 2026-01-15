@@ -10,14 +10,16 @@ const OTPScreen: React.FC = () => {
   const router = useRouter();
   const [otp, setOtp] = useState(['', '', '', '', '', '']);
   const [countdown, setCountdown] = useState(59);
-  const inputRefs = useRef([]);
+  const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
 
   useEffect(() => {
-    const timer = countdown > 0 && setInterval(() => setCountdown(countdown - 1), 1000);
-    return () => clearInterval(timer);
+    if (countdown > 0) {
+      const timer = setInterval(() => setCountdown(c => c - 1), 1000);
+      return () => clearInterval(timer);
+    }
   }, [countdown]);
 
-  const handleChange = (index, value) => {
+  const handleChange = (index: number, value: string) => {
     if (value.length > 1) return;
     
     const newOtp = [...otp];
@@ -30,7 +32,7 @@ const OTPScreen: React.FC = () => {
     }
   };
 
-  const handleKeyDown = (index, e) => {
+  const handleKeyDown = (index: number, e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Backspace' && !otp[index] && index > 0) {
       inputRefs.current[index - 1]?.focus();
     }
@@ -111,7 +113,7 @@ const OTPScreen: React.FC = () => {
         {otp.map((digit, index) => (
           <input
             key={index}
-            ref={el => inputRefs.current[index] = el}
+            ref={el => { inputRefs.current[index] = el }}
             type="text"
             inputMode="numeric"
             maxLength={1}

@@ -45,7 +45,7 @@ const LanguageSettingsScreen: React.FC = () => {
     },
   ];
 
-  const handleLanguageSelect = (code) => {
+  const handleLanguageSelect = (code: string) => {
     if (code !== selectedLanguage) {
       setSelectedLanguage(code);
       setHasChanges(true);

@@ -35,15 +35,15 @@ const BankDetailsScreen: React.FC = () => {
     router.push('/payment-method');
   };
 
-  const handleEditAccount = (accountId) => {
+  const handleEditAccount = (accountId: number) => {
     alert(`Edit account ${accountId}`);
   };
 
-  const handleSetDefault = (accountId) => {
+  const handleSetDefault = (accountId: number) => {
     alert(`Set account ${accountId} as default`);
   };
 
-  const handleDeleteAccount = (accountId) => {
+  const handleDeleteAccount = (accountId: number) => {
     if (confirm('Are you sure you want to remove this bank account?')) {
       alert(`Account ${accountId} removed`);
     }

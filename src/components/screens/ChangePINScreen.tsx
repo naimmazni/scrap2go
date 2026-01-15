@@ -17,7 +17,7 @@ import {
 
 const ChangePINScreen: React.FC = () => {
   const router = useRouter();
-  const [step, setStep] = useState('current'); // current, new, confirm
+  const [step, setStep] = useState<'current' | 'new' | 'confirm'>('current'); // current, new, confirm
   const [pins, setPins] = useState({
     current: '',
     new: '',
@@ -27,7 +27,7 @@ const ChangePINScreen: React.FC = () => {
 
   const PIN_LENGTH = 6;
 
-  const handleNumberPress = (num) => {
+  const handleNumberPress = (num: string) => {
     setError('');
     const currentPin = pins[step];
     

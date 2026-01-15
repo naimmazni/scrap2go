@@ -119,12 +119,13 @@ export default function VehicleOrderTimelineScreen() {
         background: `linear-gradient(135deg, ${theme.colors.primary}, ${theme.colors.primaryDark})`,
         color: 'white',
       }}>
-        <Button 
-          variant="ghost" 
+        <Button
+          variant="ghost"
           icon="arrow_back"
           onClick={() => router.back()}
           style={{ color: 'white' }}
         >
+          Back
         </Button>
         <h1 style={{
           fontSize: theme.fontSizes['2xl'],

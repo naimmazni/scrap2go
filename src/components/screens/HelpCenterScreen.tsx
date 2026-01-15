@@ -16,7 +16,7 @@ import {
 const HelpCenterScreen: React.FC = () => {
   const router = useRouter();
   const [searchQuery, setSearchQuery] = useState('');
-  const [expandedFaq, setExpandedFaq] = useState(null);
+  const [expandedFaq, setExpandedFaq] = useState<number | null>(null);
 
   const categories = [
     { id: 'getting-started', name: 'Getting Started', icon: 'play_circle' },

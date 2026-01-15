@@ -46,7 +46,7 @@ const VehicleDetailsScreen: React.FC = () => {
         onBack={() => router.back()}
       />
 
-      <StepIndicator currentStep={1} totalSteps={4} />
+      <StepIndicator currentStep={1} steps={4} />
 
       <ContentArea>
         {/* Vehicle Plate Hero */}

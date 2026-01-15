@@ -65,7 +65,7 @@ const PhotoGuidanceScreen: React.FC = () => {
               backgroundColor: index <= currentStep 
                 ? theme.colors.primary 
                 : theme.colors.gray200,
-              transition: theme.transitions.default,
+              transition: theme.transitions.normal,
             }}
           />
         ))}
@@ -203,7 +203,7 @@ const PhotoGuidanceScreen: React.FC = () => {
                   alignItems: 'flex-start',
                   gap: theme.spacing.sm,
                   fontSize: theme.fontSizes.sm,
-                  color: theme.colors.text,
+                  color: theme.colors.textPrimary,
                 }}
               >
                 <Icon name="check" size={16} color={theme.colors.primary} />

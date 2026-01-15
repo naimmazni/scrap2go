@@ -30,7 +30,7 @@ const ProfileSettingsScreen: React.FC = () => {
   });
   const [notificationsEnabled, setNotificationsEnabled] = useState(true);
 
-  const handleTabChange = (tabId) => {
+  const handleTabChange = (tabId: string) => {
     setActiveTab(tabId);
     if (tabId === 'home') router.push('/home');
     else if (tabId === 'history') router.push('/history');

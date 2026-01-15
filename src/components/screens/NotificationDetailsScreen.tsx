@@ -49,7 +49,7 @@ The Scrap2Go Team
     actionRoute: '/history',
   };
 
-  const getIcon = (type) => {
+  const getIcon = (type: string) => {
     switch (type) {
       case 'success': return { name: 'check_circle', color: '#10B981' };
       case 'warning': return { name: 'warning', color: '#F59E0B' };

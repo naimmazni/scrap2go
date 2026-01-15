@@ -39,6 +39,8 @@ const DocumentPreviewScreen: React.FC = () => {
 
   const currentDoc = documents.find(d => d.id === selectedDocument);
 
+  if (!currentDoc) return null;
+
   return (
     <PageContainer>
       <PageHeader

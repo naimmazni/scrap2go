@@ -65,10 +65,10 @@ const ReferralScreen: React.FC = () => {
     setTimeout(() => setCopied(false), 2000);
   };
 
-  const handleShare = (platform) => {
+  const handleShare = (platform: string) => {
     const message = `Join Scrap2Go and get instant cash for your scrap vehicle! Use my referral code: ${referralCode}`;
     
-    const urls = {
+    const urls: Record<string, string> = {
       whatsapp: `https://wa.me/?text=${encodeURIComponent(message + ' ' + referralLink)}`,
       facebook: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(referralLink)}`,
       twitter: `https://twitter.com/intent/tweet?text=${encodeURIComponent(message)}&url=${encodeURIComponent(referralLink)}`,

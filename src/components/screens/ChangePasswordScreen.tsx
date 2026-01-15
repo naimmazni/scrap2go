@@ -27,9 +27,9 @@ const ChangePasswordScreen: React.FC = () => {
     new: false,
     confirm: false,
   });
-  const [errors, setErrors] = useState({});
+  const [errors, setErrors] = useState<Record<string, string>>({});
 
-  const validatePassword = (password) => {
+  const validatePassword = (password: string) => {
     const minLength = password.length >= 8;
     const hasUpperCase = /[A-Z]/.test(password);
     const hasLowerCase = /[a-z]/.test(password);
@@ -49,7 +49,7 @@ const ChangePasswordScreen: React.FC = () => {
   const passwordStrength = validatePassword(formData.newPassword);
 
   const handleSubmit = () => {
-    const newErrors = {};
+    const newErrors: Record<string, string> = {};
 
     if (!formData.currentPassword) {
       newErrors.currentPassword = 'Current password is required';
