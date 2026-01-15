@@ -195,7 +195,7 @@ const SuccessScreen: React.FC = () => {
               fontSize: theme.fontSizes.xs,
               fontWeight: theme.fontWeights.bold,
               backgroundColor: withOpacity(theme.colors.alertOrange, 0.1),
-              color: theme.colors.alertDark, // Using existing theme color close to orange-700
+              color: '#c2410c',
             }}>
               Pending Verification
             </div>
@@ -281,3 +281,4 @@ const SuccessScreen: React.FC = () => {
   );
 };
 
+export default SuccessScreen;
