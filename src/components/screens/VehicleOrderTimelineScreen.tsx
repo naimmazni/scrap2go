@@ -364,9 +364,9 @@ export default function VehicleOrderTimelineScreen() {
         }}>
           <Button 
             icon="description"
-            onClick={() => router.push('/tracking')}
+            onClick={() => router.push('/jpj-success')}
           >
-            Track Shipment
+            View Official Certificate
           </Button>
           <Button 
             variant="outline" 

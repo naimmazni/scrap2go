@@ -50,27 +50,16 @@ const LoginScreen: React.FC = () => {
         <div style={{
           display: 'flex',
           alignItems: 'center',
-          gap: theme.spacing.sm,
         }}>
-          <div style={{
-            width: 48,
-            height: 48,
-            borderRadius: theme.borderRadius.lg,
-            backgroundColor: theme.colors.primary,
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}>
-            <Icon name="recycling" size={28} color={theme.colors.textLight} filled />
-          </div>
-          <h2 style={{
-            fontSize: theme.fontSizes.xl,
-            fontWeight: theme.fontWeights.bold,
-            color: theme.colors.textPrimary,
-            margin: 0,
-          }}>
-            Scrap2Go
-          </h2>
+          <img 
+            src="/scrap2go-logo.png" 
+            alt="Scrap2Go"
+            style={{
+              height: 48,
+              width: 'auto',
+              objectFit: 'contain',
+            }}
+          />
         </div>
 
         {/* Language Toggle */}

@@ -261,15 +261,38 @@ const BankDetailsScreen: React.FC = () => {
       </ScrollableContent>
 
       <FixedBottomContainer>
-        <Button
-          variant="primary"
-          size="lg"
-          fullWidth
-          onClick={handleAddAccount}
-          icon="add"
-        >
-          Add Bank Account
-        </Button>
+        {accounts.length > 0 ? (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: theme.spacing.sm }}>
+             <Button
+              variant="primary"
+              size="lg"
+              fullWidth
+              onClick={() => router.push('/payout-confirmation')}
+              icon="check_circle"
+            >
+              Confirm Payout Method
+            </Button>
+            <Button
+              variant="ghost" 
+              size="lg" // Adjust if needed
+              fullWidth
+              onClick={handleAddAccount}
+              icon="add"
+            >
+              Add Another Account
+            </Button>
+          </div>
+        ) : (
+          <Button
+            variant="primary"
+            size="lg"
+            fullWidth
+            onClick={handleAddAccount}
+            icon="add"
+          >
+            Add Bank Account
+          </Button>
+        )}
       </FixedBottomContainer>
     </ScreenContainer>
   );

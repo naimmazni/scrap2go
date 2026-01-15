@@ -60,25 +60,16 @@ const OTPScreen: React.FC = () => {
         alignItems: 'center',
         padding: `${theme.spacing.xl} ${theme.spacing.lg}`,
       }}>
-        <div style={{
-          width: 64,
-          height: 64,
-          borderRadius: theme.borderRadius.xl,
-          backgroundColor: withOpacity(theme.colors.primary, 0.1),
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          marginBottom: theme.spacing.sm,
-        }}>
-          <Icon name="directions_car" size={32} color={theme.colors.primary} />
-        </div>
-        <h1 style={{
-          fontSize: theme.fontSizes.xl,
-          fontWeight: theme.fontWeights.bold,
-          color: theme.colors.primary,
-        }}>
-          Scrap2Go
-        </h1>
+        <img 
+          src="/scrap2go-logo.png" 
+          alt="Scrap2Go"
+          style={{
+            height: 64,
+            width: 'auto',
+            objectFit: 'contain',
+            marginBottom: theme.spacing.sm,
+          }}
+        />
       </div>
 
       {/* Content */}

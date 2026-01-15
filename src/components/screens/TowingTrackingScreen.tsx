@@ -314,8 +314,23 @@ const TowingTrackingScreen: React.FC = () => {
           >
             Call Driver
           </Button>
+
+          {/* New Proceed Button */}
+          <Button
+            fullWidth
+            size="lg"
+            variant="primary" // Changed to primary to be prominent
+            icon="arrow_forward"
+            onClick={() => router.push('/ownership-transfer')}
+            style={{
+               backgroundColor: theme.colors.success, // Distinguish from Call
+            }}
+          >
+            Driver Arrived - Proceed
+          </Button>
+
           <button
-            onClick={() => router.push('/success')}
+            onClick={() => router.push('/home')} // Changed from success to home for cancel 
             style={{
               padding: theme.spacing.sm,
               color: theme.colors.alertOrangeDark,

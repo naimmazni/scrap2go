@@ -17,36 +17,59 @@ import {
 const OwnershipTransferScreen: React.FC = () => {
   const router = useRouter();
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  // State
   const [isDrawing, setIsDrawing] = useState(false);
   const [hasSignature, setHasSignature] = useState(false);
-  const [agreedToTerms, setAgreedToTerms] = useState(false);
+  
+  // Consent State
   const [agreedToTransfer, setAgreedToTransfer] = useState(false);
   const [agreedToDisposal, setAgreedToDisposal] = useState(false);
+  const [agreedToTerms, setAgreedToTerms] = useState(false);
 
+  // Canvas Setup
   useEffect(() => {
     const canvas = canvasRef.current;
-    if (canvas) {
+    const container = containerRef.current;
+    
+    if (canvas && container) {
+      // Set canvas resolution to match display size for sharpness
+      canvas.width = container.clientWidth;
+      canvas.height = 224; // Fixed height
+
       const ctx = canvas.getContext('2d');
       if (ctx) {
-        ctx.strokeStyle = theme.colors.primary;
-        ctx.lineWidth = 2;
+        ctx.strokeStyle = theme.colors.textPrimary;
+        ctx.lineWidth = 3;
         ctx.lineCap = 'round';
         ctx.lineJoin = 'round';
       }
     }
   }, []);
 
+  // --- Drawing Logic ---
+
+  const getCoordinates = (e: React.MouseEvent | React.TouchEvent) => {
+    const canvas = canvasRef.current;
+    if (!canvas) return { x: 0, y: 0 };
+
+    const rect = canvas.getBoundingClientRect();
+    const x = ('touches' in e) ? e.touches[0].clientX - rect.left : (e as React.MouseEvent).nativeEvent.offsetX;
+    const y = ('touches' in e) ? e.touches[0].clientY - rect.top : (e as React.MouseEvent).nativeEvent.offsetY;
+    return { x, y };
+  };
+
   const startDrawing = (e: React.MouseEvent<HTMLCanvasElement> | React.TouchEvent<HTMLCanvasElement>) => {
+    // Prevent scrolling when touching canvas
+    if ('touches' in e) e.stopPropagation(); 
+
     const canvas = canvasRef.current;
     if (!canvas) return;
-
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
-    const rect = canvas.getBoundingClientRect();
-    const x = ('touches' in e) ? e.touches[0].clientX - rect.left : e.nativeEvent.offsetX;
-    const y = ('touches' in e) ? e.touches[0].clientY - rect.top : e.nativeEvent.offsetY;
-
+    const { x, y } = getCoordinates(e);
     ctx.beginPath();
     ctx.moveTo(x, y);
     setIsDrawing(true);
@@ -54,17 +77,14 @@ const OwnershipTransferScreen: React.FC = () => {
 
   const draw = (e: React.MouseEvent<HTMLCanvasElement> | React.TouchEvent<HTMLCanvasElement>) => {
     if (!isDrawing) return;
+    if ('touches' in e) e.preventDefault(); // Prevent scrolling while drawing
 
     const canvas = canvasRef.current;
     if (!canvas) return;
-
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
-    const rect = canvas.getBoundingClientRect();
-    const x = ('touches' in e) ? e.touches[0].clientX - rect.left : e.nativeEvent.offsetX;
-    const y = ('touches' in e) ? e.touches[0].clientY - rect.top : e.nativeEvent.offsetY;
-
+    const { x, y } = getCoordinates(e);
     ctx.lineTo(x, y);
     ctx.stroke();
     setHasSignature(true);
@@ -85,418 +105,294 @@ const OwnershipTransferScreen: React.FC = () => {
     }
   };
 
+  // --- Submission Logic ---
+
+  const canSubmit = hasSignature && agreedToTransfer && agreedToDisposal && agreedToTerms;
+
   const handleSubmit = () => {
     if (canSubmit) {
-      // In real app, save signature and transfer data
+      // In real app: save signature blob and transfer data
       console.log('Ownership transfer authorized');
-      router.push('/order-timeline');
+      router.push('/success');
     }
   };
 
-  const canSubmit = hasSignature && agreedToTerms && agreedToTransfer && agreedToDisposal;
-
   return (
     <ScreenContainer>
-      <ScrollableContent bottomPadding={120}>
-        {/* Header */}
-        <div style={{
-          padding: theme.spacing.lg,
-          paddingBottom: theme.spacing.md,
-          display: 'flex',
-          alignItems: 'center',
-          gap: theme.spacing.md,
+      {/* Header */}
+      <div style={{
+        position: 'sticky',
+        top: 0,
+        zIndex: 30,
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        padding: `${theme.spacing.md} ${theme.spacing.lg}`,
+        backgroundColor: withOpacity(theme.colors.backgroundLight, 0.9),
+        backdropFilter: 'blur(12px)',
+        borderBottom: `1px solid ${withOpacity(theme.colors.gray200, 0.5)}`
+      }}>
+        <button
+          onClick={() => router.back()}
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            color: theme.colors.primary,
+            border: 'none',
+            background: 'none',
+            padding: 0,
+            cursor: 'pointer'
+          }}
+        >
+          <Icon name="arrow_back_ios" size={20} />
+        </button>
+        <h1 style={{
+          fontSize: theme.fontSizes.lg,
+          fontWeight: theme.fontWeights.bold,
+          color: theme.colors.textPrimary,
         }}>
-          <button
-            onClick={() => router.back()}
-            style={{
-              width: 40,
-              height: 40,
-              borderRadius: theme.borderRadius.full,
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              backgroundColor: theme.colors.surfaceLight,
-              border: `1px solid ${theme.colors.borderLight}`,
-            }}
-          >
-            <Icon name="arrow_back" size={24} color={theme.colors.textPrimary} />
-          </button>
-          <div>
-            <h1 style={{
-              fontSize: theme.fontSizes.xl,
-              fontWeight: theme.fontWeights.bold,
-              color: theme.colors.textPrimary,
-            }}>
-              Transfer Authorization
-            </h1>
-            <p style={{
-              fontSize: theme.fontSizes.sm,
-              color: theme.colors.textSecondary,
-            }}>
-              Digital consent & signature
-            </p>
-          </div>
-        </div>
+          Final Handover
+        </h1>
+        <div style={{ width: 20 }} /> 
+      </div>
 
-        {/* Warning Banner */}
-        <div style={{ padding: `0 ${theme.spacing.lg}`, marginBottom: theme.spacing.lg }}>
-          <Card style={{
-            backgroundColor: withOpacity(theme.colors.alertOrange, 0.1),
-            border: `1px solid ${withOpacity(theme.colors.alertOrange, 0.3)}`,
-          }}>
-            <div style={{ display: 'flex', gap: theme.spacing.sm }}>
-              <Icon name="info" size={20} color={theme.colors.alertOrange} />
-              <div>
-                <p style={{
-                  fontSize: theme.fontSizes.sm,
-                  fontWeight: theme.fontWeights.semibold,
-                  color: theme.colors.textPrimary,
-                  marginBottom: 4,
-                }}>
-                  Legal Authorization Required
-                </p>
-                <p style={{
-                  fontSize: theme.fontSizes.xs,
-                  color: theme.colors.textSecondary,
-                  lineHeight: 1.5,
-                }}>
-                  By signing below, you authorize Scrap2Go to process your vehicle for scrapping and handle JPJ deregistration on your behalf.
-                </p>
-              </div>
-            </div>
-          </Card>
-        </div>
-
-        {/* Vehicle Details */}
-        <div style={{ padding: theme.spacing.lg, paddingTop: 0 }}>
-          <SectionTitle title="Vehicle Information" />
+      <ScrollableContent bottomPadding={140}>
+        <div style={{ padding: theme.spacing.lg, paddingTop: theme.spacing.sm, display: 'flex', flexDirection: 'column', gap: theme.spacing.lg }}>
           
+          {/* Vehicle Info Card */}
           <Card>
-            <div style={{
-              display: 'grid',
-              gridTemplateColumns: '1fr 1fr',
-              gap: theme.spacing.md,
-            }}>
-              <div>
-                <p style={{
-                  fontSize: theme.fontSizes.xs,
-                  color: theme.colors.textSecondary,
-                  marginBottom: 4,
-                }}>
-                  Registration
-                </p>
-                <p style={{
-                  fontSize: theme.fontSizes.base,
-                  fontWeight: theme.fontWeights.bold,
-                  color: theme.colors.textPrimary,
-                }}>
-                  WXX 1234
-                </p>
-              </div>
-              <div>
-                <p style={{
-                  fontSize: theme.fontSizes.xs,
-                  color: theme.colors.textSecondary,
-                  marginBottom: 4,
-                }}>
-                  Make & Model
-                </p>
-                <p style={{
-                  fontSize: theme.fontSizes.base,
-                  fontWeight: theme.fontWeights.bold,
-                  color: theme.colors.textPrimary,
-                }}>
-                  Proton Saga 1.3
-                </p>
-              </div>
-              <div>
-                <p style={{
-                  fontSize: theme.fontSizes.xs,
-                  color: theme.colors.textSecondary,
-                  marginBottom: 4,
-                }}>
-                  Year
-                </p>
-                <p style={{
-                  fontSize: theme.fontSizes.base,
-                  fontWeight: theme.fontWeights.bold,
-                  color: theme.colors.textPrimary,
-                }}>
-                  2010
-                </p>
-              </div>
-              <div>
-                <p style={{
-                  fontSize: theme.fontSizes.xs,
-                  color: theme.colors.textSecondary,
-                  marginBottom: 4,
-                }}>
-                  Valuation
-                </p>
-                <p style={{
-                  fontSize: theme.fontSizes.base,
-                  fontWeight: theme.fontWeights.bold,
-                  color: theme.colors.primary,
-                }}>
-                  RM 850
-                </p>
-              </div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: theme.spacing.md, marginBottom: theme.spacing.md }}>
+               <div style={{
+                 height: 48,
+                 width: 48,
+                 display: 'flex',
+                 alignItems: 'center',
+                 justifyContent: 'center',
+                 borderRadius: theme.borderRadius.xl,
+                 backgroundColor: withOpacity(theme.colors.primary, 0.1),
+                 color: theme.colors.primary,
+               }}>
+                 <Icon name="directions_car" size={28} />
+               </div>
+               <div>
+                 <h2 style={{
+                   fontSize: theme.fontSizes.lg,
+                   fontWeight: theme.fontWeights.bold,
+                   color: theme.colors.textPrimary,
+                   lineHeight: 1.2,
+                 }}>
+                   Proton Saga 1.3
+                 </h2>
+                 <p style={{ fontSize: theme.fontSizes.sm, color: theme.colors.textSecondary }}>
+                   WAB 1234 • 2010 Model
+                 </p>
+               </div>
             </div>
-          </Card>
-        </div>
-
-        {/* Consent Checkboxes */}
-        <div style={{ padding: theme.spacing.lg, paddingTop: 0 }}>
-          <SectionTitle title="Authorization & Consent" />
-
-          <Card>
+            
             <div style={{
-              display: 'flex',
-              flexDirection: 'column',
-              gap: theme.spacing.md,
-            }}>
-              {/* Transfer Ownership */}
-              <label style={{
-                display: 'flex',
-                alignItems: 'flex-start',
-                gap: theme.spacing.sm,
-                cursor: 'pointer',
-              }}>
-                <input
-                  type="checkbox"
-                  checked={agreedToTransfer}
-                  onChange={(e) => setAgreedToTransfer(e.target.checked)}
-                  style={{
-                    width: 20,
-                    height: 20,
-                    marginTop: 2,
-                    cursor: 'pointer',
-                    accentColor: theme.colors.primary,
-                  }}
-                />
-                <div>
-                  <p style={{
-                    fontSize: theme.fontSizes.sm,
-                    fontWeight: theme.fontWeights.semibold,
-                    color: theme.colors.textPrimary,
-                    marginBottom: 4,
-                  }}>
-                    I authorize the transfer of vehicle ownership
-                  </p>
-                  <p style={{
-                    fontSize: theme.fontSizes.xs,
-                    color: theme.colors.textSecondary,
-                    lineHeight: 1.5,
-                  }}>
-                    I confirm that I am the legal owner of this vehicle and authorize Scrap2Go to take possession of the vehicle for scrapping purposes.
-                  </p>
-                </div>
-              </label>
-
-              {/* Disposal Authorization */}
-              <label style={{
-                display: 'flex',
-                alignItems: 'flex-start',
-                gap: theme.spacing.sm,
-                cursor: 'pointer',
-              }}>
-                <input
-                  type="checkbox"
-                  checked={agreedToDisposal}
-                  onChange={(e) => setAgreedToDisposal(e.target.checked)}
-                  style={{
-                    width: 20,
-                    height: 20,
-                    marginTop: 2,
-                    cursor: 'pointer',
-                    accentColor: theme.colors.primary,
-                  }}
-                />
-                <div>
-                  <p style={{
-                    fontSize: theme.fontSizes.sm,
-                    fontWeight: theme.fontWeights.semibold,
-                    color: theme.colors.textPrimary,
-                    marginBottom: 4,
-                  }}>
-                    I consent to vehicle disposal and scrapping
-                  </p>
-                  <p style={{
-                    fontSize: theme.fontSizes.xs,
-                    color: theme.colors.textSecondary,
-                    lineHeight: 1.5,
-                  }}>
-                    I understand that the vehicle will be permanently disposed of and cannot be recovered after the scrapping process begins.
-                  </p>
-                </div>
-              </label>
-
-              {/* JPJ Deregistration */}
-              <label style={{
-                display: 'flex',
-                alignItems: 'flex-start',
-                gap: theme.spacing.sm,
-                cursor: 'pointer',
-              }}>
-                <input
-                  type="checkbox"
-                  checked={agreedToTerms}
-                  onChange={(e) => setAgreedToTerms(e.target.checked)}
-                  style={{
-                    width: 20,
-                    height: 20,
-                    marginTop: 2,
-                    cursor: 'pointer',
-                    accentColor: theme.colors.primary,
-                  }}
-                />
-                <div>
-                  <p style={{
-                    fontSize: theme.fontSizes.sm,
-                    fontWeight: theme.fontWeights.semibold,
-                    color: theme.colors.textPrimary,
-                    marginBottom: 4,
-                  }}>
-                    I authorize JPJ deregistration on my behalf
-                  </p>
-                  <p style={{
-                    fontSize: theme.fontSizes.xs,
-                    color: theme.colors.textSecondary,
-                    lineHeight: 1.5,
-                  }}>
-                    I authorize Scrap2Go to process the deregistration of my vehicle with JPJ (Road Transport Department) and receive the official deregistration certificate.
-                  </p>
-                </div>
-              </label>
-            </div>
-          </Card>
-        </div>
-
-        {/* Digital Signature */}
-        <div style={{ padding: theme.spacing.lg, paddingTop: 0 }}>
-          <SectionTitle 
-            title="Digital Signature" 
-            subtitle="Sign below to authorize the transfer"
-          />
-
-          <Card>
-            {/* Signature Pad */}
-            <div style={{
-              position: 'relative',
-              marginBottom: theme.spacing.md,
-            }}>
-              <canvas
-                ref={canvasRef}
-                width={350}
-                height={180}
-                onMouseDown={startDrawing}
-                onMouseMove={draw}
-                onMouseUp={stopDrawing}
-                onMouseLeave={stopDrawing}
-                onTouchStart={startDrawing}
-                onTouchMove={draw}
-                onTouchEnd={stopDrawing}
-                style={{
-                  width: '100%',
-                  height: 180,
-                  border: `2px dashed ${theme.colors.borderLight}`,
-                  borderRadius: theme.borderRadius.lg,
-                  backgroundColor: withOpacity(theme.colors.gray100, 0.3),
-                  cursor: 'crosshair',
-                  touchAction: 'none',
-                }}
-              />
-              
-              {!hasSignature && (
-                <div style={{
-                  position: 'absolute',
-                  inset: 0,
-                  display: 'flex',
-                  flexDirection: 'column',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  pointerEvents: 'none',
-                  gap: theme.spacing.xs,
-                }}>
-                  <Icon name="draw" size={32} color={theme.colors.gray400} />
-                  <p style={{
-                    fontSize: theme.fontSizes.sm,
-                    color: theme.colors.textSecondary,
-                  }}>
-                    Sign here with your finger or mouse
-                  </p>
-                </div>
-              )}
-            </div>
-
-            {/* Clear Button */}
-            {hasSignature && (
-              <Button
-                variant="outline"
-                size="sm"
-                icon="refresh"
-                onClick={clearSignature}
-                fullWidth
-              >
-                Clear Signature
-              </Button>
-            )}
-
-            {/* Signature Info */}
-            <div style={{
-              marginTop: theme.spacing.md,
-              padding: theme.spacing.sm,
-              backgroundColor: withOpacity(theme.colors.primary, 0.05),
-              borderRadius: theme.borderRadius.md,
-              border: `1px solid ${withOpacity(theme.colors.primary, 0.1)}`,
-            }}>
-              <div style={{ display: 'flex', gap: theme.spacing.xs, alignItems: 'flex-start' }}>
-                <Icon name="verified" size={16} color={theme.colors.primary} />
-                <p style={{
-                  fontSize: theme.fontSizes.xs,
-                  color: theme.colors.textSecondary,
-                  lineHeight: 1.5,
-                }}>
-                  Your signature will be securely stored and used only for this vehicle transfer authorization. This digital signature has the same legal validity as a handwritten signature.
-                </p>
-              </div>
-            </div>
-          </Card>
-        </div>
-
-        {/* Date & Time */}
-        <div style={{ padding: `0 ${theme.spacing.lg}`, marginBottom: theme.spacing.lg }}>
-          <Card>
-            <div style={{
+              paddingTop: theme.spacing.sm,
+              borderTop: `1px solid ${theme.colors.gray100}`,
               display: 'flex',
               justifyContent: 'space-between',
               alignItems: 'center',
             }}>
               <div>
-                <p style={{
-                  fontSize: theme.fontSizes.xs,
-                  color: theme.colors.textSecondary,
-                  marginBottom: 4,
-                }}>
-                  Signed On
-                </p>
-                <p style={{
-                  fontSize: theme.fontSizes.sm,
-                  fontWeight: theme.fontWeights.semibold,
-                  color: theme.colors.textPrimary,
-                }}>
-                  {new Date().toLocaleDateString('en-MY', { 
-                    day: 'numeric', 
-                    month: 'long', 
-                    year: 'numeric',
-                    hour: '2-digit',
-                    minute: '2-digit'
-                  })}
-                </p>
+                <span style={{ fontSize: theme.fontSizes.xs, color: theme.colors.textSecondary, display: 'block' }}>
+                  Agreed Valuation
+                </span>
+                <span style={{ fontSize: theme.fontSizes.xl, fontWeight: theme.fontWeights.extrabold, color: theme.colors.primary }}>
+                  RM 850
+                </span>
               </div>
-              <Icon name="schedule" size={24} color={theme.colors.primary} />
+              <div style={{ textAlign: 'right' }}>
+                <span style={{ fontSize: theme.fontSizes.xs, color: theme.colors.textSecondary, display: 'block' }}>
+                   Status
+                </span>
+                <span style={{ 
+                  fontSize: theme.fontSizes.sm, 
+                  fontWeight: theme.fontWeights.bold, 
+                  color: theme.colors.alertOrange,
+                  textTransform: 'uppercase'
+                }}>
+                  Pending Signature
+                </span>
+              </div>
             </div>
           </Card>
+
+          {/* Legal Declaration Text */}
+          <div style={{ display: 'flex', flexDirection: 'column', gap: theme.spacing.xs }}>
+            <SectionTitle title="Terms of Transfer" />
+            <div style={{
+              height: 140,
+              overflowY: 'auto',
+              backgroundColor: theme.colors.surfaceLight,
+              padding: theme.spacing.md,
+              borderRadius: theme.borderRadius.xl,
+              border: `1px solid ${theme.colors.borderLight}`,
+              fontSize: theme.fontSizes.sm,
+              lineHeight: 1.6,
+              color: theme.colors.textSecondary,
+            }}>
+              <p style={{ marginBottom: theme.spacing.sm }}>
+                I hereby give full consent to Scrap2Go to sell and scrap this vehicle. I transfer full ownership and liability of the vehicle mentioned above to the appointed representative upon completion of this handover.
+              </p>
+              <p style={{ marginBottom: theme.spacing.sm }}>
+                I confirm that all personal belongings have been removed. I acknowledge receipt of the final valuation price.
+              </p>
+              <p>
+                This digital signature serves as a legally binding agreement for the deregistration and disposal of the asset.
+              </p>
+            </div>
+          </div>
+
+          {/* Authorization Checkboxes */}
+          <Card>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: theme.spacing.md }}>
+              
+              {/* Transfer Ownership */}
+              <label style={{ display: 'flex', alignItems: 'flex-start', gap: theme.spacing.sm, cursor: 'pointer' }}>
+                <input
+                  type="checkbox"
+                  checked={agreedToTransfer}
+                  onChange={(e) => setAgreedToTransfer(e.target.checked)}
+                  style={{ width: 20, height: 20, marginTop: 2, accentColor: theme.colors.primary }}
+                />
+                <div>
+                  <p style={{ fontSize: theme.fontSizes.sm, fontWeight: theme.fontWeights.semibold, color: theme.colors.textPrimary }}>
+                    Transfer Ownership
+                  </p>
+                  <p style={{ fontSize: theme.fontSizes.xs, color: theme.colors.textSecondary, lineHeight: 1.4 }}>
+                    I confirm I am the legal owner and authorize the transfer.
+                  </p>
+                </div>
+              </label>
+
+              {/* Disposal Authorization */}
+              <label style={{ display: 'flex', alignItems: 'flex-start', gap: theme.spacing.sm, cursor: 'pointer' }}>
+                <input
+                  type="checkbox"
+                  checked={agreedToDisposal}
+                  onChange={(e) => setAgreedToDisposal(e.target.checked)}
+                  style={{ width: 20, height: 20, marginTop: 2, accentColor: theme.colors.primary }}
+                />
+                <div>
+                  <p style={{ fontSize: theme.fontSizes.sm, fontWeight: theme.fontWeights.semibold, color: theme.colors.textPrimary }}>
+                    Authorize Disposal
+                  </p>
+                  <p style={{ fontSize: theme.fontSizes.xs, color: theme.colors.textSecondary, lineHeight: 1.4 }}>
+                    I understand the vehicle will be permanently scrapped.
+                  </p>
+                </div>
+              </label>
+
+              {/* JPJ Deregistration */}
+              <label style={{ display: 'flex', alignItems: 'flex-start', gap: theme.spacing.sm, cursor: 'pointer' }}>
+                <input
+                  type="checkbox"
+                  checked={agreedToTerms}
+                  onChange={(e) => setAgreedToTerms(e.target.checked)}
+                  style={{ width: 20, height: 20, marginTop: 2, accentColor: theme.colors.primary }}
+                />
+                <div>
+                  <p style={{ fontSize: theme.fontSizes.sm, fontWeight: theme.fontWeights.semibold, color: theme.colors.textPrimary }}>
+                    JPJ Deregistration
+                  </p>
+                  <p style={{ fontSize: theme.fontSizes.xs, color: theme.colors.textSecondary, lineHeight: 1.4 }}>
+                    I authorize Scrap2Go to process deregistration with JPJ.
+                  </p>
+                </div>
+              </label>
+            </div>
+          </Card>
+
+          {/* Signature Area */}
+          <div>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: theme.spacing.xs }}>
+              <SectionTitle title="Digital Signature" />
+              {hasSignature && (
+                 <button 
+                 onClick={clearSignature}
+                 style={{
+                   fontSize: theme.fontSizes.xs,
+                   fontWeight: theme.fontWeights.bold,
+                   color: theme.colors.alertOrange,
+                   textTransform: 'uppercase',
+                   background: 'none',
+                   border: 'none',
+                   cursor: 'pointer',
+                 }}>
+                 Clear
+               </button>
+              )}
+            </div>
+            
+            <div 
+              ref={containerRef}
+              style={{
+                position: 'relative',
+                width: '100%',
+                height: 224,
+                backgroundColor: theme.colors.surfaceLight,
+                borderRadius: theme.borderRadius['2xl'],
+                border: `2px dashed ${hasSignature ? theme.colors.primary : theme.colors.gray300}`,
+                overflow: 'hidden',
+                touchAction: 'none',
+              }}
+            >
+               {!hasSignature && !isDrawing && (
+                 <div style={{
+                   position: 'absolute',
+                   inset: 0,
+                   display: 'flex',
+                   flexDirection: 'column',
+                   alignItems: 'center',
+                   justifyContent: 'center',
+                   pointerEvents: 'none',
+                   color: theme.colors.gray300
+                 }}>
+                   <Icon name="edit" size={40} />
+                   <span style={{
+                     marginTop: theme.spacing.sm,
+                     color: theme.colors.textSecondary,
+                     fontSize: theme.fontSizes.sm,
+                     fontWeight: theme.fontWeights.semibold,
+                     textTransform: 'uppercase',
+                     letterSpacing: 1,
+                   }}>
+                     Sign Here
+                   </span>
+                 </div>
+               )}
+               
+               <canvas
+                  ref={canvasRef}
+                  onMouseDown={startDrawing}
+                  onMouseMove={draw}
+                  onMouseUp={stopDrawing}
+                  onMouseLeave={stopDrawing}
+                  onTouchStart={startDrawing}
+                  onTouchMove={draw}
+                  onTouchEnd={stopDrawing}
+                  style={{
+                    display: 'block',
+                    width: '100%',
+                    height: '100%',
+                    cursor: 'crosshair',
+                  }}
+               />
+            </div>
+            
+            <p style={{
+              marginTop: theme.spacing.sm,
+              fontSize: theme.fontSizes.xs,
+              color: theme.colors.textSecondary,
+              textAlign: 'center'
+            }}>
+              Signed on {new Date().toLocaleDateString()}
+            </p>
+          </div>
+
         </div>
       </ScrollableContent>
 
@@ -508,22 +404,22 @@ const OwnershipTransferScreen: React.FC = () => {
           disabled={!canSubmit}
           onClick={handleSubmit}
           style={{
-            opacity: canSubmit ? 1 : 0.5,
-            backgroundColor: canSubmit ? theme.colors.primary : theme.colors.gray300,
+            height: 56,
+            opacity: canSubmit ? 1 : 0.6,
+            backgroundColor: canSubmit ? theme.colors.primary : theme.colors.gray400,
             boxShadow: canSubmit ? theme.shadows.primary : 'none',
           }}
         >
-          Authorize Transfer
+          Confirm Handover
         </Button>
         {!canSubmit && (
           <p style={{
             marginTop: theme.spacing.sm,
             fontSize: theme.fontSizes.xs,
-            color: theme.colors.error,
+            color: theme.colors.error || '#ef4444',
             textAlign: 'center',
           }}>
-            {!hasSignature && 'Please sign above. '}
-            {(!agreedToTerms || !agreedToTransfer || !agreedToDisposal) && 'Check all consent boxes to continue.'}
+            {!hasSignature ? 'Please provide your signature.' : 'Please check all boxes to proceed.'}
           </p>
         )}
       </FixedBottomContainer>

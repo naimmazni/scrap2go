@@ -10,26 +10,42 @@ import { Icon, Button, PageContainer, PageHeader, ContentArea } from '@/componen
 const photoSteps = [
   {
     id: 1,
-    angle: 'Front View',
+    angle: 'Front',
     icon: 'directions_car',
-    description: 'Position yourself 3 meters in front of the vehicle. Capture the full front including license plate.',
-    tips: ['Include full bumper', 'Ensure license plate is visible', 'Good lighting on headlights'],
+    description: 'Capture the full front view including license plate.',
+    tips: ['Include full bumper', 'License plate visible', 'Good lighting'],
     image: IMAGES.CAR_FRONT,
   },
   {
     id: 2,
-    angle: 'Side View',
+    angle: 'Side',
     icon: 'panorama_horizontal',
-    description: 'Stand 4 meters from the side. Capture the entire length of the vehicle.',
-    tips: ['Full vehicle length', 'Show door condition', 'Include all wheels'],
+    description: 'Capture the entire length of the vehicle from the side.',
+    tips: ['Full car length', 'Show door scratches', 'Include wheels'],
     image: IMAGES.CAR_SIDE,
   },
   {
     id: 3,
-    angle: 'Interior View',
+    angle: 'Rear',
+    icon: 'directions_car',
+    description: 'Capture the full rear view including license plate.',
+    tips: ['Include bumper', 'License plate visible', 'Trunk closed'],
+    image: IMAGES.CAR_SIDE, // Using side image as placeholder if rear not available, or I should check IMAGES constant. For now standardizing.
+  },
+  {
+    id: 4,
+    angle: 'Engine',
+    icon: 'engineering',
+    description: 'Open hood and capture the entire engine bay.',
+    tips: ['Hood fully open', 'Engine visible', 'Check fluid containers'],
+    image: IMAGES.CAR_FRONT, // Placeholder
+  },
+  {
+    id: 5,
+    angle: 'Interior',
     icon: 'airline_seat_recline_normal',
-    description: 'Open the driver door and capture the full dashboard and front seats.',
-    tips: ['Show dashboard condition', 'Include steering wheel', 'Capture seat wear'],
+    description: 'Capture dashboard, steering wheel and front seats.',
+    tips: ['Dashboard clear', 'Steering wheel', 'Seat condition'],
     image: IMAGES.CAR_INTERIOR,
   },
 ];

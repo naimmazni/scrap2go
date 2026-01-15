@@ -20,26 +20,16 @@ const WelcomeScreen: React.FC = () => {
         padding: theme.spacing.md,
         zIndex: 20,
       }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: theme.spacing.sm }}>
-          <div style={{
-            width: 40,
-            height: 40,
-            borderRadius: theme.borderRadius.lg,
-            backgroundColor: theme.colors.primary,
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            boxShadow: theme.shadows.md,
-          }}>
-            <Icon name="recycling" size={24} color={theme.colors.textLight} />
-          </div>
-          <span style={{
-            fontSize: theme.fontSizes.xl,
-            fontWeight: theme.fontWeights.bold,
-            color: theme.colors.textPrimary,
-          }}>
-            Scrap2Go
-          </span>
+        <div style={{ display: 'flex', alignItems: 'center' }}>
+          <img 
+            src="/scrap2go-logo.png" 
+            alt="Scrap2Go"
+            style={{
+              height: 40,
+              width: 'auto',
+              objectFit: 'contain',
+            }}
+          />
         </div>
         
         {/* Language Toggle */}

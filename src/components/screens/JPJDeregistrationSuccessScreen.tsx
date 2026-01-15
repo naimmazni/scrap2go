@@ -1,391 +1,298 @@
-﻿'use client'
+'use client';
 
-// JPJ Deregistration Success Screen - Official certificate display
+// JPJ Processing Status Screen
+// Replaces the placeholder wait screen with detailed JPJ sync status
 import React from 'react';
 import { useRouter } from 'next/navigation';
 import { theme, withOpacity } from '@/lib/theme';
-import { 
-  Icon, 
-  Button, 
-  Card, 
-  ScreenContainer, 
-  ScrollableContent, 
-  FixedBottomContainer,
-  SuccessIcon,
-  IconButton
-} from '@/components/ui';
+import { Icon, Button, PageContainer } from '@/components/ui';
 
 const JPJDeregistrationSuccessScreen: React.FC = () => {
   const router = useRouter();
 
-  const handleDownload = () => {
-    // In a real app, this would download the certificate PDF
-    alert('Certificate downloaded!');
-  };
+  const steps = [
+    {
+       title: 'Vehicle ID Verification',
+       status: 'completed',
+       description: 'Completed',
+    },
+    {
+       title: 'Owner Biometric Match',
+       status: 'completed',
+       description: 'Completed',
+    },
+    {
+       title: 'Batal Hak Milik Approval',
+       status: 'in-progress',
+       description: 'In Progress...',
+    },
+    {
+       title: 'Generate Sijil Pelupusan',
+       status: 'pending',
+       description: 'Pending',
+    },
+  ];
 
   return (
-    <ScreenContainer>
-      {/* Header with Close Button */}
-      <div style={{
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'flex-end',
-        padding: theme.spacing.md,
-      }}>
-        <IconButton
-          icon="close"
-          variant="ghost"
-          onClick={() => router.push('/home')}
-        />
-      </div>
-
-      {/* Main Content */}
-      <ScrollableContent bottomPadding={140} style={{ alignItems: 'center' }}>
-        {/* Success Icon & Message */}
-        <div style={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          gap: theme.spacing.lg,
-          marginBottom: theme.spacing.xl,
-          animation: 'fadeInUp 0.6s ease-out forwards',
-        }}>
-          <SuccessIcon size={80} />
-
-          {/* Success Text */}
-          <div style={{
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            gap: theme.spacing.sm,
-            textAlign: 'center',
-          }}>
-            <h1 style={{
-              fontSize: theme.fontSizes['2xl'],
-              fontWeight: theme.fontWeights.bold,
-              color: theme.colors.textPrimary,
-              lineHeight: 1.2,
+    <PageContainer>
+       {/* Header */}
+       <header style={{
+         display: 'flex',
+         alignItems: 'center',
+         justifyContent: 'space-between',
+         padding: `${theme.spacing.lg} ${theme.spacing.xl}`,
+         backgroundColor: 'transparent',
+       }}>
+         <div style={{ display: 'flex', alignItems: 'center', gap: theme.spacing.sm }}>
+            <button 
+              onClick={() => router.back()}
+              style={{ padding: 0, border: 'none', background: 'none' }}
+            >
+              <Icon name="chevron_left" size={24} color={theme.colors.textPrimary} />
+            </button>
+            <span style={{ 
+               fontSize: theme.fontSizes.xl, 
+               fontWeight: theme.fontWeights.bold,
+               color: theme.colors.textPrimary,
             }}>
-              Official Deregistration Complete
-            </h1>
-            <p style={{
-              fontSize: theme.fontSizes.base,
-              color: theme.colors.textSecondary,
-              maxWidth: 280,
-            }}>
-              Your vehicle plate <span style={{
-                fontWeight: theme.fontWeights.bold,
-                color: theme.colors.textPrimary,
-              }}>WXX 1234</span> is now legally deregistered.
-            </p>
-          </div>
-        </div>
-
-        {/* Certificate Card */}
-        <Card
-          padding="none"
-          style={{
-            width: '100%',
-            maxWidth: 380,
-            overflow: 'hidden',
-            boxShadow: '0 4px 20px rgba(0, 0, 0, 0.05)',
-          }}
-        >
-          {/* Blue Header Bar */}
-          <div style={{
-            height: 12,
-            width: '100%',
-            background: `linear-gradient(to right, ${theme.colors.primary}, ${theme.colors.primaryLight})`,
-          }} />
-
-          {/* Certificate Content */}
-          <div style={{
-            padding: theme.spacing.lg,
-            display: 'flex',
-            flexDirection: 'column',
-            gap: theme.spacing.lg,
-            position: 'relative',
-          }}>
-            {/* Watermark */}
-            <div style={{
-              position: 'absolute',
-              inset: 0,
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              opacity: 0.03,
-              pointerEvents: 'none',
-              overflow: 'hidden',
-            }}>
-              <Icon
-                name="verified"
-                size={200}
-                style={{ transform: 'rotate(-15deg)' }}
-              />
-            </div>
-
-            {/* Header Row */}
-            <div style={{
-              display: 'flex',
-              justifyContent: 'space-between',
-              alignItems: 'flex-start',
-              position: 'relative',
-              zIndex: 10,
-            }}>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-                <p style={{
-                  fontSize: 10,
-                  fontWeight: theme.fontWeights.bold,
-                  color: theme.colors.textSecondary,
-                  textTransform: 'uppercase',
-                  letterSpacing: 2,
-                }}>
-                  Government of Malaysia
-                </p>
-                <h2 style={{
-                  fontSize: theme.fontSizes.lg,
-                  fontWeight: theme.fontWeights.bold,
-                  color: theme.colors.primary,
-                }}>
-                  Sijil Batal Hak Milik
-                </h2>
-                <p style={{
-                  fontSize: theme.fontSizes.xs,
-                  color: theme.colors.textSecondary,
-                }}>
-                  Road Transport Department (JPJ)
-                </p>
-              </div>
-
-              {/* JPJ Emblem */}
-              <div style={{
-                width: 48,
-                height: 48,
-                backgroundColor: withOpacity('#FFC107', 0.1),
-                borderRadius: theme.borderRadius.md,
-                border: `1px solid ${withOpacity('#FFC107', 0.3)}`,
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-              }}>
-                <Icon name="local_police" size={32} color="#D97706" />
-              </div>
-            </div>
-
-            {/* Details Grid */}
-            <div style={{
-              display: 'grid',
-              gridTemplateColumns: '1fr 1fr',
-              gap: theme.spacing.lg,
-              rowGap: theme.spacing.lg,
-              position: 'relative',
-              zIndex: 10,
-            }}>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
-                <span style={{
-                  fontSize: 11,
-                  textTransform: 'uppercase',
-                  letterSpacing: 1,
-                  color: theme.colors.textMuted,
-                  fontWeight: theme.fontWeights.semibold,
-                }}>
-                  Vehicle Plate
-                </span>
-                <span style={{
-                  fontSize: theme.fontSizes.xl,
-                  fontWeight: theme.fontWeights.bold,
-                  color: theme.colors.textPrimary,
-                  fontFamily: 'monospace',
-                }}>
-                  WXX 1234
-                </span>
-              </div>
-
-              <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
-                <span style={{
-                  fontSize: 11,
-                  textTransform: 'uppercase',
-                  letterSpacing: 1,
-                  color: theme.colors.textMuted,
-                  fontWeight: theme.fontWeights.semibold,
-                }}>
-                  Status
-                </span>
-                <div style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: 6,
-                }}>
-                  <span style={{
-                    width: 8,
-                    height: 8,
-                    borderRadius: theme.borderRadius.full,
-                    backgroundColor: theme.colors.alertOrange,
-                  }} />
-                  <span style={{
-                    fontSize: theme.fontSizes.base,
-                    fontWeight: theme.fontWeights.medium,
-                    color: theme.colors.textPrimary,
-                  }}>
-                    Scrapped
-                  </span>
-                </div>
-              </div>
-
-              <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
-                <span style={{
-                  fontSize: 11,
-                  textTransform: 'uppercase',
-                  letterSpacing: 1,
-                  color: theme.colors.textMuted,
-                  fontWeight: theme.fontWeights.semibold,
-                }}>
-                  Date
-                </span>
-                <span style={{
-                  fontSize: theme.fontSizes.sm,
-                  fontWeight: theme.fontWeights.medium,
-                  color: theme.colors.textPrimary,
-                }}>
-                  24 Oct 2023
-                </span>
-              </div>
-
-              <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
-                <span style={{
-                  fontSize: 11,
-                  textTransform: 'uppercase',
-                  letterSpacing: 1,
-                  color: theme.colors.textMuted,
-                  fontWeight: theme.fontWeights.semibold,
-                }}>
-                  Cert Ref.
-                </span>
-                <span style={{
-                  fontSize: theme.fontSizes.sm,
-                  fontWeight: theme.fontWeights.medium,
-                  color: theme.colors.textPrimary,
-                  fontFamily: 'monospace',
-                }}>
-                  JPJ-SBHM-9921
-                </span>
-              </div>
-            </div>
-
-            {/* QR Code Section */}
-            <div style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: theme.spacing.md,
-              paddingTop: theme.spacing.md,
-              marginTop: theme.spacing.sm,
-              borderTop: `1px dashed ${theme.colors.borderLight}`,
-              position: 'relative',
-              zIndex: 10,
-            }}>
-              {/* QR Code */}
-              <div style={{
-                width: 72,
-                height: 72,
-                backgroundColor: theme.colors.surfaceLight,
-                padding: 4,
-                borderRadius: theme.borderRadius.sm,
-                border: `1px solid ${theme.colors.borderLight}`,
-                flexShrink: 0,
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-              }}>
-                <Icon name="qr_code_2" size={64} color={theme.colors.textPrimary} />
-              </div>
-
-              {/* Verification Text */}
-              <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
-                <p style={{
-                  fontSize: 11,
-                  color: theme.colors.textSecondary,
-                  lineHeight: 1.4,
-                }}>
-                  This is a digitally generated document by JPJ e-Aduan System. No signature is required.
-                </p>
-                <div style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: 4,
-                  marginTop: 4,
-                }}>
-                  <Icon name="verified_user" size={14} color={theme.colors.primary} />
-                  <span style={{
-                    fontSize: 10,
-                    fontWeight: theme.fontWeights.bold,
-                    color: theme.colors.primary,
-                    textTransform: 'uppercase',
-                  }}>
-                    Valid Document
-                  </span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </Card>
-      </ScrollableContent>
-
-      {/* Fixed Bottom Actions */}
-      <FixedBottomContainer>
-        <Button
-          variant="primary"
-          size="lg"
-          icon="local_shipping"
-          fullWidth
-          onClick={() => router.push('/payment-method')}
-          style={{
-            boxShadow: `0 8px 16px ${withOpacity(theme.colors.primary, 0.3)}`,
-          }}
-        >
-          Set Up Payment Method
-        </Button>
-
-        <button
-          onClick={() => router.push('/document-preview')}
-          style={{
-            width: '100%',
-            height: 48,
+               Legal Deregistration
+            </span>
+         </div>
+         <div style={{
+            height: 40,
+            width: 40,
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            backgroundColor: 'transparent',
-            color: theme.colors.primary,
-            fontSize: theme.fontSizes.sm,
-            fontWeight: theme.fontWeights.semibold,
             borderRadius: theme.borderRadius.lg,
-            border: 'none',
-            cursor: 'pointer',
-            gap: theme.spacing.xs,
-          }}
-        >
-          <Icon name="visibility" size={18} />
-          View Certificate
-        </button>
-      </FixedBottomContainer>
+            backgroundColor: withOpacity(theme.colors.primary, 0.1),
+            color: theme.colors.primary,
+         }}>
+            <Icon name="gavel" size={24} />
+         </div>
+       </header>
 
-      {/* CSS Animation */}
+       <main style={{
+          flex: 1,
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          padding: `0 ${theme.spacing.xl}`,
+          width: '100%',
+          maxWidth: 448, // max-w-md
+          margin: '0 auto',
+       }}>
+          {/* Main Status Animation */}
+          <div style={{
+             display: 'flex',
+             flexDirection: 'column',
+             alignItems: 'center',
+             marginTop: theme.spacing.md,
+             marginBottom: 40,
+          }}>
+             <div style={{
+                position: 'relative',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                width: 128,
+                height: 128,
+                marginBottom: 24,
+             }}>
+                {/* Outer Pulse */}
+                <div style={{
+                   position: 'absolute',
+                   inset: 0,
+                   borderRadius: theme.borderRadius.full,
+                   backgroundColor: withOpacity(theme.colors.primary, 0.2),
+                   animation: 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                }} />
+                {/* Rotating Border */}
+                <div style={{
+                   position: 'absolute',
+                   inset: 8,
+                   borderRadius: theme.borderRadius.full,
+                   border: `2px dashed ${withOpacity(theme.colors.primary, 0.3)}`,
+                   animation: 'spin 10s linear infinite',
+                }} />
+                {/* Inner Circle */}
+                <div style={{
+                   position: 'relative',
+                   zIndex: 10,
+                   height: 80,
+                   width: 80,
+                   display: 'flex',
+                   alignItems: 'center',
+                   justifyContent: 'center',
+                   borderRadius: theme.borderRadius.full,
+                   backgroundColor: theme.colors.primary,
+                   color: '#fff',
+                   boxShadow: `0 20px 25px -5px ${withOpacity(theme.colors.primary, 0.4)}`,
+                }}>
+                   <Icon name="verified_user" size={40} color="#fff" filled />
+                </div>
+             </div>
+             
+             <h2 style={{
+                fontSize: theme.fontSizes.xl,
+                fontWeight: theme.fontWeights.bold,
+                color: theme.colors.textPrimary,
+                marginBottom: 4,
+             }}>
+                Syncing with JPJ Database...
+             </h2>
+             <p style={{
+                fontSize: theme.fontSizes.sm,
+                fontWeight: theme.fontWeights.medium,
+                color: theme.colors.textSecondary,
+             }}>
+                Transaction ID: S2G-99210-JPJ
+             </p>
+          </div>
+
+          {/* Timeline */}
+          <div style={{
+             width: '100%',
+             position: 'relative',
+             marginBottom: 32,
+          }}>
+             {/* Vertical Line */}
+             <div style={{
+                position: 'absolute',
+                left: 19,
+                top: 24,
+                bottom: 24,
+                width: 2,
+                backgroundColor: theme.colors.gray200,
+             }} />
+
+             {steps.map((step, index) => {
+                const isCompleted = step.status === 'completed';
+                const isInProgress = step.status === 'in-progress';
+                const isPending = step.status === 'pending';
+
+                return (
+                   <div key={index} style={{
+                      position: 'relative',
+                      display: 'flex',
+                      alignItems: 'flex-start',
+                      gap: 16,
+                      paddingBottom: index === steps.length - 1 ? 0 : 32,
+                   }}>
+                      <div style={{
+                         position: 'relative',
+                         zIndex: 10,
+                         flexShrink: 0,
+                         height: 40,
+                         width: 40,
+                         display: 'flex',
+                         alignItems: 'center',
+                         justifyContent: 'center',
+                         borderRadius: theme.borderRadius.full,
+                         backgroundColor: isCompleted ? theme.colors.success : (isInProgress ? theme.colors.primary : theme.colors.gray200),
+                         color: isPending ? theme.colors.gray400 : '#fff',
+                         boxShadow: isCompleted || isInProgress ? theme.shadows.sm : 'none',
+                         animation: isInProgress ? 'pulse 2s infinite' : 'none',
+                      }}>
+                         {isInProgress ? (
+                           <Icon name="sync" size={20} style={{ animation: 'spin 1.5s linear infinite' }} />
+                         ) : isPending ? (
+                           <Icon name="description" size={20} />
+                         ) : (
+                           <Icon name="check" size={20} />
+                         )}
+                      </div>
+                      <div style={{ paddingTop: 8 }}>
+                         <h3 style={{
+                            fontWeight: theme.fontWeights.bold,
+                            color: isInProgress ? theme.colors.primary : (isPending ? theme.colors.textMuted : theme.colors.textPrimary),
+                         }}>
+                            {step.title}
+                         </h3>
+                         <p style={{
+                            fontSize: theme.fontSizes.xs,
+                            fontWeight: theme.fontWeights.medium,
+                            color: isInProgress ? theme.colors.primary : (isPending ? theme.colors.textMuted : theme.colors.success),
+                         }}>
+                            {step.description}
+                         </p>
+                      </div>
+                   </div>
+                );
+             })}
+          </div>
+
+          {/* Info Box */}
+          <div style={{
+             width: '100%',
+             borderRadius: theme.borderRadius.xl,
+             backgroundColor: withOpacity(theme.colors.primary, 0.05), // blue-50
+             padding: 16,
+             border: `1px solid ${withOpacity(theme.colors.primary, 0.1)}`,
+          }}>
+             <div style={{ display: 'flex', gap: 12 }}>
+                <Icon name="info" size={20} color={theme.colors.primary} />
+                <p style={{
+                   fontSize: theme.fontSizes.sm,
+                   fontWeight: theme.fontWeights.medium,
+                   lineHeight: 1.6,
+                   color: withOpacity(theme.colors.textPrimary, 0.8),
+                }}>
+                   This process usually takes 2-4 hours. You will receive a notification once the Digital Certificate is ready.
+                </p>
+             </div>
+          </div>
+       </main>
+
+       {/* Footer */}
+       <footer style={{
+          width: '100%',
+          maxWidth: 448,
+          margin: '0 auto',
+          padding: `16px ${theme.spacing.xl} 40px`,
+          position: 'relative',
+          zIndex: 20,
+          display: 'flex',
+          flexDirection: 'column',
+          gap: theme.spacing.md,
+       }}>
+          <Button
+             fullWidth
+             size="lg"
+             onClick={() => router.push('/location')}
+             style={{
+                height: 56,
+                borderRadius: theme.borderRadius.xl,
+                boxShadow: `0 10px 15px -3px ${withOpacity(theme.colors.primary, 0.25)}`,
+             }}
+          >
+             Schedule Pickup
+          </Button>
+
+          <Button
+            variant="outline"
+            fullWidth
+            onClick={() => router.push('/home')}
+            style={{
+              height: 56,
+              borderRadius: theme.borderRadius.xl,
+              border: 'none',
+              color: theme.colors.textSecondary,
+            }}
+           >
+            Back to Dashboard
+          </Button>
+       </footer>
+
+        {/* CSS Animations */}
       <style>{`
-        @keyframes fadeInUp {
-          from {
-            opacity: 0;
-            transform: translateY(20px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
+        @keyframes spin {
+          from { transform: rotate(0deg); }
+          to { transform: rotate(360deg); }
         }
       `}</style>
-    </ScreenContainer>
+    </PageContainer>
   );
 };
 
 export default JPJDeregistrationSuccessScreen;
-
-
-
