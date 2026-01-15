@@ -27,7 +27,7 @@ const IdentityVerificationScreen: React.FC = () => {
 
   const handleSubmit = () => {
     if (myKadFrontUploaded && myKadBackUploaded && vocUploaded && numberPlateUploaded) {
-      router.push('/jpj-success');
+      router.push('/location');
     }
   };
 
