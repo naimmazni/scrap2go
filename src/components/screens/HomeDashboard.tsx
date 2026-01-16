@@ -96,9 +96,9 @@ const HeroSection = () => (
     <div style={{
       position: 'relative',
       height: 160,
-      backgroundImage: `url("${IMAGES.HERO_FULL_COLOR}")`,
+      backgroundImage: `url("/home_page-car.png")`,
       backgroundSize: 'cover',
-      backgroundPosition: 'center',
+      backgroundPosition: 'center bottom',
     }}>
       <div style={{
         position: 'absolute',
