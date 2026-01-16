@@ -11,7 +11,7 @@ export default function AppLayout({ children }: AppLayoutProps) {
   return (
     <div style={{
       minHeight: '100vh',
-      backgroundImage: 'linear-gradient(rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.3)), url("/scrap-car-background.jpg")',
+      backgroundImage: 'linear-gradient(rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.3)), url("/scrap-car-background.png")',
       backgroundSize: 'cover',
       backgroundPosition: 'center',
       backgroundRepeat: 'no-repeat',
