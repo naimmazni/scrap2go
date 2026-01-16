@@ -14,7 +14,7 @@ const photoSteps = [
     icon: 'directions_car',
     description: 'Capture the full front view including license plate.',
     tips: ['Include full bumper', 'License plate visible', 'Good lighting'],
-    image: IMAGES.CAR_FRONT,
+    image: '/photoguide-frontcar.png',
   },
   {
     id: 2,
@@ -22,7 +22,7 @@ const photoSteps = [
     icon: 'panorama_horizontal',
     description: 'Capture the entire length of the vehicle from the side.',
     tips: ['Full car length', 'Show door scratches', 'Include wheels'],
-    image: IMAGES.CAR_SIDE,
+    image: '/photoguide-sidecar.png',
   },
   {
     id: 3,
@@ -30,7 +30,7 @@ const photoSteps = [
     icon: 'directions_car',
     description: 'Capture the full rear view including license plate.',
     tips: ['Include bumper', 'License plate visible', 'Trunk closed'],
-    image: IMAGES.CAR_SIDE, // Using side image as placeholder if rear not available, or I should check IMAGES constant. For now standardizing.
+    image: '/photoguide-rearcar.png', 
   },
   {
     id: 4,
@@ -38,7 +38,7 @@ const photoSteps = [
     icon: 'engineering',
     description: 'Open hood and capture the entire engine bay.',
     tips: ['Hood fully open', 'Engine visible', 'Check fluid containers'],
-    image: IMAGES.CAR_FRONT, // Placeholder
+    image: '/photoguide-engine.png'
   },
   {
     id: 5,
@@ -145,6 +145,7 @@ const PhotoGuidanceScreen: React.FC = () => {
               width: '100%',
               height: '100%',
               objectFit: 'cover',
+              objectPosition: 'center bottom',
             }}
           />
           {/* Overlay Frame */}
