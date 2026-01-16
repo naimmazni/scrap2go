@@ -11,6 +11,7 @@ import {
   ScreenContainer,
   ScrollableContent,
   FixedBottomContainer,
+  PageHeader,
 } from '@/components/ui';
 
 const ReceiptScreen: React.FC = () => {
@@ -75,46 +76,12 @@ const ReceiptScreen: React.FC = () => {
 
   return (
     <ScreenContainer>
+      <PageHeader
+        title="Payment Receipt"
+        onBack={() => router.push('/home')}
+        showBack
+      />
       <ScrollableContent bottomPadding={140}>
-        {/* Header */}
-        <div style={{
-          padding: theme.spacing.lg,
-          paddingBottom: theme.spacing.md,
-          display: 'flex',
-          alignItems: 'center',
-          gap: theme.spacing.md,
-        }}>
-          <button
-            onClick={() => router.push('/home')}
-            style={{
-              width: 40,
-              height: 40,
-              borderRadius: theme.borderRadius.full,
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              backgroundColor: theme.colors.surfaceLight,
-              border: `1px solid ${theme.colors.borderLight}`,
-            }}
-          >
-            <Icon name="close" size={24} color={theme.colors.textPrimary} />
-          </button>
-          <div>
-            <h1 style={{
-              fontSize: theme.fontSizes.xl,
-              fontWeight: theme.fontWeights.bold,
-              color: theme.colors.textPrimary,
-            }}>
-              Payment Receipt
-            </h1>
-            <p style={{
-              fontSize: theme.fontSizes.sm,
-              color: theme.colors.textSecondary,
-            }}>
-              Order #{receiptData.orderNumber}
-            </p>
-          </div>
-        </div>
 
         {/* Success Icon */}
         <div style={{
@@ -162,10 +129,12 @@ const ReceiptScreen: React.FC = () => {
           }}>
             <p style={{
               fontSize: theme.fontSizes.sm,
-              color: withOpacity('#fff', 0.8),
+              color: '#ffffff',
               marginBottom: theme.spacing.xs,
               textTransform: 'uppercase',
               letterSpacing: 1,
+              fontWeight: theme.fontWeights.semibold,
+              opacity: 0.95,
             }}>
               Total Paid
             </p>

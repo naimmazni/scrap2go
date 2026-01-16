@@ -12,6 +12,7 @@ import {
   ScrollableContent,
   FixedBottomContainer,
   SectionTitle,
+  PageHeader,
 } from '@/components/ui';
 
 const OwnershipTransferScreen: React.FC = () => {
@@ -119,45 +120,11 @@ const OwnershipTransferScreen: React.FC = () => {
 
   return (
     <ScreenContainer>
-      {/* Header */}
-      <div style={{
-        position: 'sticky',
-        top: 0,
-        zIndex: 30,
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        padding: `${theme.spacing.md} ${theme.spacing.lg}`,
-        backgroundColor: withOpacity(theme.colors.backgroundLight, 0.95),
-        borderBottom: `1px solid ${withOpacity(theme.colors.borderLight, 1)}`
-      }}>
-        <button
-          onClick={() => router.back()}
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            color: theme.colors.primary,
-            border: 'none',
-            background: 'none',
-            padding: 0,
-            cursor: 'pointer'
-          }}
-        >
-          <Icon name="arrow_back_ios" size={20} />
-        </button>
-        <h1 style={{
-          fontSize: theme.fontSizes.lg,
-          fontWeight: theme.fontWeights.bold,
-          color: theme.colors.textPrimary,
-          textAlign: 'center',
-          flex: 1,
-        }}>
-          Final Handover Signature
-        </h1>
-        <div style={{ width: 36, textAlign: 'right', color: theme.colors.textSecondary, fontSize: theme.fontSizes.sm }}>
-          2/6
-        </div>
-      </div>
+      <PageHeader
+        title="Handover Signature"
+        showBack
+        onBack={() => router.back()}
+      />
 
       <ScrollableContent bottomPadding={140}>
         <div style={{ padding: theme.spacing.lg, paddingTop: theme.spacing.sm, display: 'flex', flexDirection: 'column', gap: theme.spacing.lg }}>

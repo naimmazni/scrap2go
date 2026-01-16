@@ -3,7 +3,7 @@
 import React from 'react';
 import { useRouter } from 'next/navigation';
 import { theme, withOpacity } from '@/lib/theme';
-import { Icon, Button, PageContainer, Card } from '@/components/ui';
+import { Icon, Button, PageContainer, Card, PageHeader } from '@/components/ui';
 import { IMAGES } from '@/constants/images';
 
 const DriverInspectionScreen: React.FC = () => {
@@ -17,64 +17,11 @@ const DriverInspectionScreen: React.FC = () => {
 
   return (
     <PageContainer>
-      {/* Header */}
-      <div style={{
-        position: 'sticky',
-        top: 0,
-        zIndex: 30,
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        padding: `${theme.spacing.md} ${theme.spacing.lg}`,
-        backgroundColor: theme.colors.backgroundLight,
-        borderBottom: `1px solid ${theme.colors.borderLight}`,
-      }}>
-        <button
-          onClick={() => router.back()}
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            width: 24,
-            height: 24,
-            color: theme.colors.textPrimary,
-            border: 'none',
-            background: 'none',
-            padding: 0,
-            cursor: 'pointer',
-          }}
-        >
-          <Icon name="arrow_back_ios" size={20} />
-        </button>
-        <h1 style={{
-          fontSize: theme.fontSizes.lg,
-          fontWeight: theme.fontWeights.semibold,
-          color: theme.colors.textPrimary,
-          flex: 1,
-          textAlign: 'center',
-        }}>
-          Driver Vehicle Inspection
-        </h1>
-        <button
-          onClick={() => {
-            /* Help action */
-          }}
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            width: 24,
-            height: 24,
-            color: theme.colors.textPrimary,
-            border: 'none',
-            background: 'none',
-            padding: 0,
-            cursor: 'pointer',
-          }}
-        >
-          <Icon name="help_outline" size={20} />
-        </button>
-      </div>
+      <PageHeader
+        title="Vehicle Inspection"
+        showBack
+        onBack={() => router.back()}
+      />
 
       {/* Main Content */}
       <div style={{

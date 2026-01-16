@@ -4,7 +4,7 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { theme, withOpacity } from '@/lib/theme';
-import { Icon, Button, PageContainer } from '@/components/ui';
+import { Icon, Button, PageContainer, PageHeader } from '@/components/ui';
 
 const BankDetailsScreen: React.FC = () => {
   const router = useRouter();
@@ -29,41 +29,11 @@ const BankDetailsScreen: React.FC = () => {
 
   return (
     <PageContainer>
-      {/* Header */}
-      <header style={{
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        padding: `${theme.spacing.md} ${theme.spacing.xl}`,
-        backgroundColor: 'transparent',
-        position: 'relative',
-        zIndex: 20,
-      }}>
-        <button
-          onClick={() => router.push('/vehicle-details')}
-          style={{
-            position: 'absolute',
-            left: theme.spacing.xl,
-            padding: 0,
-            border: 'none',
-            background: 'none',
-            cursor: 'pointer',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            color: theme.colors.textPrimary,
-          }}
-        >
-          <Icon name="chevron_left" size={24} color={theme.colors.textPrimary} />
-        </button>
-        <h1 style={{
-          fontSize: theme.fontSizes.xl,
-          fontWeight: theme.fontWeights.bold,
-          color: theme.colors.textPrimary,
-        }}>
-          Payout Setup
-        </h1>
-      </header>
+      <PageHeader
+        title="Payout Setup"
+        showBack
+        onBack={() => router.push('/vehicle-details')}
+      />
 
       {/* Main Content */}
       <main style={{

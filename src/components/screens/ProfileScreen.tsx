@@ -1,7 +1,7 @@
 ﻿'use client'
 
 // Profile / Settings Screen
-import React from 'react';
+import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { theme, withOpacity } from '@/lib/theme';
 import { 
@@ -17,6 +17,11 @@ import {
 
 const ProfileScreen: React.FC = () => {
   const router = useRouter();
+  const [showLogoutDialog, setShowLogoutDialog] = useState(false);
+
+  const handleLogout = () => {
+    router.push('/login');
+  };
 
   return (
     <PageContainer>
@@ -194,7 +199,7 @@ const ProfileScreen: React.FC = () => {
           <div style={{
             backgroundColor: theme.colors.surfaceLight,
           }}>
-            <MenuItem icon="logout" label="Log Out" danger />
+            <MenuItem icon="logout" label="Log Out" danger onClick={() => setShowLogoutDialog(true)} />
           </div>
         </div>
 
@@ -208,6 +213,90 @@ const ProfileScreen: React.FC = () => {
           Scrap2Go v1.0.0
         </p>
       </ContentArea>
+
+      {/* Logout Confirmation Dialog */}
+      {showLogoutDialog && (
+        <div style={{
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          backgroundColor: 'rgba(0, 0, 0, 0.5)',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          zIndex: 1000,
+          padding: theme.spacing.lg,
+        }}>
+          <div style={{
+            backgroundColor: theme.colors.surfaceLight,
+            borderRadius: theme.borderRadius.lg,
+            padding: theme.spacing.xl,
+            maxWidth: 400,
+            width: '100%',
+          }}>
+            <div style={{
+              display: 'flex',
+              justifyContent: 'center',
+              marginBottom: theme.spacing.lg,
+            }}>
+              <div style={{
+                width: 64,
+                height: 64,
+                borderRadius: theme.borderRadius.full,
+                backgroundColor: withOpacity(theme.colors.error, 0.1),
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}>
+                <Icon name="logout" size={32} color={theme.colors.error} />
+              </div>
+            </div>
+
+            <h3 style={{
+              fontSize: theme.fontSizes.xl,
+              fontWeight: theme.fontWeights.bold,
+              textAlign: 'center',
+              marginBottom: theme.spacing.sm,
+            }}>
+              Log Out
+            </h3>
+
+            <p style={{
+              fontSize: theme.fontSizes.base,
+              color: theme.colors.textSecondary,
+              textAlign: 'center',
+              marginBottom: theme.spacing.xl,
+            }}>
+              Are you sure you want to log out of your account?
+            </p>
+
+            <div style={{
+              display: 'flex',
+              gap: theme.spacing.md,
+            }}>
+              <Button
+                variant="outline"
+                fullWidth
+                onClick={() => setShowLogoutDialog(false)}
+              >
+                Cancel
+              </Button>
+              <Button
+                variant="primary"
+                fullWidth
+                onClick={handleLogout}
+                style={{
+                  backgroundColor: theme.colors.error,
+                }}
+              >
+                Log Out
+              </Button>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Bottom Nav */}
       <BottomNav activeTab="profile" onTabChange={(tab) => {

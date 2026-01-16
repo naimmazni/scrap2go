@@ -28,9 +28,9 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
         display: 'flex',
         alignItems: 'center',
         padding: `${theme.spacing.sm} ${theme.spacing.md}`,
-        backgroundColor: theme.colors.surfaceLight,
-        borderBottom: `1px solid ${theme.colors.borderLight}`,
-        boxShadow: theme.shadows.sm,
+        backgroundColor: 'transparent',
+        borderBottom: 'none',
+        boxShadow: 'none',
         position: 'sticky',
         top: 0,
         zIndex: theme.zIndex.sticky,
@@ -68,11 +68,12 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
       
       <h2 style={{ 
         flex: 1,
-        textAlign: 'center',
+        textAlign: 'left',
         fontSize: theme.fontSizes.xl,
         fontWeight: theme.fontWeights.bold,
         color: theme.colors.textPrimary,
-        paddingRight: rightAction ? 0 : 48,
+        paddingLeft: theme.spacing.md,
+        margin: 0,
       }}>
         {title}
       </h2>
