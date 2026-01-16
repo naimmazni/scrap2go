@@ -1,5 +1,8 @@
 # Scrap2Go
 
+![Welcome Screen](./public/screenshots/welcome-screen.png)
+_Turn your old car into cash today - The first screen users see when opening Scrap2Go_
+
 ## Overview
 
 Scrap2Go is a comprehensive digital platform designed to revolutionize the scrap vehicle disposal process in Malaysia. The application serves as an end-to-end solution that connects vehicle owners with authorized scrap dealers, streamlining the entire journey from vehicle valuation to official deregistration with the Road Transport Department of Malaysia (JPJ - Jabatan Pengangkutan Jalan).
@@ -17,6 +20,9 @@ Scrap2Go operates on a mobile-first approach, offering users a seamless experien
 **1. User Onboarding**
 Users begin their journey by creating an account through a simple registration process. The platform supports multiple authentication methods including PIN and password protection, ensuring secure access to sensitive information and transactions.
 
+![Home Dashboard](./public/screenshots/home-dashboard.png)
+_Home Dashboard - Your command center for all scrap vehicle activities with active orders and quick scan access_
+
 **2. Vehicle Assessment**
 The heart of the service lies in its AI-powered vehicle valuation system. Users are guided through a photo documentation process where they capture images of their vehicle from multiple angles. The platform provides clear guidance on how to photograph the vehicle for optimal assessment, ensuring accurate valuations based on:
 
@@ -25,6 +31,9 @@ The heart of the service lies in its AI-powered vehicle valuation system. Users 
 - Make and model
 - Age and mileage
 - Government incentives for proper disposal
+
+![Valuation Result](./public/screenshots/valuation-result.png)
+_Valuation Result - Transparent pricing with clear breakdown of offer components and 24-hour validity_
 
 **3. Instant Valuation**
 Within moments of submitting vehicle photos and details, users receive a transparent, competitive offer for their vehicle. The platform guarantees fair pricing based on current scrap metal rates, vehicle condition, and applicable government incentive programs. Each offer comes with a validity period, typically 24 hours, giving users time to make an informed decision.
@@ -41,6 +50,9 @@ Once users accept an offer, they can schedule a convenient pickup time and locat
 On the scheduled day, a certified driver arrives to collect the vehicle. The platform facilitates real-time tracking of the tow truck, allowing users to monitor the driver's arrival. Upon arrival, the driver conducts a comprehensive inspection to verify:
 
 - Engine presence
+  ![Tracking Screen](./public/screenshots/tracking-screen.png)
+  _Live Tracking - Real-time map showing driver location and estimated arrival time_
+
 - Catalytic converter status
 - Overall condition matching the submitted photos
 
@@ -66,6 +78,8 @@ The platform manages this entire process on behalf of the user, providing update
 
 **8. Payment & Payout**
 Users receive their payment through their chosen method after successful vehicle collection and inspection. The platform supports:
+![Payout Success](./public/screenshots/payout-success.png)
+_Payment Success - Celebration screen confirming payment sent with transaction details and downloadable receipts_
 
 - Bank account transfers
 - Multiple payment methods
