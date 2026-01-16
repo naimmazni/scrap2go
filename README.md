@@ -1,7 +1,12 @@
 # Scrap2Go
 
+<div align="center">
+
 ![Welcome Screen](./public/screenshots/welcome-screen.png)
+
 _Turn your old car into cash today - The first screen users see when opening Scrap2Go_
+
+</div>
 
 ## Overview
 
@@ -20,8 +25,13 @@ Scrap2Go operates on a mobile-first approach, offering users a seamless experien
 **1. User Onboarding**
 Users begin their journey by creating an account through a simple registration process. The platform supports multiple authentication methods including PIN and password protection, ensuring secure access to sensitive information and transactions.
 
+<div align="center">
+
 ![Home Dashboard](./public/screenshots/home-dashboard.png)
+
 _Home Dashboard - Your command center for all scrap vehicle activities with active orders and quick scan access_
+
+</div>
 
 **2. Vehicle Assessment**
 The heart of the service lies in its AI-powered vehicle valuation system. Users are guided through a photo documentation process where they capture images of their vehicle from multiple angles. The platform provides clear guidance on how to photograph the vehicle for optimal assessment, ensuring accurate valuations based on:
@@ -32,8 +42,13 @@ The heart of the service lies in its AI-powered vehicle valuation system. Users 
 - Age and mileage
 - Government incentives for proper disposal
 
+<div align="center">
+
 ![Valuation Result](./public/screenshots/valuation-result.png)
+
 _Valuation Result - Transparent pricing with clear breakdown of offer components and 24-hour validity_
+
+</div>
 
 **3. Instant Valuation**
 Within moments of submitting vehicle photos and details, users receive a transparent, competitive offer for their vehicle. The platform guarantees fair pricing based on current scrap metal rates, vehicle condition, and applicable government incentive programs. Each offer comes with a validity period, typically 24 hours, giving users time to make an informed decision.
@@ -46,8 +61,13 @@ Once users accept an offer, they can schedule a convenient pickup time and locat
 - Choosing preferred time slots
 - Receiving notifications about pickup status
 
+<div align="center">
+
 ![Order Timeline](./public/screenshots/order-timeline.png)
+
 _Order Timeline - Visual progress tracker showing all stages from order placement to completion_
+
+</div>
 
 **5. Driver Coordination & Inspection**
 On the scheduled day, a certified driver arrives to collect the vehicle. The platform facilitates real-time tracking of the tow truck, allowing users to monitor the driver's arrival. Upon arrival, the driver conducts a comprehensive inspection to verify:
@@ -64,8 +84,13 @@ A critical feature of Scrap2Go is its handling of legal documentation. The platf
 - Terms and conditions acknowledgment
 - Documentation preview before finalization
 
+<div align="center">
+
 ![Handover Signature](./public/screenshots/handover-signature.png)
+
 _Handover Signature - Digital signature pad for legally binding ownership transfer with consent checkboxes_
+
+</div>
 
 This ensures that the ownership transfer is legally binding and properly documented, protecting both the seller and the buyer.
 
