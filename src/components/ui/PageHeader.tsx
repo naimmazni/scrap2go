@@ -68,11 +68,12 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
       
       <h2 style={{ 
         flex: 1,
-        textAlign: 'center',
+        textAlign: 'left',
         fontSize: theme.fontSizes.xl,
         fontWeight: theme.fontWeights.bold,
         color: theme.colors.textPrimary,
-        paddingRight: rightAction ? 0 : 48,
+        paddingLeft: theme.spacing.md,
+        margin: 0,
       }}>
         {title}
       </h2>
