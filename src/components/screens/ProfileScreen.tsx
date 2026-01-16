@@ -128,7 +128,6 @@ const ProfileScreen: React.FC = () => {
               Account
             </p>
             <MenuItem icon="badge" label="Identity Verification" badge="Complete" />
-            <MenuItem icon="account_balance" label="Bank Details" onClick={() => router.push('/bank-details')} />
             <MenuItem icon="location_on" label="Saved Addresses" onClick={() => router.push('/saved-addresses')} />
           </div>
 

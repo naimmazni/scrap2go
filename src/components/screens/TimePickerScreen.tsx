@@ -26,10 +26,10 @@ const TimePickerScreen: React.FC = () => {
       {/* Header */}
       <div style={{
         padding: `${theme.spacing.sm} ${theme.spacing.md}`,
-        borderBottom: `1px solid ${theme.colors.borderLight}`,
+        borderBottom: 'none',
         position: 'sticky',
         top: 0,
-        backgroundColor: theme.colors.surfaceLight,
+        backgroundColor: 'transparent',
         zIndex: 20,
       }}>
         <div style={{
@@ -58,15 +58,8 @@ const TimePickerScreen: React.FC = () => {
           }}>
             Schedule Pickup
           </h2>
-          <span style={{
-            fontSize: theme.fontSizes.sm,
-            fontWeight: theme.fontWeights.bold,
-            color: theme.colors.primaryDark,
-          }}>
-            Step 3 of 4
-          </span>
+          <div style={{ width: 40 }} />
         </div>
-        <ProgressBar progress={75} height={4} style={{ marginTop: theme.spacing.sm }} />
       </div>
 
       {/* Content */}

@@ -61,18 +61,18 @@ const RegistrationScreen: React.FC = () => {
     if (validateForm()) {
       console.log('Registering user:', formData);
       // TODO: Implement actual registration logic
-      router.push('/onboarding');
+      router.push('/bank-details');
     }
   };
 
   const handleGoogleSignup = () => {
     console.log('Google signup');
-    router.push('/onboarding');
+    router.push('/bank-details');
   };
 
   const handleAppleSignup = () => {
     console.log('Apple signup');
-    router.push('/onboarding');
+    router.push('/bank-details');
   };
 
   const handleInputChange = (field: string, value: string) => {

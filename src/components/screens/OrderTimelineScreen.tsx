@@ -132,13 +132,20 @@ const OrderTimelineScreen: React.FC = () => {
             marginBottom: theme.spacing.md,
           }}>
             <div>
+              <p style={{
+                fontSize: theme.fontSizes.sm,
+                color: theme.colors.textSecondary,
+                marginBottom: theme.spacing.xs,
+              }}>
+                Scrap Order
+              </p>
               <h3 style={{
                 fontSize: theme.fontSizes.lg,
                 fontWeight: theme.fontWeights.bold,
                 color: theme.colors.textPrimary,
                 marginBottom: theme.spacing.xs,
               }}>
-                Scrap Order #SO-2026-001234
+                #SO-2026-001234
               </h3>
               <p style={{
                 fontSize: theme.fontSizes.sm,
@@ -209,6 +216,7 @@ const OrderTimelineScreen: React.FC = () => {
                   <h4 style={{
                     fontSize: theme.fontSizes.base,
                     fontWeight: theme.fontWeights.bold,
+                    color: '#fff',
                   }}>
                     Current Status
                   </h4>
@@ -224,12 +232,15 @@ const OrderTimelineScreen: React.FC = () => {
                   fontSize: theme.fontSizes.lg,
                   fontWeight: theme.fontWeights.semibold,
                   marginBottom: theme.spacing.xs,
+                  color: '#fff',
                 }}>
                   {timelineSteps[currentStepIndex].title}
                 </p>
                 <p style={{
                   fontSize: theme.fontSizes.sm,
-                  opacity: 0.9,
+                  opacity: 1,
+                  color: '#fff',
+                  lineHeight: 1.5,
                 }}>
                   {timelineSteps[currentStepIndex].description}
                 </p>
@@ -309,6 +320,8 @@ const OrderTimelineScreen: React.FC = () => {
                       fontWeight: theme.fontWeights.bold,
                       color: step.status === 'pending' 
                         ? theme.colors.textSecondary 
+                        : step.status === 'current'
+                        ? theme.colors.alertOrange
                         : theme.colors.textPrimary,
                     }}>
                       {step.title}

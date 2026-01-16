@@ -113,7 +113,7 @@ const OwnershipTransferScreen: React.FC = () => {
     if (canSubmit) {
       // In real app: save signature blob and transfer data
       console.log('Ownership transfer authorized');
-      router.push('/success');
+      router.push('/jpj-success');
     }
   };
 
@@ -128,9 +128,8 @@ const OwnershipTransferScreen: React.FC = () => {
         alignItems: 'center',
         justifyContent: 'space-between',
         padding: `${theme.spacing.md} ${theme.spacing.lg}`,
-        backgroundColor: withOpacity(theme.colors.backgroundLight, 0.9),
-        backdropFilter: 'blur(12px)',
-        borderBottom: `1px solid ${withOpacity(theme.colors.gray200, 0.5)}`
+        backgroundColor: withOpacity(theme.colors.backgroundLight, 0.95),
+        borderBottom: `1px solid ${withOpacity(theme.colors.borderLight, 1)}`
       }}>
         <button
           onClick={() => router.back()}
@@ -150,90 +149,153 @@ const OwnershipTransferScreen: React.FC = () => {
           fontSize: theme.fontSizes.lg,
           fontWeight: theme.fontWeights.bold,
           color: theme.colors.textPrimary,
+          textAlign: 'center',
+          flex: 1,
         }}>
-          Final Handover
+          Final Handover Signature
         </h1>
-        <div style={{ width: 20 }} /> 
+        <div style={{ width: 36, textAlign: 'right', color: theme.colors.textSecondary, fontSize: theme.fontSizes.sm }}>
+          2/6
+        </div>
       </div>
 
       <ScrollableContent bottomPadding={140}>
         <div style={{ padding: theme.spacing.lg, paddingTop: theme.spacing.sm, display: 'flex', flexDirection: 'column', gap: theme.spacing.lg }}>
           
           {/* Vehicle Info Card */}
-          <Card>
-            <div style={{ display: 'flex', alignItems: 'center', gap: theme.spacing.md, marginBottom: theme.spacing.md }}>
-               <div style={{
-                 height: 48,
-                 width: 48,
-                 display: 'flex',
-                 alignItems: 'center',
-                 justifyContent: 'center',
-                 borderRadius: theme.borderRadius.xl,
-                 backgroundColor: withOpacity(theme.colors.primary, 0.1),
-                 color: theme.colors.primary,
-               }}>
-                 <Icon name="directions_car" size={28} />
-               </div>
-               <div>
-                 <h2 style={{
-                   fontSize: theme.fontSizes.lg,
-                   fontWeight: theme.fontWeights.bold,
-                   color: theme.colors.textPrimary,
-                   lineHeight: 1.2,
-                 }}>
-                   Proton Saga 1.3
-                 </h2>
-                 <p style={{ fontSize: theme.fontSizes.sm, color: theme.colors.textSecondary }}>
-                   WAB 1234 • 2010 Model
-                 </p>
-               </div>
-            </div>
-            
-            <div style={{
-              paddingTop: theme.spacing.sm,
-              borderTop: `1px solid ${theme.colors.gray100}`,
-              display: 'flex',
-              justifyContent: 'space-between',
-              alignItems: 'center',
-            }}>
-              <div>
-                <span style={{ fontSize: theme.fontSizes.xs, color: theme.colors.textSecondary, display: 'block' }}>
-                  Agreed Valuation
-                </span>
-                <span style={{ fontSize: theme.fontSizes.xl, fontWeight: theme.fontWeights.extrabold, color: theme.colors.primary }}>
-                  RM 850
-                </span>
-              </div>
-              <div style={{ textAlign: 'right' }}>
-                <span style={{ fontSize: theme.fontSizes.xs, color: theme.colors.textSecondary, display: 'block' }}>
-                   Status
-                </span>
-                <span style={{ 
-                  fontSize: theme.fontSizes.sm, 
-                  fontWeight: theme.fontWeights.bold, 
-                  color: theme.colors.alertOrange,
-                  textTransform: 'uppercase'
+          <Card style={{ 
+            padding: theme.spacing.lg, 
+            borderRadius: theme.borderRadius.xl,
+            background: `linear-gradient(135deg, ${withOpacity(theme.colors.primary, 0.05)} 0%, ${withOpacity(theme.colors.primary, 0.02)} 100%)`,
+            border: `1px solid ${withOpacity(theme.colors.primary, 0.1)}`,
+          }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: theme.spacing.lg }}>
+              {/* Top section with icon and vehicle name */}
+              <div style={{ display: 'flex', alignItems: 'flex-start', gap: theme.spacing.md }}>
+                <div style={{
+                  height: 72,
+                  width: 72,
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  borderRadius: theme.borderRadius.xl,
+                  backgroundColor: theme.colors.primary,
+                  color: '#fff',
+                  flexShrink: 0,
                 }}>
-                  Pending Signature
-                </span>
+                  <Icon name="directions_car" size={40} filled />
+                </div>
+                <div style={{ flex: 1 }}>
+                  <p style={{
+                    fontSize: theme.fontSizes.xs,
+                    fontWeight: theme.fontWeights.bold,
+                    color: theme.colors.textSecondary,
+                    textTransform: 'uppercase',
+                    letterSpacing: '0.05em',
+                    margin: 0,
+                    marginBottom: 4,
+                  }}>
+                    Vehicle Details
+                  </p>
+                  <h2 style={{
+                    fontSize: theme.fontSizes['2xl'],
+                    fontWeight: theme.fontWeights.extrabold || 800,
+                    color: theme.colors.textPrimary,
+                    lineHeight: 1.2,
+                    margin: 0,
+                    marginBottom: 8,
+                  }}>
+                    Proton Wira
+                  </h2>
+                  <div style={{
+                    display: 'inline-block',
+                    backgroundColor: '#000',
+                    color: '#fff',
+                    padding: '6px 12px',
+                    borderRadius: '4px',
+                    fontSize: theme.fontSizes.base,
+                    fontWeight: theme.fontWeights.extrabold,
+                    letterSpacing: '0.1em',
+                    fontFamily: 'monospace',
+                  }}>
+                    WAB 1234
+                  </div>
+                </div>
+              </div>
+
+              {/* Bottom section with payment amount */}
+              <div style={{
+                backgroundColor: withOpacity(theme.colors.primary, 0.08),
+                borderRadius: theme.borderRadius.lg,
+                padding: theme.spacing.md,
+                display: 'flex',
+                flexDirection: 'column',
+                gap: theme.spacing.sm,
+              }}>
+                <p style={{
+                  fontSize: theme.fontSizes.xs,
+                  fontWeight: theme.fontWeights.bold,
+                  color: theme.colors.textSecondary,
+                  textTransform: 'uppercase',
+                  letterSpacing: '0.05em',
+                  margin: 0,
+                }}>
+                  Payment Amount
+                </p>
+                <h3 style={{
+                  fontSize: theme.fontSizes['3xl'],
+                  fontWeight: theme.fontWeights.extrabold || 800,
+                  color: theme.colors.primary,
+                  margin: 0,
+                }}>
+                  RM 1,200.00
+                </h3>
               </div>
             </div>
           </Card>
 
-          {/* Legal Declaration Text */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: theme.spacing.xs }}>
-            <SectionTitle title="Terms of Transfer" />
+          {/* Payment Reserved Status Card */}
+          <div style={{
+            backgroundColor: theme.colors.successLight || '#F0FDF4',
+            borderRadius: theme.borderRadius.lg,
+            padding: theme.spacing.md,
+            display: 'flex',
+            gap: theme.spacing.md,
+            alignItems: 'flex-start',
+            border: `1px solid ${theme.colors.successGreen || theme.colors.successLight || '#BBF7D0'}`,
+          }}>
             <div style={{
-              height: 140,
-              overflowY: 'auto',
-              backgroundColor: theme.colors.surfaceLight,
-              padding: theme.spacing.md,
-              borderRadius: theme.borderRadius.xl,
-              border: `1px solid ${theme.colors.borderLight}`,
-              fontSize: theme.fontSizes.sm,
-              lineHeight: 1.6,
-              color: theme.colors.textSecondary,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              width: 36,
+              height: 36,
+              borderRadius: theme.borderRadius.full,
+              backgroundColor: withOpacity(theme.colors.white, 0.12),
+              color: theme.colors.successGreen || theme.colors.success,
             }}>
+              <Icon name="lock" size={18} />
+            </div>
+            <div>
+              <p style={{ fontSize: theme.fontSizes.sm, fontWeight: theme.fontWeights.semibold, color: theme.colors.successGreen || theme.colors.success }}>Payment Reserved</p>
+              <p style={{ fontSize: theme.fontSizes.xs, color: withOpacity(theme.colors.successGreen || theme.colors.success, 0.9) }}>Funds are secured and ready for instant release upon signature completion.</p>
+            </div>
+          </div>
+
+            {/* Legal Declaration Text */}
+            <div style={{ display: 'flex', flexDirection: 'column', gap: theme.spacing.xs }}>
+              <SectionTitle title="Legal Declaration" />
+              <div style={{
+                height: 128,
+                overflowY: 'auto',
+                backgroundColor: theme.colors.surfaceLight,
+                padding: theme.spacing.md,
+                borderRadius: theme.borderRadius.xl,
+                border: `1px solid ${theme.colors.borderLight}`,
+                fontSize: theme.fontSizes.sm,
+                lineHeight: 1.6,
+                color: theme.colors.textSecondary,
+              }}>
               <p style={{ marginBottom: theme.spacing.sm }}>
                 I hereby give full consent to Scrap2Go to sell and scrap this vehicle. I transfer full ownership and liability of the vehicle mentioned above to the appointed representative upon completion of this handover.
               </p>
@@ -308,8 +370,8 @@ const OwnershipTransferScreen: React.FC = () => {
 
           {/* Signature Area */}
           <div>
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: theme.spacing.xs }}>
-              <SectionTitle title="Digital Signature" />
+            <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', marginBottom: theme.spacing.xs }}>
+              <SectionTitle title="Owner Signature" />
               {hasSignature && (
                  <button 
                  onClick={clearSignature}
@@ -322,19 +384,19 @@ const OwnershipTransferScreen: React.FC = () => {
                    border: 'none',
                    cursor: 'pointer',
                  }}>
-                 Clear
+                 CLEAR
                </button>
               )}
             </div>
-            
+
             <div 
               ref={containerRef}
               style={{
                 position: 'relative',
                 width: '100%',
-                height: 224,
+                height: 192,
                 backgroundColor: theme.colors.surfaceLight,
-                borderRadius: theme.borderRadius['2xl'],
+                borderRadius: theme.borderRadius.xl,
                 border: `2px dashed ${hasSignature ? theme.colors.primary : theme.colors.gray300}`,
                 overflow: 'hidden',
                 touchAction: 'none',
@@ -351,11 +413,12 @@ const OwnershipTransferScreen: React.FC = () => {
                    pointerEvents: 'none',
                    color: theme.colors.gray300
                  }}>
-                   <Icon name="edit" size={40} />
+                   <Icon name="edit" size={48} />
+                   <div style={{ width: '60%', height: 1, backgroundImage: `linear-gradient(to right, ${theme.colors.gray300} 33%, rgba(255,255,255,0) 0%)`, backgroundSize: '12px 1px', backgroundRepeat: 'repeat-x', marginTop: theme.spacing.sm }} />
                    <span style={{
                      marginTop: theme.spacing.sm,
                      color: theme.colors.textSecondary,
-                     fontSize: theme.fontSizes.sm,
+                     fontSize: theme.fontSizes.xs,
                      fontWeight: theme.fontWeights.semibold,
                      textTransform: 'uppercase',
                      letterSpacing: 1,
@@ -382,7 +445,7 @@ const OwnershipTransferScreen: React.FC = () => {
                   }}
                />
             </div>
-            
+
             <p style={{
               marginTop: theme.spacing.sm,
               fontSize: theme.fontSizes.xs,
@@ -408,9 +471,10 @@ const OwnershipTransferScreen: React.FC = () => {
             opacity: canSubmit ? 1 : 0.6,
             backgroundColor: canSubmit ? theme.colors.primary : theme.colors.gray400,
             boxShadow: canSubmit ? theme.shadows.primary : 'none',
+            borderRadius: theme.borderRadius.xl,
           }}
         >
-          Confirm Handover
+          Sign & Secure Payment
         </Button>
         {!canSubmit && (
           <p style={{
@@ -422,6 +486,15 @@ const OwnershipTransferScreen: React.FC = () => {
             {!hasSignature ? 'Please provide your signature.' : 'Please check all boxes to proceed.'}
           </p>
         )}
+        <p style={{
+          marginTop: theme.spacing.sm,
+          fontSize: theme.fontSizes.xs,
+          color: theme.colors.textSecondary,
+          textAlign: 'center',
+          lineHeight: 1.4,
+        }}>
+          By signing, you confirm the physical handover of the vehicle and authorize payment release.
+        </p>
       </FixedBottomContainer>
     </ScreenContainer>
   );

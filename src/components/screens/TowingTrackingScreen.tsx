@@ -167,32 +167,40 @@ const TowingTrackingScreen: React.FC = () => {
         bottom: 0,
         left: 0,
         right: 0,
+        maxHeight: '50vh',
+        overflowY: 'auto',
         backgroundColor: theme.colors.surfaceLight,
         borderTopLeftRadius: 32,
         borderTopRightRadius: 32,
-        boxShadow: '0 -4px 30px rgba(0,0,0,0.12)',
+        boxShadow: '0 -8px 40px rgba(0,0,0,0.15)',
         padding: theme.spacing.lg,
-        paddingTop: theme.spacing.sm,
+        paddingTop: theme.spacing.md,
         paddingBottom: theme.spacing.xl,
         zIndex: 30,
       }}>
         {/* Handle */}
         <div style={{
           width: 48,
-          height: 6,
+          height: 5,
           backgroundColor: theme.colors.gray300,
           borderRadius: theme.borderRadius.full,
           margin: '0 auto',
           marginBottom: theme.spacing.lg,
         }} />
 
-        {/* Status */}
-        <div style={{ marginBottom: theme.spacing.lg }}>
+        {/* Status Card */}
+        <div style={{
+          backgroundColor: withOpacity(theme.colors.primary, 0.08),
+          padding: theme.spacing.md,
+          borderRadius: theme.borderRadius.xl,
+          marginBottom: theme.spacing.lg,
+          border: `1px solid ${withOpacity(theme.colors.primary, 0.15)}`,
+        }}>
           <div style={{
             display: 'flex',
             alignItems: 'center',
             gap: theme.spacing.sm,
-            marginBottom: 4,
+            marginBottom: theme.spacing.sm,
           }}>
             <div style={{
               width: 8,
@@ -202,7 +210,7 @@ const TowingTrackingScreen: React.FC = () => {
               animation: 'pulse 2s ease-in-out infinite',
             }} />
             <span style={{
-              fontSize: theme.fontSizes.sm,
+              fontSize: theme.fontSizes.xs,
               fontWeight: theme.fontWeights.bold,
               color: theme.colors.primary,
               textTransform: 'uppercase',
@@ -212,20 +220,21 @@ const TowingTrackingScreen: React.FC = () => {
             </span>
           </div>
           <h1 style={{
-            fontSize: 32,
+            fontSize: 36,
             fontWeight: theme.fontWeights.extrabold,
+            color: theme.colors.textPrimary,
           }}>
             5 mins away
           </h1>
         </div>
 
-        {/* Driver Info */}
+        {/* Driver Info Card */}
         <div style={{
           display: 'flex',
           alignItems: 'center',
           gap: theme.spacing.md,
-          padding: theme.spacing.md,
-          borderRadius: theme.borderRadius['2xl'],
+          padding: theme.spacing.lg,
+          borderRadius: theme.borderRadius.xl,
           backgroundColor: theme.colors.backgroundLight,
           border: `1px solid ${theme.colors.borderLight}`,
           marginBottom: theme.spacing.lg,
@@ -239,17 +248,20 @@ const TowingTrackingScreen: React.FC = () => {
               backgroundImage: `url("${IMAGES.DRIVER_AVATAR}")`,
               backgroundSize: 'cover',
               backgroundPosition: 'center',
-              border: `2px solid ${theme.colors.surfaceLight}`,
-              boxShadow: theme.shadows.sm,
+              border: `3px solid ${theme.colors.surfaceLight}`,
+              boxShadow: `0 4px 12px ${withOpacity(theme.colors.primary, 0.2)}`,
             }} />
             <div style={{
               position: 'absolute',
-              bottom: -4,
-              right: -4,
-              padding: 4,
+              bottom: -2,
+              right: -2,
+              padding: '4px 6px',
               borderRadius: theme.borderRadius.full,
               backgroundColor: theme.colors.surfaceLight,
-              border: `1px solid ${theme.colors.borderLight}`,
+              border: `2px solid ${theme.colors.yellow}`,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
             }}>
               <Icon name="star" size={12} color={theme.colors.yellow} filled />
             </div>
@@ -261,10 +273,12 @@ const TowingTrackingScreen: React.FC = () => {
               display: 'flex',
               alignItems: 'baseline',
               justifyContent: 'space-between',
+              marginBottom: 4,
             }}>
               <h3 style={{
                 fontSize: theme.fontSizes.lg,
                 fontWeight: theme.fontWeights.bold,
+                color: theme.colors.textPrimary,
               }}>
                 Ahmad
               </h3>
@@ -274,6 +288,9 @@ const TowingTrackingScreen: React.FC = () => {
                 display: 'flex',
                 alignItems: 'center',
                 gap: 4,
+                backgroundColor: withOpacity(theme.colors.yellow, 0.1),
+                padding: '2px 8px',
+                borderRadius: theme.borderRadius.full,
               }}>
                 4.8 <span style={{ color: theme.colors.yellow, fontSize: theme.fontSizes.xs }}>★</span>
               </span>
@@ -281,61 +298,73 @@ const TowingTrackingScreen: React.FC = () => {
             <p style={{
               fontSize: theme.fontSizes.sm,
               color: theme.colors.textSecondary,
-              marginTop: 2,
             }}>
-              3-Ton Lorry â€¢ BKE 4829
+              3-Ton Lorry • BKE 4829
             </p>
           </div>
 
           {/* Chat Button */}
           <button style={{
-            width: 40,
-            height: 40,
+            width: 44,
+            height: 44,
             borderRadius: theme.borderRadius.full,
             backgroundColor: withOpacity(theme.colors.primary, 0.1),
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
+            border: 'none',
+            cursor: 'pointer',
+            transition: 'all 0.3s ease',
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.backgroundColor = withOpacity(theme.colors.primary, 0.2);
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.backgroundColor = withOpacity(theme.colors.primary, 0.1);
           }}>
             <Icon name="chat" size={20} color={theme.colors.primary} />
           </button>
         </div>
 
         {/* Actions */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: theme.spacing.sm }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: theme.spacing.md }}>
           <Button
             fullWidth
             size="lg"
             icon="call"
             onClick={() => {}}
             style={{
-              boxShadow: `0 8px 20px ${withOpacity(theme.colors.primary, 0.25)}`,
+              boxShadow: `0 8px 20px ${withOpacity(theme.colors.primary, 0.2)}`,
             }}
           >
             Call Driver
           </Button>
 
-          {/* New Proceed Button */}
           <Button
             fullWidth
             size="lg"
-            variant="primary" // Changed to primary to be prominent
+            variant="primary"
             icon="arrow_forward"
-            onClick={() => router.push('/ownership-transfer')}
+            onClick={() => router.push('/driver-inspection')}
             style={{
-               backgroundColor: theme.colors.success, // Distinguish from Call
+              backgroundColor: theme.colors.success,
+              boxShadow: `0 8px 20px ${withOpacity(theme.colors.success, 0.2)}`,
             }}
           >
             Driver Arrived - Proceed
           </Button>
 
           <button
-            onClick={() => router.push('/home')} // Changed from success to home for cancel 
+            onClick={() => router.push('/home')}
             style={{
-              padding: theme.spacing.sm,
+              padding: `${theme.spacing.md} ${theme.spacing.sm}`,
               color: theme.colors.alertOrangeDark,
               fontWeight: theme.fontWeights.semibold,
               textAlign: 'center',
+              border: 'none',
+              backgroundColor: 'transparent',
+              cursor: 'pointer',
+              fontSize: theme.fontSizes.base,
             }}
           >
             Cancel Booking

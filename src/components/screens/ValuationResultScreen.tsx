@@ -1,20 +1,30 @@
 ﻿'use client'
 
 // Valuation Result Screen
-import React from 'react';
+import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { theme, withOpacity } from '@/lib/theme';
 import { Icon, Button, Card, Badge, Divider, PageContainer, PageHeader, ContentArea } from '@/components/ui';
 
 const ValuationResultScreen: React.FC = () => {
   const router = useRouter();
+  const [expandedFAQ, setExpandedFAQ] = useState<string | null>(null);
+
+  const toggleFAQ = (faqKey: string) => {
+    setExpandedFAQ(expandedFAQ === faqKey ? null : faqKey);
+  };
 
   return (
     <PageContainer>
       <PageHeader
         title="Valuation Result"
         showBack
-        onBack={() => router.back()}
+        onBack={() => router.push('/camera')}
+        style={{
+          backgroundColor: 'transparent',
+          boxShadow: 'none',
+          borderBottom: 'none',
+        }}
       />
 
       {/* Main Content */}
@@ -202,32 +212,110 @@ const ValuationResultScreen: React.FC = () => {
 
         {/* FAQ Buttons */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: theme.spacing.sm }}>
-          <button style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            padding: theme.spacing.md,
-            borderRadius: theme.borderRadius.lg,
-            backgroundColor: 'transparent',
-          }}>
+          <button 
+            onClick={() => toggleFAQ('calculation')}
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              padding: theme.spacing.md,
+              borderRadius: theme.borderRadius.lg,
+              backgroundColor: expandedFAQ === 'calculation' ? withOpacity(theme.colors.primary, 0.1) : 'transparent',
+              border: `1px solid ${expandedFAQ === 'calculation' ? theme.colors.primary : theme.colors.borderLight}`,
+              transition: 'all 0.3s ease',
+              cursor: 'pointer',
+            }}>
             <span style={{ fontSize: theme.fontSizes.sm, color: theme.colors.textSecondary }}>
               How is this calculated?
             </span>
-            <Icon name="expand_more" size={20} color={theme.colors.textMuted} />
+            <Icon 
+              name={expandedFAQ === 'calculation' ? 'expand_less' : 'expand_more'} 
+              size={20} 
+              color={expandedFAQ === 'calculation' ? theme.colors.primary : theme.colors.textMuted} 
+            />
           </button>
-          <button style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            padding: theme.spacing.md,
-            borderRadius: theme.borderRadius.lg,
-            backgroundColor: 'transparent',
-          }}>
+          {expandedFAQ === 'calculation' && (
+            <div style={{
+              padding: theme.spacing.md,
+              backgroundColor: withOpacity(theme.colors.primary, 0.05),
+              borderRadius: theme.borderRadius.lg,
+              marginBottom: theme.spacing.sm,
+              borderLeft: `4px solid ${theme.colors.primary}`,
+            }}>
+              <p style={{
+                fontSize: theme.fontSizes.sm,
+                color: theme.colors.textPrimary,
+                lineHeight: 1.6,
+                marginBottom: theme.spacing.sm,
+              }}>
+                <strong>Our AI-powered valuation considers:</strong>
+              </p>
+              <ul style={{
+                fontSize: theme.fontSizes.sm,
+                color: theme.colors.textSecondary,
+                lineHeight: 1.8,
+                paddingLeft: theme.spacing.lg,
+              }}>
+                <li><strong>Scrap Metal Rates:</strong> Real-time commodity prices for steel, aluminum, and copper</li>
+                <li><strong>Vehicle Condition:</strong> Photos analyzed by our AI to assess overall condition</li>
+                <li><strong>Government Incentives:</strong> Current deregistration rebates and environmental bonuses</li>
+                <li><strong>Market Demand:</strong> Current market rates for vehicle parts and materials</li>
+              </ul>
+            </div>
+          )}
+
+          <button 
+            onClick={() => toggleFAQ('carProcess')}
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              padding: theme.spacing.md,
+              borderRadius: theme.borderRadius.lg,
+              backgroundColor: expandedFAQ === 'carProcess' ? withOpacity(theme.colors.primary, 0.1) : 'transparent',
+              border: `1px solid ${expandedFAQ === 'carProcess' ? theme.colors.primary : theme.colors.borderLight}`,
+              transition: 'all 0.3s ease',
+              cursor: 'pointer',
+            }}>
             <span style={{ fontSize: theme.fontSizes.sm, color: theme.colors.textSecondary }}>
               What happens to my car?
             </span>
-            <Icon name="expand_more" size={20} color={theme.colors.textMuted} />
+            <Icon 
+              name={expandedFAQ === 'carProcess' ? 'expand_less' : 'expand_more'} 
+              size={20} 
+              color={expandedFAQ === 'carProcess' ? theme.colors.primary : theme.colors.textMuted} 
+            />
           </button>
+          {expandedFAQ === 'carProcess' && (
+            <div style={{
+              padding: theme.spacing.md,
+              backgroundColor: withOpacity(theme.colors.primary, 0.05),
+              borderRadius: theme.borderRadius.lg,
+              marginBottom: theme.spacing.sm,
+              borderLeft: `4px solid ${theme.colors.primary}`,
+            }}>
+              <p style={{
+                fontSize: theme.fontSizes.sm,
+                color: theme.colors.textPrimary,
+                lineHeight: 1.6,
+                marginBottom: theme.spacing.sm,
+              }}>
+                <strong>Your vehicle will go through these steps:</strong>
+              </p>
+              <ol style={{
+                fontSize: theme.fontSizes.sm,
+                color: theme.colors.textSecondary,
+                lineHeight: 1.8,
+                paddingLeft: theme.spacing.lg,
+              }}>
+                <li><strong>Legal Handover:</strong> You sign documents transferring ownership to us</li>
+                <li><strong>JPJ Deregistration:</strong> We complete the official deregistration with JPJ</li>
+                <li><strong>Pickup Arrangement:</strong> We schedule a convenient pickup time at your location</li>
+                <li><strong>Towing & Collection:</strong> Our team safely tows your vehicle to our facility</li>
+                <li><strong>Payment Release:</strong> Your payment is transferred to your bank account within 2 hours</li>
+              </ol>
+            </div>
+          )}
         </div>
       </ContentArea>
 

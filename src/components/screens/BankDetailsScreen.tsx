@@ -1,300 +1,360 @@
 ﻿'use client'
 
-// Bank Details Screen - Add/edit bank account info (alias for PaymentMethodScreen)
+// Bank Details Screen - Payout Setup Form
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { theme, withOpacity } from '@/lib/theme';
-import { 
-  Icon, 
-  Button, 
-  Card, 
-  Header, 
-  Input,
-  ScreenContainer,
-  ScrollableContent,
-  FixedBottomContainer,
-  SectionTitle,
-  ListItem,
-  SecurityNotice
-} from '@/components/ui';
+import { Icon, Button, PageContainer } from '@/components/ui';
 
 const BankDetailsScreen: React.FC = () => {
   const router = useRouter();
-  const [accounts] = useState([
-    { 
-      id: 1, 
-      bank: 'Maybank', 
-      accountNumber: '****8821',
-      accountName: 'Ali Bin Abu',
-      isDefault: true,
-      addedDate: '15 Sep 2024',
-    },
-  ]);
+  const [selectedBank, setSelectedBank] = useState<string>('');
+  const [accountNumber, setAccountNumber] = useState('');
+  const [showBankDropdown, setShowBankDropdown] = useState(false);
 
-  const handleAddAccount = () => {
-    router.push('/payment-method');
-  };
+  const banks = [
+    'Maybank',
+    'CIMB Bank',
+    'Public Bank',
+    'Hong Leong Bank',
+    'RHB Bank',
+    'AmBank',
+  ];
 
-  const handleEditAccount = (accountId: number) => {
-    alert(`Edit account ${accountId}`);
-  };
-
-  const handleSetDefault = (accountId: number) => {
-    alert(`Set account ${accountId} as default`);
-  };
-
-  const handleDeleteAccount = (accountId: number) => {
-    if (confirm('Are you sure you want to remove this bank account?')) {
-      alert(`Account ${accountId} removed`);
+  const handleContinue = () => {
+    if (selectedBank && accountNumber) {
+      router.push('/identity-verification');
     }
   };
 
   return (
-    <ScreenContainer>
-      <Header
-        title="Bank Details"
-        showBack
-        onBack={() => router.back()}
-      />
+    <PageContainer>
+      {/* Header */}
+      <header style={{
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        padding: `${theme.spacing.md} ${theme.spacing.xl}`,
+        backgroundColor: 'transparent',
+        position: 'relative',
+        zIndex: 20,
+      }}>
+        <button
+          onClick={() => router.push('/vehicle-details')}
+          style={{
+            position: 'absolute',
+            left: theme.spacing.xl,
+            padding: 0,
+            border: 'none',
+            background: 'none',
+            cursor: 'pointer',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            color: theme.colors.textPrimary,
+          }}
+        >
+          <Icon name="chevron_left" size={24} color={theme.colors.textPrimary} />
+        </button>
+        <h1 style={{
+          fontSize: theme.fontSizes.xl,
+          fontWeight: theme.fontWeights.bold,
+          color: theme.colors.textPrimary,
+        }}>
+          Payout Setup
+        </h1>
+      </header>
 
-      <ScrollableContent bottomPadding={120}>
-        {/* Info Banner */}
-        <div style={{ padding: theme.spacing.md }}>
-          <Card style={{
-            backgroundColor: withOpacity(theme.colors.primary, 0.05),
-            border: `1px solid ${withOpacity(theme.colors.primary, 0.1)}`,
+      {/* Main Content */}
+      <main style={{
+        flex: 1,
+        overflowY: 'auto',
+        padding: `${theme.spacing.lg} ${theme.spacing.xl}`,
+        display: 'flex',
+        flexDirection: 'column',
+        gap: theme.spacing.xl,
+      }}>
+        {/* Main Question Section */}
+        <div>
+          <h2 style={{
+            fontSize: 28,
+            fontWeight: 800,
+            color: theme.colors.textPrimary,
+            marginBottom: theme.spacing.md,
+            lineHeight: 1.2,
           }}>
-            <div style={{ display: 'flex', gap: theme.spacing.sm }}>
-              <Icon name="account_balance" size={20} color={theme.colors.primary} />
-              <div>
-                <p style={{
-                  fontSize: theme.fontSizes.sm,
-                  fontWeight: theme.fontWeights.semibold,
-                  color: theme.colors.textPrimary,
-                  marginBottom: 4,
-                }}>
-                  Secure Payouts
-                </p>
-                <p style={{
-                  fontSize: theme.fontSizes.xs,
-                  color: theme.colors.textSecondary,
-                  lineHeight: 1.5,
-                }}>
-                  Your scrap value will be transferred directly to your chosen bank account within 1-3 business days.
-                </p>
-              </div>
-            </div>
-          </Card>
+            Where should we send your{' '}
+            <span style={{ color: theme.colors.primary }}>RM 1,200</span>?
+          </h2>
+          <p style={{
+            fontSize: theme.fontSizes.base,
+            color: theme.colors.textSecondary,
+            lineHeight: 1.6,
+          }}>
+            Enter your bank details to receive instant payment upon vehicle handover.
+          </p>
         </div>
 
-        {/* Saved Bank Accounts */}
-        {accounts.length > 0 && (
-          <div style={{ padding: theme.spacing.md, paddingTop: 0 }}>
-            <SectionTitle title="Your Bank Accounts" />
-            
-            {accounts.map(account => (
-              <Card
-                key={account.id}
-                padding="none"
-                style={{ marginBottom: theme.spacing.md }}
-              >
-                {/* Account Info Header */}
-                <div style={{
-                  padding: theme.spacing.md,
+        {/* Form Fields */}
+        <div style={{
+          display: 'flex',
+          flexDirection: 'column',
+          gap: theme.spacing.lg,
+        }}>
+          {/* Receiving Bank */}
+          <div>
+            <label style={{
+              display: 'block',
+              fontSize: theme.fontSizes.xs,
+              fontWeight: theme.fontWeights.bold,
+              color: theme.colors.textSecondary,
+              textTransform: 'uppercase',
+              letterSpacing: 0.5,
+              marginBottom: theme.spacing.sm,
+              paddingLeft: theme.spacing.xs,
+            }}>
+              RECEIVING BANK
+            </label>
+            <div style={{ position: 'relative' }}>
+              <button
+                onClick={() => setShowBankDropdown(!showBankDropdown)}
+                style={{
+                  width: '100%',
+                  padding: `${theme.spacing.md} ${theme.spacing.md}`,
+                  border: 'none',
+                  borderRadius: theme.borderRadius['2xl'],
+                  backgroundColor: theme.colors.white,
+                  boxShadow: theme.shadows.sm,
                   display: 'flex',
                   alignItems: 'center',
-                  gap: theme.spacing.md,
-                  borderBottom: `1px solid ${theme.colors.borderLight}`,
-                }}>
-                  <div style={{
-                    width: 56,
-                    height: 56,
-                    borderRadius: theme.borderRadius.full,
-                    backgroundColor: withOpacity('#FFC107', 0.1),
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    flexShrink: 0,
-                  }}>
-                    <Icon name="account_balance" size={28} color="#D97706" />
-                  </div>
-                  <div style={{ flex: 1 }}>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: theme.spacing.xs }}>
-                      <p style={{
-                        fontSize: theme.fontSizes.lg,
-                        fontWeight: theme.fontWeights.bold,
-                        color: theme.colors.textPrimary,
-                      }}>
-                        {account.bank}
-                      </p>
-                      {account.isDefault && (
-                        <span style={{
-                          fontSize: theme.fontSizes.xs,
-                          fontWeight: theme.fontWeights.semibold,
-                          color: theme.colors.primary,
-                          backgroundColor: withOpacity(theme.colors.primary, 0.1),
-                          padding: `2px ${theme.spacing.xs}`,
-                          borderRadius: theme.borderRadius.sm,
-                        }}>
-                          Default
-                        </span>
-                      )}
-                    </div>
-                    <p style={{
-                      fontSize: theme.fontSizes.base,
-                      color: theme.colors.textSecondary,
-                      fontFamily: 'monospace',
-                      marginTop: 2,
-                    }}>
-                      {account.accountNumber}
-                    </p>
-                    <p style={{
-                      fontSize: theme.fontSizes.sm,
-                      color: theme.colors.textPrimary,
-                      marginTop: 4,
-                    }}>
-                      {account.accountName}
-                    </p>
-                  </div>
-                </div>
+                  gap: theme.spacing.sm,
+                  cursor: 'pointer',
+                  fontSize: theme.fontSizes.base,
+                  fontWeight: theme.fontWeights.medium,
+                  color: selectedBank ? theme.colors.textPrimary : theme.colors.textSecondary,
+                }}
+              >
+                <Icon name="account_balance" size={20} color={theme.colors.primary} />
+                <span style={{ flex: 1, textAlign: 'left' }}>
+                  {selectedBank || 'Select your bank'}
+                </span>
+                <Icon name="unfold_more" size={20} color={theme.colors.textSecondary} />
+              </button>
 
-                {/* Account Actions */}
-                <div>
-                  <ListItem
-                    icon="edit"
-                    label="Edit Account"
-                    onClick={() => handleEditAccount(account.id)}
-                    showBorder
-                  />
-                  {!account.isDefault && (
-                    <ListItem
-                      icon="star"
-                      label="Set as Default"
-                      onClick={() => handleSetDefault(account.id)}
-                      showBorder
-                    />
-                  )}
-                  <ListItem
-                    icon="delete"
-                    label="Remove Account"
-                    onClick={() => handleDeleteAccount(account.id)}
-                  />
-                </div>
-
-                {/* Account Metadata */}
+              {/* Dropdown Menu */}
+              {showBankDropdown && (
                 <div style={{
-                  padding: theme.spacing.sm,
-                  backgroundColor: theme.colors.gray50,
-                  borderTop: `1px solid ${theme.colors.borderLight}`,
+                  position: 'absolute',
+                  top: '100%',
+                  left: 0,
+                  right: 0,
+                  backgroundColor: theme.colors.white,
+                  border: `1px solid ${theme.colors.borderLight}`,
+                  borderRadius: theme.borderRadius['2xl'],
+                  marginTop: theme.spacing.xs,
+                  zIndex: 100,
+                  maxHeight: 300,
+                  overflowY: 'auto',
+                  boxShadow: theme.shadows.lg,
                 }}>
-                  <p style={{
-                    fontSize: theme.fontSizes.xs,
-                    color: theme.colors.textSecondary,
-                    textAlign: 'center',
-                  }}>
-                    Added on {account.addedDate}
-                  </p>
+                  {banks.map((bank, index) => (
+                    <button
+                      key={bank}
+                      onClick={() => {
+                        setSelectedBank(bank);
+                        setShowBankDropdown(false);
+                      }}
+                      style={{
+                        width: '100%',
+                        padding: `${theme.spacing.md} ${theme.spacing.md}`,
+                        border: 'none',
+                        backgroundColor: selectedBank === bank ? withOpacity(theme.colors.primary, 0.05) : 'transparent',
+                        borderBottom: index < banks.length - 1 ? `1px solid ${theme.colors.borderLight}` : 'none',
+                        textAlign: 'left',
+                        cursor: 'pointer',
+                        fontSize: theme.fontSizes.base,
+                        fontWeight: theme.fontWeights.medium,
+                        color: selectedBank === bank ? theme.colors.primary : theme.colors.textPrimary,
+                      }}
+                    >
+                      {bank}
+                    </button>
+                  ))}
                 </div>
-              </Card>
-            ))}
+              )}
+            </div>
           </div>
-        )}
 
-        {/* Empty State */}
-        {accounts.length === 0 && (
-          <div style={{ padding: theme.spacing.xl }}>
+          {/* Account Number */}
+          <div>
+            <label style={{
+              display: 'block',
+              fontSize: theme.fontSizes.xs,
+              fontWeight: theme.fontWeights.bold,
+              color: theme.colors.textSecondary,
+              textTransform: 'uppercase',
+              letterSpacing: 0.5,
+              marginBottom: theme.spacing.sm,
+              paddingLeft: theme.spacing.xs,
+            }}>
+              ACCOUNT NUMBER
+            </label>
             <div style={{
               display: 'flex',
-              flexDirection: 'column',
               alignItems: 'center',
-              textAlign: 'center',
-            }}>
-              <Icon name="account_balance" size={64} color={theme.colors.textMuted} />
-              <p style={{
-                fontSize: theme.fontSizes.lg,
-                fontWeight: theme.fontWeights.semibold,
-                color: theme.colors.textPrimary,
-                marginTop: theme.spacing.md,
-              }}>
-                No Bank Accounts
-              </p>
-              <p style={{
-                fontSize: theme.fontSizes.sm,
-                color: theme.colors.textSecondary,
-                marginTop: theme.spacing.xs,
-              }}>
-                Add a bank account to receive payouts
-              </p>
-            </div>
-          </div>
-        )}
-
-        {/* Security Notice */}
-        <div style={{ padding: theme.spacing.md, paddingTop: 0 }}>
-          <SecurityNotice message="Your bank details are encrypted and stored securely. We only use this information for payout purposes." />
-        </div>
-
-        {/* Supported Banks */}
-        <div style={{ padding: theme.spacing.md, paddingTop: 0 }}>
-          <SectionTitle 
-            title="Supported Banks" 
-            subtitle="We support all major Malaysian banks"
-          />
-          <Card style={{ backgroundColor: theme.colors.gray50 }}>
-            <div style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(2, 1fr)',
+              padding: `${theme.spacing.md} ${theme.spacing.md}`,
+              borderRadius: theme.borderRadius['2xl'],
+              backgroundColor: theme.colors.white,
+              boxShadow: theme.shadows.sm,
               gap: theme.spacing.sm,
-              fontSize: theme.fontSizes.sm,
-              color: theme.colors.textSecondary,
             }}>
-              {['Maybank', 'CIMB Bank', 'Public Bank', 'RHB Bank', 
-                'Hong Leong Bank', 'AmBank', 'BSN', 'Bank Islam'].map((bank, index) => (
-                <div key={index} style={{ display: 'flex', alignItems: 'center', gap: theme.spacing.xs }}>
-                  <Icon name="check" size={14} color={theme.colors.primary} />
-                  <span>{bank}</span>
-                </div>
-              ))}
+              <div style={{
+                width: 36,
+                height: 36,
+                borderRadius: theme.borderRadius.lg,
+                backgroundColor: theme.colors.primary,
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                color: 'white',
+                fontSize: theme.fontSizes.xs,
+                fontWeight: theme.fontWeights.bold,
+                flexShrink: 0,
+              }}>
+                123
+              </div>
+              <input
+                type="text"
+                placeholder="0000 0000 0000"
+                value={accountNumber}
+                onChange={(e) => setAccountNumber(e.target.value)}
+                style={{
+                  flex: 1,
+                  border: 'none',
+                  backgroundColor: 'transparent',
+                  fontSize: theme.fontSizes.base,
+                  fontWeight: theme.fontWeights.medium,
+                  color: accountNumber ? theme.colors.textPrimary : theme.colors.textMuted,
+                  outline: 'none',
+                }}
+              />
             </div>
-          </Card>
-        </div>
-      </ScrollableContent>
-
-      <FixedBottomContainer>
-        {accounts.length > 0 ? (
-          <div style={{ display: 'flex', flexDirection: 'column', gap: theme.spacing.sm }}>
-             <Button
-              variant="primary"
-              size="lg"
-              fullWidth
-              onClick={() => router.push('/payout-confirmation')}
-              icon="check_circle"
-            >
-              Confirm Payout Method
-            </Button>
-            <Button
-              variant="ghost" 
-              size="lg" // Adjust if needed
-              fullWidth
-              onClick={handleAddAccount}
-              icon="add"
-            >
-              Add Another Account
-            </Button>
           </div>
-        ) : (
-          <Button
-            variant="primary"
-            size="lg"
-            fullWidth
-            onClick={handleAddAccount}
-            icon="add"
-          >
-            Add Bank Account
-          </Button>
-        )}
-      </FixedBottomContainer>
-    </ScreenContainer>
+
+          {/* Account Holder Name */}
+          <div>
+            <label style={{
+              display: 'block',
+              fontSize: theme.fontSizes.xs,
+              fontWeight: theme.fontWeights.bold,
+              color: theme.colors.textSecondary,
+              textTransform: 'uppercase',
+              letterSpacing: 0.5,
+              marginBottom: theme.spacing.sm,
+              paddingLeft: theme.spacing.xs,
+            }}>
+              ACCOUNT HOLDER NAME
+            </label>
+            <div style={{
+              display: 'flex',
+              alignItems: 'center',
+              padding: `${theme.spacing.md} ${theme.spacing.md}`,
+              borderRadius: theme.borderRadius['2xl'],
+              backgroundColor: theme.colors.gray100,
+              gap: theme.spacing.sm,
+            }}>
+              <Icon name="person" size={20} color={theme.colors.textSecondary} />
+              <span style={{
+                flex: 1,
+                fontSize: theme.fontSizes.base,
+                fontWeight: theme.fontWeights.bold,
+                color: theme.colors.textSecondary,
+                letterSpacing: 0.5,
+              }}>
+                AHMAD BIN MUSTAFA
+              </span>
+              <Icon name="verified" size={20} color={theme.colors.success} />
+            </div>
+            <p style={{
+              fontSize: theme.fontSizes.xs,
+              color: theme.colors.textSecondary,
+              marginTop: theme.spacing.sm,
+              paddingLeft: theme.spacing.xs,
+            }}>
+              Name auto-filled from your registered profile.
+            </p>
+          </div>
+
+          {/* Secure Connection */}
+          <div style={{
+            padding: theme.spacing.md,
+            borderRadius: theme.borderRadius.xl,
+            backgroundColor: withOpacity(theme.colors.gray100, 0.5),
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            gap: theme.spacing.sm,
+          }}>
+            <Icon name="lock" size={24} color={theme.colors.primary} />
+            <span style={{
+              fontSize: theme.fontSizes.sm,
+              fontWeight: theme.fontWeights.bold,
+              color: theme.colors.textSecondary,
+              textTransform: 'uppercase',
+              letterSpacing: 1,
+            }}>
+              SECURE CONNECTION
+            </span>
+          </div>
+        </div>
+      </main>
+
+      {/* Footer with Button */}
+      <footer style={{
+        padding: `${theme.spacing.lg} ${theme.spacing.xl} ${theme.spacing.xl}`,
+        borderTop: `1px solid ${theme.colors.borderLight}`,
+        backgroundColor: theme.colors.white,
+        display: 'flex',
+        flexDirection: 'column',
+        gap: theme.spacing.md,
+      }}>
+        <Button
+          fullWidth
+          size="lg"
+          onClick={handleContinue}
+          disabled={!selectedBank || !accountNumber}
+          style={{
+            borderRadius: theme.borderRadius['2xl'],
+            fontSize: theme.fontSizes.base,
+            fontWeight: theme.fontWeights.bold,
+            height: 56,
+          }}
+        >
+          Save & Schedule Pickup
+        </Button>
+
+        {/* Pagination Dots */}
+        <div style={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          gap: 6,
+        }}>
+          {[0, 1, 2, 3, 4, 5].map((index) => (
+            <div
+              key={index}
+              style={{
+                width: index === 0 ? 24 : 6,
+                height: 6,
+                borderRadius: theme.borderRadius.full,
+                backgroundColor: index === 0 ? theme.colors.primary : theme.colors.gray300,
+                transition: 'all 0.3s ease',
+              }}
+            />
+          ))}
+        </div>
+      </footer>
+    </PageContainer>
   );
 };
 
