@@ -3,7 +3,7 @@
 import React from 'react';
 import { useRouter } from 'next/navigation';
 import { theme, withOpacity } from '@/lib/theme';
-import { Icon, Button, PageContainer } from '@/components/ui';
+import { Icon, Button, PageContainer, PageHeader } from '@/components/ui';
 
 const JPJDeregistrationSuccessScreen: React.FC = () => {
   const router = useRouter();
@@ -17,43 +17,11 @@ const JPJDeregistrationSuccessScreen: React.FC = () => {
 
   return (
     <PageContainer>
-      {/* Sticky Header */}
-      <header style={{
-        position: 'sticky',
-        top: 0,
-        zIndex: 30,
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        backgroundColor: withOpacity(theme.colors.backgroundLight, 0.8),
-        backdropFilter: 'blur(10px)',
-        padding: `${theme.spacing.lg} ${theme.spacing.xl}`,
-        width: '100%',
-      }}>
-        <button
-          onClick={() => router.back()}
-          style={{
-            padding: 0,
-            border: 'none',
-            background: 'none',
-            display: 'flex',
-            alignItems: 'center',
-            cursor: 'pointer',
-          }}
-        >
-          <Icon name="chevron_left" size={24} color={theme.colors.textPrimary} />
-        </button>
-        <h1 style={{
-          fontSize: theme.fontSizes.lg,
-          fontWeight: theme.fontWeights.bold,
-          color: theme.colors.textPrimary,
-          textAlign: 'center',
-          flex: 1,
-        }}>
-          Deregistration
-        </h1>
-        <div style={{ width: 24 }} />
-      </header>
+      <PageHeader
+        title="Deregistration"
+        showBack
+        onBack={() => router.back()}
+      />
 
       <main style={{
         flex: 1,
