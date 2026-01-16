@@ -3,6 +3,7 @@
 import React from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { PageContainer, ContentArea } from '@/components/ui/PageContainer';
+import { PageHeader } from '@/components/ui/PageHeader';
 import { Button } from '@/components/ui/Button';
 import { Badge } from '@/components/ui/Badge';
 import { Icon } from '@/components/ui/Icon';
@@ -25,6 +26,7 @@ export default function VehicleOrderTimelineScreen() {
   // Get vehicle details from URL params
   const vehiclePlate = searchParams.get('plate') || 'N/A';
   const vehicleModel = searchParams.get('model') || 'N/A';
+  const vehicleImage = searchParams.get('image') || 'https://lh3.googleusercontent.com/aida-public/AB6AXuAesUFmzjMMr0LU5hKyzB0EcJeBpr1MyLs3iZF18wHNH1l2PzVEnS1DFSTb4wQVMExWgLf4ADzRRJFlo4SXyDu6nA_aPBvWba5L5PRlUOjUy7iJOpHlmTYFWwwzyfS8U_7GFvOQOn4SXfyzQGqdhfGXT1c_gAiu5M5AdLSkA254ZtmXEphFvOOrlxiov9HnhAsh_4KnZ0K2CiNQcLxv4WOS8A4WCvksVK3_a71mBbqjjzLbOoMsc6-VkFawn4PZ1OBhNc-xQHVABbaA';
   const orderStatus = searchParams.get('status') || 'completed';
   const orderId = searchParams.get('orderId') || 'SO-2025-999999';
 
@@ -101,6 +103,51 @@ export default function VehicleOrderTimelineScreen() {
       time: '9:15 AM',
       status: 'completed',
       icon: 'celebration'
+    },
+    {
+      id: 9,
+      title: 'Inspection Scheduled',
+      description: 'Vehicle inspection appointment booked',
+      date: 'Dec 22, 2025',
+      time: '10:00 AM',
+      status: 'completed',
+      icon: 'event_note'
+    },
+    {
+      id: 10,
+      title: 'Final Inspection',
+      description: 'Vehicle condition verified at facility',
+      date: 'Dec 23, 2025',
+      time: '2:15 PM',
+      status: 'completed',
+      icon: 'fact_check'
+    },
+    {
+      id: 11,
+      title: 'Processing Complete',
+      description: 'Vehicle processing and documentation finished',
+      date: 'Dec 24, 2025',
+      time: '4:30 PM',
+      status: 'completed',
+      icon: 'done_all'
+    },
+    {
+      id: 12,
+      title: 'Final Payment Processed',
+      description: 'Final settlement amount transferred',
+      date: 'Dec 25, 2025',
+      time: '11:00 AM',
+      status: 'completed',
+      icon: 'account_balance_wallet'
+    },
+    {
+      id: 13,
+      title: 'Recycling Initiated',
+      description: 'Vehicle sent to recycling facility',
+      date: 'Dec 26, 2025',
+      time: '8:45 AM',
+      status: 'completed',
+      icon: 'recycling'
     }
   ];
 
@@ -109,48 +156,40 @@ export default function VehicleOrderTimelineScreen() {
 
   return (
     <PageContainer>
-      {/* Header */}
-      <div style={{
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        padding: theme.spacing.lg,
-        paddingTop: theme.spacing.xl,
-        background: `linear-gradient(135deg, ${theme.colors.primary}, ${theme.colors.primaryDark})`,
-        color: 'white',
-      }}>
-        <Button
-          variant="ghost"
-          icon="arrow_back"
-          onClick={() => router.back()}
-          style={{ color: 'white' }}
-        >
-          Back
-        </Button>
-        <h1 style={{
-          fontSize: theme.fontSizes['2xl'],
-          fontWeight: theme.fontWeights.bold,
-          margin: 0,
-        }}>
-          Order Timeline
-        </h1>
-        <div style={{ width: 48 }} />
-      </div>
+      <PageHeader
+        title="Order Timeline"
+        showBack
+        onBack={() => router.back()}
+      />
 
       <ContentArea>
+        {/* Vehicle Image */}
+        <div style={{
+          width: 'calc(100% - 32px)',
+          height: 240,
+          borderRadius: theme.borderRadius.xl,
+          backgroundImage: `url("${vehicleImage}")`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          marginBottom: theme.spacing.lg,
+          marginLeft: 'auto',
+          marginRight: 'auto',
+          overflow: 'hidden',
+        }} />
+
         {/* Vehicle Info Card */}
         <div style={{
           backgroundColor: 'transparent',
           borderRadius: theme.borderRadius.xl,
-          padding: theme.spacing.lg,
-          marginBottom: theme.spacing.xl,
+          padding: `${theme.spacing.md} ${theme.spacing.lg}`,
+          marginBottom: theme.spacing.xs,
           boxShadow: 'none',
         }}>
           <div style={{
             display: 'flex',
             justifyContent: 'space-between',
             alignItems: 'flex-start',
-            marginBottom: theme.spacing.md,
+            marginBottom: theme.spacing.sm,
           }}>
             <div>
               <div style={{
@@ -183,7 +222,7 @@ export default function VehicleOrderTimelineScreen() {
 
           <div style={{
             borderTop: `1px solid ${theme.colors.borderLight}`,
-            paddingTop: theme.spacing.md,
+            paddingTop: theme.spacing.sm,
           }}>
             <p style={{
               fontSize: theme.fontSizes.sm,
@@ -203,7 +242,7 @@ export default function VehicleOrderTimelineScreen() {
           backgroundColor: theme.colors.surfaceLight,
           borderRadius: theme.borderRadius.xl,
           padding: theme.spacing.lg,
-          marginBottom: theme.spacing.xl,
+          marginBottom: theme.spacing.lg,
           boxShadow: theme.shadows.card,
         }}>
           <div style={{
