@@ -46,13 +46,13 @@ Once users accept an offer, they can schedule a convenient pickup time and locat
 - Choosing preferred time slots
 - Receiving notifications about pickup status
 
+![Order Timeline](./public/screenshots/order-timeline.png)
+_Order Timeline - Visual progress tracker showing all stages from order placement to completion_
+
 **5. Driver Coordination & Inspection**
 On the scheduled day, a certified driver arrives to collect the vehicle. The platform facilitates real-time tracking of the tow truck, allowing users to monitor the driver's arrival. Upon arrival, the driver conducts a comprehensive inspection to verify:
 
 - Engine presence
-  ![Tracking Screen](./public/screenshots/tracking-screen.png)
-  _Live Tracking - Real-time map showing driver location and estimated arrival time_
-
 - Catalytic converter status
 - Overall condition matching the submitted photos
 
@@ -63,6 +63,9 @@ A critical feature of Scrap2Go is its handling of legal documentation. The platf
 - Consent forms for vehicle disposal
 - Terms and conditions acknowledgment
 - Documentation preview before finalization
+
+![Handover Signature](./public/screenshots/handover-signature.png)
+_Handover Signature - Digital signature pad for legally binding ownership transfer with consent checkboxes_
 
 This ensures that the ownership transfer is legally binding and properly documented, protecting both the seller and the buyer.
 
@@ -78,8 +81,6 @@ The platform manages this entire process on behalf of the user, providing update
 
 **8. Payment & Payout**
 Users receive their payment through their chosen method after successful vehicle collection and inspection. The platform supports:
-![Payout Success](./public/screenshots/payout-success.png)
-_Payment Success - Celebration screen confirming payment sent with transaction details and downloadable receipts_
 
 - Bank account transfers
 - Multiple payment methods
