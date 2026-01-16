@@ -46,7 +46,7 @@ const photoSteps = [
     icon: 'airline_seat_recline_normal',
     description: 'Capture dashboard, steering wheel and front seats.',
     tips: ['Dashboard clear', 'Steering wheel', 'Seat condition'],
-    image: IMAGES.CAR_INTERIOR,
+    image: '/photoguide-interior.png',
   },
 ];
 
