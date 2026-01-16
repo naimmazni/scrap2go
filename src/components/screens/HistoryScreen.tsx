@@ -177,18 +177,15 @@ const VehicleHistoryCard = ({
             {item.status === 'completed' ? 'Completed' : 'Archived'}
           </Badge>
         </div>
-        <div style={{ position: 'absolute', bottom: 12, left: 16, color: theme.colors.textLight }}>
-          <p style={{ fontSize: theme.fontSizes.xs, opacity: 0.9 }}>Scrapped on</p>
-          <p style={{ fontSize: theme.fontSizes.sm, fontWeight: theme.fontWeights.bold }}>{item.date}</p>
-        </div>
+
       </div>
 
       {/* Card Body */}
-      <div style={{ padding: theme.spacing.lg }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: theme.spacing.md }}>
+      <div style={{ padding: theme.spacing.md }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: theme.spacing.sm }}>
           <div>
             <h3 style={{ fontSize: theme.fontSizes['2xl'], fontWeight: theme.fontWeights.bold }}>{item.plate}</h3>
-            <p style={{ fontSize: theme.fontSizes.base, color: theme.colors.textSecondary, marginTop: 4 }}>{item.model}</p>
+            <p style={{ fontSize: theme.fontSizes.base, color: theme.colors.textSecondary, marginTop: 2 }}>{item.model}</p>
           </div>
           <div style={{ textAlign: 'right' }}>
             <p style={{ fontSize: theme.fontSizes.xs, color: theme.colors.textSecondary, textTransform: 'uppercase', letterSpacing: 0.5 }}>Payout</p>
@@ -196,9 +193,16 @@ const VehicleHistoryCard = ({
           </div>
         </div>
 
-        <div style={{ height: 1, backgroundColor: theme.colors.borderLight, marginBottom: theme.spacing.md }} />
+        <div style={{ height: 1, backgroundColor: theme.colors.borderLight, marginBottom: theme.spacing.sm }} />
 
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: theme.spacing.sm }}>
+        <div style={{ marginBottom: theme.spacing.sm, padding: `${theme.spacing.xs} 0` }}>
+          <p style={{ fontSize: theme.fontSizes.xs, color: theme.colors.textSecondary, textTransform: 'uppercase', letterSpacing: 0.5 }}>Scrapped on</p>
+          <p style={{ fontSize: theme.fontSizes.base, fontWeight: theme.fontWeights.medium, marginTop: 2 }}>{item.date}</p>
+        </div>
+
+        <div style={{ height: 1, backgroundColor: theme.colors.borderLight, marginBottom: theme.spacing.sm }} />
+
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: theme.spacing.xs }}>
           <Button 
             variant="outline" 
             icon="description"
