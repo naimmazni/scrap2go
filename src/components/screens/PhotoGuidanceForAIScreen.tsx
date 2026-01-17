@@ -7,14 +7,12 @@ import { theme, withOpacity } from '@/lib/theme';
 import { 
   Icon, 
   Button, 
-  Card, 
-  Header,
-  ScreenContainer,
-  ScrollableContent,
-  FixedBottomContainer,
-  SectionTitle,
+  PageContainer,
+  PageHeader,
+  ContentArea,
   TipItem,
-  WarningBox
+  WarningBox,
+  FixedBottomContainer
 } from '@/components/ui';
 
 const PhotoGuidanceForAIScreen: React.FC = () => {
@@ -43,34 +41,44 @@ const PhotoGuidanceForAIScreen: React.FC = () => {
   };
 
   return (
-    <ScreenContainer>
-      <Header
+    <PageContainer>
+      <PageHeader
         title="Photo Guide"
         showBack
         onBack={() => router.back()}
       />
 
-      <ScrollableContent bottomPadding={100} style={{ padding: theme.spacing.lg }}>
-        <SectionTitle
-          title="Help us price your car"
-          subtitle="Better photos mean a more accurate valuation. Follow these simple tips."
-          centered
-        />
+      <ContentArea>
+        <div style={{
+          padding: theme.spacing.lg,
+          paddingBottom: 120,
+        }}>
+          <div style={{
+            marginBottom: theme.spacing.lg,
+          }}>
+            <h2 style={{
+              fontSize: theme.fontSizes.xl,
+              fontWeight: theme.fontWeights.bold,
+              color: theme.colors.textPrimary,
+              marginBottom: theme.spacing.xs,
+            }}>
+              Help us price your car
+            </h2>
+            <p style={{
+              fontSize: theme.fontSizes.sm,
+              color: theme.colors.textSecondary,
+              lineHeight: 1.5,
+            }}>
+              Better photos mean a more accurate valuation. Follow these simple tips.
+            </p>
+          </div>
 
-        {/* Illustration Preview */}
-        <Card
-          padding="none"
-          style={{
+          {/* Illustration Preview */}
+          <div style={{
             marginBottom: theme.spacing.xl,
             overflow: 'hidden',
             aspectRatio: '16/9',
             position: 'relative',
-          }}
-        >
-          <div style={{
-            width: '100%',
-            height: '100%',
-            backgroundColor: theme.colors.gray100,
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
@@ -80,56 +88,56 @@ const PhotoGuidanceForAIScreen: React.FC = () => {
               size={80}
               color={withOpacity(theme.colors.primary, 0.4)}
             />
-          </div>
 
-          {/* AI Ready Badge */}
-          <div style={{
-            position: 'absolute',
-            bottom: 12,
-            right: 12,
-            backgroundColor: withOpacity('#fff', 0.9),
-            backdropFilter: 'blur(8px)',
-            padding: '6px 12px',
-            borderRadius: theme.borderRadius.full,
-            display: 'flex',
-            alignItems: 'center',
-            gap: 4,
-            boxShadow: theme.shadows.sm,
-          }}>
-            <Icon name="check_circle" size={14} color={theme.colors.primary} />
-            <span style={{
-              fontSize: theme.fontSizes.xs,
-              fontWeight: theme.fontWeights.bold,
-              color: theme.colors.primary,
+            {/* AI Ready Badge */}
+            <div style={{
+              position: 'absolute',
+              bottom: 12,
+              right: 12,
+              backgroundColor: withOpacity('#fff', 0.9),
+              backdropFilter: 'blur(8px)',
+              padding: '6px 12px',
+              borderRadius: theme.borderRadius.full,
+              display: 'flex',
+              alignItems: 'center',
+              gap: 4,
+              boxShadow: theme.shadows.sm,
             }}>
-              AI Ready
-            </span>
+              <Icon name="check_circle" size={14} color={theme.colors.primary} />
+              <span style={{
+                fontSize: theme.fontSizes.xs,
+                fontWeight: theme.fontWeights.bold,
+                color: theme.colors.primary,
+              }}>
+                AI Ready
+              </span>
+            </div>
           </div>
-        </Card>
 
-        {/* Tips List */}
-        <div style={{
-          display: 'flex',
-          flexDirection: 'column',
-          gap: theme.spacing.md,
-        }}>
-          {tips.map((tip, index) => (
-            <TipItem
-              key={index}
-              icon={tip.icon}
-              title={tip.title}
-              description={tip.description}
+          {/* Tips List */}
+          <div style={{
+            display: 'flex',
+            flexDirection: 'column',
+            gap: theme.spacing.md,
+          }}>
+            {tips.map((tip, index) => (
+              <TipItem
+                key={index}
+                icon={tip.icon}
+                title={tip.title}
+                description={tip.description}
+              />
+            ))}
+
+            <WarningBox
+              title="Please Avoid"
+              message="Blurry photos or photos where the license plate is covered."
+              variant="error"
+              style={{ marginTop: theme.spacing.sm }}
             />
-          ))}
-
-          <WarningBox
-            title="Please Avoid"
-            message="Blurry photos or photos where the license plate is covered."
-            variant="error"
-            style={{ marginTop: theme.spacing.sm }}
-          />
+          </div>
         </div>
-      </ScrollableContent>
+      </ContentArea>
 
       <FixedBottomContainer blur={false}>
         <Button
@@ -143,7 +151,7 @@ const PhotoGuidanceForAIScreen: React.FC = () => {
           Got It! Start Scan
         </Button>
       </FixedBottomContainer>
-    </ScreenContainer>
+    </PageContainer>
   );
 };
 

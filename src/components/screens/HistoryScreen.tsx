@@ -24,6 +24,22 @@ interface HistoryItem {
   image: string;
 }
 
+// --- Helper Functions ---
+const getCarImageByModel = (model: string): string => {
+  const modelLower = model.toLowerCase();
+  
+  if (modelLower.includes('proton saga')) {
+    return '/cars/Proton Saga.jpeg';
+  } else if (modelLower.includes('toyota vios')) {
+    return '/cars/Toyota Vios.jpeg';
+  } else if (modelLower.includes('kancil')) {
+    return '/cars/Perodua Kancil.jpeg';
+  }
+  
+  // Default fallback
+  return '/cars/Proton Saga.jpeg';
+};
+
 // --- Mock Data ---
 const historyData: HistoryItem[] = [
   {
@@ -33,7 +49,7 @@ const historyData: HistoryItem[] = [
     date: '15 Oct 2023',
     payout: 'RM 850.00',
     status: 'completed',
-    image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAesUFmzjMMr0LU5hKyzB0EcJeBpr1MyLs3iZF18wHNH1l2PzVEnS1DFSTb4wQVMExWgLf4ADzRRJFlo4SXyDu6nA_aPBvWba5L5PRlUOjUy7iJOpHlmTYFWwwzyfS8U_7GFvOQOn4SXfyzQGqdhfGXT1c_gAiu5M5AdLSkA254ZtmXEphFvOOrlxiov9HnhAsh_4KnZ0K2CiNQcLxv4WOS8A4WCvksVK3_a71mBbqjjzLbOoMsc6-VkFawn4PZ1OBhNc-xQHVABbaA',
+    image: getCarImageByModel('Proton Saga 1.3'),
   },
   {
     id: 2,
@@ -42,7 +58,7 @@ const historyData: HistoryItem[] = [
     date: '02 Feb 2023',
     payout: 'RM 1,200.00',
     status: 'completed',
-    image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDOm0PqIn8e2JTb12p86u2EKJSG4q2SrRekuG03sOjAmHHkxePz775XYv-EMN8azcRusBTJehpjK0Qef2VkAh--CBsEAu-THyhBR34_oOJ39Z0WwflFSwVn0Xx5CxEo20ehHvGU_Y5G_yF5B8oGYpyRGiiqayaaZAkVtosNBDthZT_kNzR2mZCmbnDL-QKagxv5S8-9kvYBJVBQe4RrI_TMEs2pgP0xFJzrRIt8GecJm0wIy_NJozhGDvKy-bEI0NYRAdMtuo8-JxyW',
+    image: getCarImageByModel('Toyota Vios 1.5J'),
   },
   {
     id: 3,
@@ -51,7 +67,7 @@ const historyData: HistoryItem[] = [
     date: '10 Dec 2021',
     payout: 'RM 350.00',
     status: 'archived',
-    image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAnPvFtmbNZJwbRlZjDzKUP_O9tjlNTGYjgPdBwQXJiWjRJAHEEDzbAMgx6QjDUPDYRy3jZbjUmUcK7IOISnl_dCEOundCqeS3k-mE07nbCq1XusSHLJ4eZAliuBIhDnjIc4A2wnXRD262_KF8PMNdoXs_wulk04HAdm5CnljxMK1upEx5AssgVMuTJCzK84311YoNBlbpHAhBuWjJZp8_MECk4w_c7411xYTecW0_jtvxs0-M0H8_vgwlojf_QpmzsP4-Ytfzp9hIZ',
+    image: getCarImageByModel('Perodua Kancil 660'),
   },
 ];
 

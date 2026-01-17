@@ -138,9 +138,10 @@ const CameraScreen: React.FC = () => {
             {steps[currentStep].name}
           </h2>
           <p style={{
-            color: withOpacity('#fff', 0.7),
+            color: theme.colors.textLight,
             fontSize: theme.fontSizes.sm,
             textAlign: 'center',
+            fontWeight: theme.fontWeights.medium,
           }}>
             {steps[currentStep].description}
           </p>
@@ -230,7 +231,8 @@ const CameraScreen: React.FC = () => {
               <span style={{ 
                 fontSize: theme.fontSizes.sm, 
                 fontWeight: theme.fontWeights.bold,
-                color: theme.colors.textPrimary,
+                color: theme.colors.primary,
+                letterSpacing: 0.3,
               }}>
                 Analyzing Condition...
               </span>
