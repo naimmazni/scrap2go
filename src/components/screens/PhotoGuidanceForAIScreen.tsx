@@ -48,89 +48,94 @@ const PhotoGuidanceForAIScreen: React.FC = () => {
         onBack={() => router.back()}
       />
 
-      <ContentArea style={{ padding: theme.spacing.lg, paddingBottom: 100 }}>
+      <ContentArea>
         <div style={{
-          marginBottom: theme.spacing.lg,
+          padding: theme.spacing.lg,
+          paddingBottom: 120,
         }}>
-          <h2 style={{
-            fontSize: theme.fontSizes.xl,
-            fontWeight: theme.fontWeights.bold,
-            color: theme.colors.textPrimary,
-            marginBottom: theme.spacing.xs,
-          }}>
-            Help us price your car
-          </h2>
-          <p style={{
-            fontSize: theme.fontSizes.sm,
-            color: theme.colors.textSecondary,
-            lineHeight: 1.5,
-          }}>
-            Better photos mean a more accurate valuation. Follow these simple tips.
-          </p>
-        </div>
-
-        {/* Illustration Preview */}
-        <div style={{
-          marginBottom: theme.spacing.xl,
-          overflow: 'hidden',
-          aspectRatio: '16/9',
-          position: 'relative',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-        }}>
-          <Icon
-            name="center_focus_strong"
-            size={80}
-            color={withOpacity(theme.colors.primary, 0.4)}
-          />
-
-          {/* AI Ready Badge */}
           <div style={{
-            position: 'absolute',
-            bottom: 12,
-            right: 12,
-            backgroundColor: withOpacity('#fff', 0.9),
-            backdropFilter: 'blur(8px)',
-            padding: '6px 12px',
-            borderRadius: theme.borderRadius.full,
+            marginBottom: theme.spacing.lg,
+          }}>
+            <h2 style={{
+              fontSize: theme.fontSizes.xl,
+              fontWeight: theme.fontWeights.bold,
+              color: theme.colors.textPrimary,
+              marginBottom: theme.spacing.xs,
+            }}>
+              Help us price your car
+            </h2>
+            <p style={{
+              fontSize: theme.fontSizes.sm,
+              color: theme.colors.textSecondary,
+              lineHeight: 1.5,
+            }}>
+              Better photos mean a more accurate valuation. Follow these simple tips.
+            </p>
+          </div>
+
+          {/* Illustration Preview */}
+          <div style={{
+            marginBottom: theme.spacing.xl,
+            overflow: 'hidden',
+            aspectRatio: '16/9',
+            position: 'relative',
             display: 'flex',
             alignItems: 'center',
-            gap: 4,
-            boxShadow: theme.shadows.sm,
+            justifyContent: 'center',
           }}>
-            <Icon name="check_circle" size={14} color={theme.colors.primary} />
-            <span style={{
-              fontSize: theme.fontSizes.xs,
-              fontWeight: theme.fontWeights.bold,
-              color: theme.colors.primary,
-            }}>
-              AI Ready
-            </span>
-          </div>
-        </div>
-
-        {/* Tips List */}
-        <div style={{
-          display: 'flex',
-          flexDirection: 'column',
-          gap: theme.spacing.md,
-        }}>
-          {tips.map((tip, index) => (
-            <TipItem
-              key={index}
-              icon={tip.icon}
-              title={tip.title}
-              description={tip.description}
+            <Icon
+              name="center_focus_strong"
+              size={80}
+              color={withOpacity(theme.colors.primary, 0.4)}
             />
-          ))}
 
-          <WarningBox
-            title="Please Avoid"
-            message="Blurry photos or photos where the license plate is covered."
-            variant="error"
-            style={{ marginTop: theme.spacing.sm }}
-          />
+            {/* AI Ready Badge */}
+            <div style={{
+              position: 'absolute',
+              bottom: 12,
+              right: 12,
+              backgroundColor: withOpacity('#fff', 0.9),
+              backdropFilter: 'blur(8px)',
+              padding: '6px 12px',
+              borderRadius: theme.borderRadius.full,
+              display: 'flex',
+              alignItems: 'center',
+              gap: 4,
+              boxShadow: theme.shadows.sm,
+            }}>
+              <Icon name="check_circle" size={14} color={theme.colors.primary} />
+              <span style={{
+                fontSize: theme.fontSizes.xs,
+                fontWeight: theme.fontWeights.bold,
+                color: theme.colors.primary,
+              }}>
+                AI Ready
+              </span>
+            </div>
+          </div>
+
+          {/* Tips List */}
+          <div style={{
+            display: 'flex',
+            flexDirection: 'column',
+            gap: theme.spacing.md,
+          }}>
+            {tips.map((tip, index) => (
+              <TipItem
+                key={index}
+                icon={tip.icon}
+                title={tip.title}
+                description={tip.description}
+              />
+            ))}
+
+            <WarningBox
+              title="Please Avoid"
+              message="Blurry photos or photos where the license plate is covered."
+              variant="error"
+              style={{ marginTop: theme.spacing.sm }}
+            />
+          </div>
         </div>
       </ContentArea>
 
