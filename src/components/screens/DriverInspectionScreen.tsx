@@ -104,7 +104,7 @@ const DriverInspectionScreen: React.FC = () => {
             aspectRatio: '16/9',
             borderRadius: theme.borderRadius.lg,
             backgroundColor: theme.colors.backgroundLight,
-            backgroundImage: `url("${IMAGES.CAR_FRONT}")`,
+            backgroundImage: `url("/cars/Honda City.jpg")`,
             backgroundSize: 'cover',
             backgroundPosition: 'center',
             overflow: 'hidden',
