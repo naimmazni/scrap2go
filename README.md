@@ -180,3 +180,5 @@ What sets Scrap2Go apart is its comprehensive approach:
 ## Vision
 
 Scrap2Go envisions a future where disposing of end-of-life vehicles is as simple as ordering a ride-share service. By combining technology, regulatory compliance, and customer-centric design, the platform aims to become Malaysia's leading digital marketplace for vehicle scrapping, setting new standards for transparency, efficiency, and user satisfaction in the automotive recycling industry.
+
+test test
