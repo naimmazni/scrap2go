@@ -7,14 +7,12 @@ import { theme, withOpacity } from '@/lib/theme';
 import { 
   Icon, 
   Button, 
-  Card, 
-  Header,
-  ScreenContainer,
-  ScrollableContent,
-  FixedBottomContainer,
-  SectionTitle,
+  PageContainer,
+  PageHeader,
+  ContentArea,
   TipItem,
-  WarningBox
+  WarningBox,
+  FixedBottomContainer
 } from '@/components/ui';
 
 const PhotoGuidanceForAIScreen: React.FC = () => {
@@ -43,44 +41,49 @@ const PhotoGuidanceForAIScreen: React.FC = () => {
   };
 
   return (
-    <ScreenContainer>
-      <Header
+    <PageContainer>
+      <PageHeader
         title="Photo Guide"
         showBack
         onBack={() => router.back()}
       />
 
-      <ScrollableContent bottomPadding={100} style={{ padding: theme.spacing.lg }}>
-        <SectionTitle
-          title="Help us price your car"
-          subtitle="Better photos mean a more accurate valuation. Follow these simple tips."
-          centered
-        />
+      <ContentArea style={{ padding: theme.spacing.lg, paddingBottom: 100 }}>
+        <div style={{
+          marginBottom: theme.spacing.lg,
+        }}>
+          <h2 style={{
+            fontSize: theme.fontSizes.xl,
+            fontWeight: theme.fontWeights.bold,
+            color: theme.colors.textPrimary,
+            marginBottom: theme.spacing.xs,
+          }}>
+            Help us price your car
+          </h2>
+          <p style={{
+            fontSize: theme.fontSizes.sm,
+            color: theme.colors.textSecondary,
+            lineHeight: 1.5,
+          }}>
+            Better photos mean a more accurate valuation. Follow these simple tips.
+          </p>
+        </div>
 
         {/* Illustration Preview */}
-        <Card
-          padding="none"
-          style={{
-            marginBottom: theme.spacing.xl,
-            overflow: 'hidden',
-            aspectRatio: '16/9',
-            position: 'relative',
-          }}
-        >
-          <div style={{
-            width: '100%',
-            height: '100%',
-            backgroundColor: theme.colors.gray100,
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}>
-            <Icon
-              name="center_focus_strong"
-              size={80}
-              color={withOpacity(theme.colors.primary, 0.4)}
-            />
-          </div>
+        <div style={{
+          marginBottom: theme.spacing.xl,
+          overflow: 'hidden',
+          aspectRatio: '16/9',
+          position: 'relative',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}>
+          <Icon
+            name="center_focus_strong"
+            size={80}
+            color={withOpacity(theme.colors.primary, 0.4)}
+          />
 
           {/* AI Ready Badge */}
           <div style={{
@@ -105,7 +108,7 @@ const PhotoGuidanceForAIScreen: React.FC = () => {
               AI Ready
             </span>
           </div>
-        </Card>
+        </div>
 
         {/* Tips List */}
         <div style={{
@@ -129,7 +132,7 @@ const PhotoGuidanceForAIScreen: React.FC = () => {
             style={{ marginTop: theme.spacing.sm }}
           />
         </div>
-      </ScrollableContent>
+      </ContentArea>
 
       <FixedBottomContainer blur={false}>
         <Button
@@ -143,7 +146,7 @@ const PhotoGuidanceForAIScreen: React.FC = () => {
           Got It! Start Scan
         </Button>
       </FixedBottomContainer>
-    </ScreenContainer>
+    </PageContainer>
   );
 };
 
