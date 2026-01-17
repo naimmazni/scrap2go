@@ -255,17 +255,30 @@ const PayoutConfirmationScreen: React.FC<PayoutConfirmationScreenProps> = ({ amo
         {/* Document Cards Section */}
         <div style={{ width: '100%', display: 'flex', flexDirection: 'column', gap: 12 }}>
           {/* Ownership Transfer Certification */}
-          <div style={{
-            width: '100%',
-            padding: 16,
-            backgroundColor: '#fff',
-            borderRadius: theme.borderRadius['2xl'],
-            border: `1px solid ${theme.colors.gray100}`,
-            display: 'flex',
-            alignItems: 'center',
-            gap: 16,
-            boxShadow: theme.shadows.sm,
-          }}>
+          <div 
+            onClick={() => router.push('/legal-completion-preview')}
+            style={{
+              width: '100%',
+              padding: 16,
+              backgroundColor: '#fff',
+              borderRadius: theme.borderRadius['2xl'],
+              border: `1px solid ${theme.colors.gray100}`,
+              display: 'flex',
+              alignItems: 'center',
+              gap: 16,
+              boxShadow: theme.shadows.sm,
+              cursor: 'pointer',
+              transition: 'all 0.2s ease',
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.boxShadow = theme.shadows.md;
+              e.currentTarget.style.transform = 'translateY(-2px)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.boxShadow = theme.shadows.sm;
+              e.currentTarget.style.transform = 'translateY(0)';
+            }}
+          >
             <div style={{
               width: 48,
               height: 48,
