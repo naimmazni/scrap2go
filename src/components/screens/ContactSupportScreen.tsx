@@ -8,10 +8,10 @@ import {
   Icon, 
   Button, 
   Card, 
-  Header,
+  PageContainer,
+  PageHeader,
+  ContentArea,
   Input,
-  ScreenContainer,
-  ScrollableContent,
   FixedBottomContainer
 } from '@/components/ui';
 
@@ -77,21 +77,21 @@ const ContactSupportScreen: React.FC = () => {
     (formData.category && formData.subject && formData.message);
 
   return (
-    <ScreenContainer>
-      <Header
+    <PageContainer>
+      <PageHeader
         title="Contact Support"
         showBack
         onBack={() => router.back()}
       />
 
-      <ScrollableContent bottomPadding={120}>
+      <ContentArea style={{ paddingBottom: 120 }}>
         {/* Support Methods */}
-        <div style={{ padding: theme.spacing.md }}>
+        <div style={{ padding: theme.spacing.lg }}>
           <p style={{
-            fontSize: theme.fontSizes.sm,
-            fontWeight: theme.fontWeights.semibold,
+            fontSize: theme.fontSizes.base,
+            fontWeight: theme.fontWeights.bold,
             color: theme.colors.textPrimary,
-            marginBottom: theme.spacing.md,
+            marginBottom: theme.spacing.lg,
           }}>
             How would you like to contact us?
           </p>
@@ -362,9 +362,9 @@ const ContactSupportScreen: React.FC = () => {
             </button>
           </Card>
         </div>
-      </ScrollableContent>
+      </ContentArea>
 
-      <FixedBottomContainer>
+      <FixedBottomContainer blur={false}>
         <Button
           variant="primary"
           size="lg"
@@ -377,7 +377,7 @@ const ContactSupportScreen: React.FC = () => {
            selectedMethod === 'phone' ? 'Call Now' : 'Submit Ticket'}
         </Button>
       </FixedBottomContainer>
-    </ScreenContainer>
+    </PageContainer>
   );
 };
 
