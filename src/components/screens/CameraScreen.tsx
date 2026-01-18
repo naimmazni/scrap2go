@@ -184,7 +184,6 @@ const CameraScreen: React.FC = () => {
           <p style={{
             color: theme.colors.textLight,
             fontSize: theme.fontSizes.sm,
-            fontWeight: theme.fontWeights.medium,
           }}>
             {steps[currentStep].description}
           </p>
@@ -314,51 +313,9 @@ const CameraScreen: React.FC = () => {
         display: 'flex',
         flexDirection: 'column',
         gap: theme.spacing.lg,
+        background: 'linear-gradient(to top, rgba(0,0,0,0.8), transparent)',
       }}>
-        {/* AI Status Card */}
-        <div style={{
-          backgroundColor: withOpacity('#fff', 0.95),
-          backdropFilter: 'blur(12px)',
-          borderRadius: theme.borderRadius['2xl'],
-          padding: theme.spacing.md,
-          boxShadow: theme.shadows.xl,
-          maxWidth: 400,
-          margin: '0 auto',
-          width: '100%',
-        }}>
-          <div style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            marginBottom: theme.spacing.sm,
-          }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: theme.spacing.sm }}>
-              <Icon name="sync" size={20} color={theme.colors.primary} className="animate-spin" />
-              <span style={{ 
-                fontSize: theme.fontSizes.sm, 
-                fontWeight: theme.fontWeights.bold,
-                color: theme.colors.textPrimary,
-              }}>
-                Analyzing Condition...
-              </span>
-            </div>
-            <Badge variant="primary" size="sm">AI Active</Badge>
-          </div>
-          <ProgressBar progress={65} height={8} />
-          <div style={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            marginTop: 4,
-          }}>
-            <span style={{ fontSize: 10, color: theme.colors.textSecondary }}>
-              Detecting dents...
-            </span>
-            <span style={{ fontSize: 10, color: theme.colors.textSecondary }}>
-              65%
-            </span>
-          </div>
-        </div>
-
+        
         {/* Step Indicators */}
         <div style={{
           display: 'flex',
