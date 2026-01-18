@@ -9,7 +9,10 @@ import {
   Button, 
   ScreenContainer,
   IconButton,
-  SecurityNotice 
+  SecurityNotice, 
+  PageContainer,
+  PageHeader,
+  ContentArea
 } from '@/components/ui';
 
 const GalleryPermissionScreen: React.FC = () => {
@@ -24,16 +27,18 @@ const GalleryPermissionScreen: React.FC = () => {
   };
 
   return (
-    <ScreenContainer>
-      {/* Header */}
-      <div style={{
-        display: 'flex',
-        alignItems: 'center',
-        padding: theme.spacing.md,
-        paddingBottom: theme.spacing.sm,
+    <PageContainer>
+      <PageHeader
+              title="Camera Access"
+              showBack
+              onBack={() => router.back()}
+            />
+
+    <ContentArea style={{
+            display: 'flex',
+            flexDirection: 'column',
+            padding: theme.spacing.sm,
       }}>
-        <IconButton icon="arrow_back" onClick={() => router.back()} />
-      </div>
 
       {/* Main Content */}
       <div style={{
@@ -49,7 +54,8 @@ const GalleryPermissionScreen: React.FC = () => {
         {/* Illustration Container */}
         <div style={{
           width: '100%',
-          maxWidth: 280,
+          maxWidth: 240,
+          maxHeight: 240,
           aspectRatio: '1',
           position: 'relative',
           display: 'flex',
@@ -82,8 +88,8 @@ const GalleryPermissionScreen: React.FC = () => {
           {/* Camera Icon Badge */}
           <div style={{
             position: 'absolute',
-            bottom: 16,
-            right: 16,
+            bottom: 11,
+            right: 11,
             backgroundColor: theme.colors.primary,
             color: theme.colors.textLight,
             padding: theme.spacing.md,
@@ -94,7 +100,7 @@ const GalleryPermissionScreen: React.FC = () => {
             justifyContent: 'center',
             zIndex: 20,
           }}>
-            <Icon name="photo_camera" size={32} />
+            <Icon name="photo_camera" size={28} />
           </div>
         </div>
 
@@ -116,7 +122,7 @@ const GalleryPermissionScreen: React.FC = () => {
             Let's value your car
           </h1>
           <p style={{
-            fontSize: theme.fontSizes.lg,
+            fontSize: theme.fontSizes.base,
             color: theme.colors.textSecondary,
             lineHeight: 1.5,
           }}>
@@ -164,6 +170,8 @@ const GalleryPermissionScreen: React.FC = () => {
         </div>
       </div>
 
+      </ContentArea>
+
       {/* CSS Animation */}
       <style>{`
         @keyframes pulse {
@@ -171,7 +179,7 @@ const GalleryPermissionScreen: React.FC = () => {
           50% { opacity: 0.6; }
         }
       `}</style>
-    </ScreenContainer>
+    </PageContainer>
   );
 };
 
