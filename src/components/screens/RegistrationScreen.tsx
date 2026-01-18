@@ -61,18 +61,18 @@ const RegistrationScreen: React.FC = () => {
     if (validateForm()) {
       console.log('Registering user:', formData);
       // TODO: Implement actual registration logic
-      router.push('/bank-details');
+      router.push('/home');
     }
   };
 
   const handleGoogleSignup = () => {
     console.log('Google signup');
-    router.push('/bank-details');
+    router.push('/home');
   };
 
   const handleAppleSignup = () => {
     console.log('Apple signup');
-    router.push('/bank-details');
+    router.push('/home');
   };
 
   const handleInputChange = (field: string, value: string) => {
@@ -481,7 +481,7 @@ const RegistrationScreen: React.FC = () => {
           <p style={{
             color: theme.colors.error,
             fontSize: theme.fontSizes.xs,
-            marginTop: -theme.spacing.sm,
+            marginTop: theme.spacing.sm,
             marginBottom: theme.spacing.md,
           }}>
             {errors.terms}
