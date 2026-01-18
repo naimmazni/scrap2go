@@ -9,14 +9,49 @@ import { Icon, Badge, ProgressBar, PageContainer } from '@/components/ui';
 const CameraScreen: React.FC = () => {
   const router = useRouter();
   const [currentStep, setCurrentStep] = useState(0);
+
+  // UPDATED: New Order and Split Interior
   const steps = [
-    { name: 'Front', description: 'Front view of the vehicle' },
-    { name: 'Rear', description: 'Back view with license plate' },
-    { name: 'Left Side', description: 'Left side profile' },
-    { name: 'Right Side', description: 'Right side profile' },
-    { name: 'Hood', description: 'Open hood/bonnet view' },
-    { name: 'Interior', description: 'Dashboard and front seats' },
-    { name: 'Engine', description: 'Engine compartment' },
+    { 
+      name: 'Front', 
+      description: 'Front view of the vehicle', 
+      image: '/capture-car/front-view.jpg' 
+    },
+    { 
+      name: 'Rear', 
+      description: 'Back view with license plate', 
+      image: '/capture-car/rear-view.jpg' 
+    },
+    { 
+      name: 'Left Side', 
+      description: 'Left side profile', 
+      image: '/capture-car/left-view.jpg' 
+    },
+    { 
+      name: 'Right Side', 
+      description: 'Right side profile', 
+      image: '/capture-car/right-view.jpg' 
+    },
+    { 
+      name: 'Engine', 
+      description: 'Engine compartment view', 
+      image: '/capture-car/engine-view.jpg'
+    },
+    { 
+      name: 'Boot', 
+      description: 'Open boot / trunk view', 
+      image: '/capture-car/trunk-view.jpg' 
+    },
+    { 
+      name: 'Int. Front', 
+      description: 'Dashboard and front seats', 
+      image: '/capture-car/interior-view-front.jpg' 
+    },
+    { 
+      name: 'Int. Rear', 
+      description: 'Rear seats and legroom', 
+      image: '/capture-car/interior-view-rear.jpg' 
+    },
   ];
 
   const handleCapture = () => {
@@ -27,16 +62,20 @@ const CameraScreen: React.FC = () => {
     }
   };
 
+  const currentProgress = Math.round(((currentStep + 1) / steps.length) * 100);
+
   return (
     <PageContainer style={{ backgroundColor: theme.colors.black, overflow: 'hidden' }}>
-      {/* Camera Background */}
+      
+      {/* --- 1. Camera Background --- */}
       <div style={{
         position: 'absolute',
         inset: 0,
-        backgroundImage: 'url("https://lh3.googleusercontent.com/aida-public/AB6AXuC6CIYeagGXFkzu2P3bHEyPDH13LNmC8dgwPAmb90mUMQAhxE4nzjGJZ2_3M38vYweaTMy_M-xlw4H_67rdmWq0_ZWug_AvFjQBV7VGJyeOUyMFPZaVtVZy8C7c0zYrE6_1cHy2VCQv7B9hIxvNNA5gulmHvwlnAOmJOdV-2TlrLYgfe6_vswXEqfk6BX0XNo2USnpWDag0aO-O1u6a7St4nnS2JIFAv97KuuPRHwpZImTVAX9epHjKfmQlchIOLjPcIzK0tLLjh_dy")',
-        backgroundSize: 'cover',
+        backgroundImage: `url("${steps[currentStep].image}")`,
+        backgroundSize: 'cover', 
         backgroundPosition: 'center',
         opacity: 0.9,
+        transition: 'background-image 0.5s ease-in-out',
       }}>
         <div style={{
           position: 'absolute',
@@ -45,7 +84,7 @@ const CameraScreen: React.FC = () => {
         }} />
       </div>
 
-      {/* Top Bar */}
+      {/* --- 2. Top Bar (Close Button) --- */}
       <div style={{
         position: 'relative',
         zIndex: 30,
@@ -73,6 +112,7 @@ const CameraScreen: React.FC = () => {
           <Icon name="close" size={24} />
         </button>
 
+        {/* Step Counter Badge */}
         <div style={{
           padding: '4px 12px',
           borderRadius: theme.borderRadius.full,
@@ -91,6 +131,7 @@ const CameraScreen: React.FC = () => {
           </span>
         </div>
 
+        {/* Flash Button */}
         <button
           style={{
             width: 40,
@@ -108,31 +149,34 @@ const CameraScreen: React.FC = () => {
         </button>
       </div>
 
-      {/* Center Content */}
+      {/* --- 3. Top Info Wrapper (Instruction + AI Card) --- */}
       <div style={{
         position: 'absolute',
-        inset: 0,
+        top: '110px', 
+        left: 0,
+        right: 0,
+        zIndex: 25,
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
-        justifyContent: 'center',
-        padding: theme.spacing.lg,
-        zIndex: 10,
+        gap: theme.spacing.sm,
+        pointerEvents: 'none', 
       }}>
-        {/* Instruction */}
+        
+        {/* Instruction Card */}
         <div style={{
-          marginBottom: theme.spacing.lg,
           padding: '12px 20px',
           borderRadius: theme.borderRadius['2xl'],
           backgroundColor: withOpacity('#000', 0.6),
           backdropFilter: 'blur(24px)',
           border: `1px solid ${withOpacity('#fff', 0.1)}`,
+          pointerEvents: 'auto',
+          textAlign: 'center',
         }}>
           <h2 style={{
             color: theme.colors.textLight,
             fontSize: theme.fontSizes.lg,
             fontWeight: theme.fontWeights.bold,
-            textAlign: 'center',
             marginBottom: 4,
           }}>
             {steps[currentStep].name}
@@ -140,14 +184,69 @@ const CameraScreen: React.FC = () => {
           <p style={{
             color: theme.colors.textLight,
             fontSize: theme.fontSizes.sm,
-            textAlign: 'center',
             fontWeight: theme.fontWeights.medium,
           }}>
             {steps[currentStep].description}
           </p>
         </div>
 
-        {/* Frame */}
+        {/* AI Status Card */}
+        <div style={{
+          backgroundColor: withOpacity('#000', 0.6),
+          backdropFilter: 'blur(24px)',
+          borderRadius: theme.borderRadius.xl,
+          padding: '12px',
+          boxShadow: theme.shadows.xl,
+          width: '90%',
+          maxWidth: 320,
+          pointerEvents: 'auto',
+        }}>
+          <div style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            marginBottom: 8,
+          }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+              <Icon name="sync" size={16} color={theme.colors.textLight} className="animate-spin" />
+              <span style={{ 
+                fontSize: theme.fontSizes.xs, 
+                fontWeight: theme.fontWeights.bold,
+                color: theme.colors.textLight,
+              }}>
+                Analyzing...
+              </span>
+            </div>
+            <Badge variant="primary" size="sm" style={{ fontSize: 10, color: theme.colors.textLight }}>AI Active</Badge>
+          </div>
+          
+          <ProgressBar progress={currentProgress} height={6} />
+          
+          <div style={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            marginTop: 4,
+          }}>
+            <span style={{ fontSize: 9, color: theme.colors.textLight }}>
+              Detecting dents...
+            </span>
+            <span style={{ fontSize: 9, color: theme.colors.textLight }}>
+              {currentProgress}%
+            </span>
+          </div>
+        </div>
+      </div>
+
+      {/* --- 4. Center Camera Frame --- */}
+      <div style={{
+        position: 'absolute',
+        inset: 0,
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        zIndex: 10,
+        pointerEvents: 'none',
+      }}>
         <div style={{
           position: 'relative',
           width: '100%',
@@ -163,25 +262,32 @@ const CameraScreen: React.FC = () => {
           }} />
           
           {/* Corner Markers */}
-          {['top-left', 'top-right', 'bottom-left', 'bottom-right'].map((corner) => (
-            <div
-              key={corner}
-              style={{
-                position: 'absolute',
-                width: 32,
-                height: 32,
-                ...(corner.includes('top') ? { top: 0 } : { bottom: 0 }),
-                ...(corner.includes('left') ? { left: 0 } : { right: 0 }),
-                borderColor: theme.colors.primary,
-                borderStyle: 'solid',
-                borderWidth: corner.includes('top') ? '4px 0 0 4px' : corner.includes('bottom') && corner.includes('left') ? '0 0 4px 4px' : corner.includes('bottom') && corner.includes('right') ? '0 4px 4px 0' : '4px 4px 0 0',
-                borderTopLeftRadius: corner === 'top-left' ? theme.borderRadius.xl : 0,
-                borderTopRightRadius: corner === 'top-right' ? theme.borderRadius.xl : 0,
-                borderBottomLeftRadius: corner === 'bottom-left' ? theme.borderRadius.xl : 0,
-                borderBottomRightRadius: corner === 'bottom-right' ? theme.borderRadius.xl : 0,
-              }}
-            />
-          ))}
+          {['top-left', 'top-right', 'bottom-left', 'bottom-right'].map((corner) => {
+            const markerOffset = 10;
+            return (
+              <div
+                key={corner}
+                style={{
+                  position: 'absolute',
+                  width: 32,
+                  height: 32,
+                  ...(corner.includes('top') ? { top: markerOffset } : { bottom: markerOffset }),
+                  ...(corner.includes('left') ? { left: markerOffset } : { right: markerOffset }),
+                  borderColor: theme.colors.primary,
+                  borderStyle: 'solid',
+                  borderWidth: 
+                    corner === 'top-left'     ? '4px 0 0 4px' :
+                    corner === 'top-right'    ? '4px 4px 0 0' : 
+                    corner === 'bottom-left'  ? '0 0 4px 4px' :
+                    '0 4px 4px 0', 
+                  borderTopLeftRadius:     corner === 'top-left' ? theme.borderRadius.xl : 0,
+                  borderTopRightRadius:    corner === 'top-right' ? theme.borderRadius.xl : 0,
+                  borderBottomLeftRadius:  corner === 'bottom-left' ? theme.borderRadius.xl : 0,
+                  borderBottomRightRadius: corner === 'bottom-right' ? theme.borderRadius.xl : 0,
+                }}
+              />
+            );
+          })}
           
           {/* Center Crosshair */}
           <div style={{
@@ -197,7 +303,7 @@ const CameraScreen: React.FC = () => {
         </div>
       </div>
 
-      {/* Bottom Section */}
+      {/* --- 5. Bottom Controls Section --- */}
       <div style={{
         position: 'absolute',
         bottom: 0,
@@ -231,8 +337,7 @@ const CameraScreen: React.FC = () => {
               <span style={{ 
                 fontSize: theme.fontSizes.sm, 
                 fontWeight: theme.fontWeights.bold,
-                color: theme.colors.primary,
-                letterSpacing: 0.3,
+                color: theme.colors.textPrimary,
               }}>
                 Analyzing Condition...
               </span>
@@ -295,13 +400,14 @@ const CameraScreen: React.FC = () => {
               }}>
                 <Icon 
                   name={
-                    index === 0 ? 'directions_car' :
-                    index === 1 ? 'directions_car' :
-                    index === 2 ? 'turn_left' :
-                    index === 3 ? 'turn_right' :
-                    index === 4 ? 'car_repair' :
-                    index === 5 ? 'airline_seat_recline_normal' :
-                    'settings'
+                    index === 0 ? 'directions_car' : // Front
+                    index === 1 ? 'directions_car' : // Rear
+                    index === 2 ? 'turn_left' :      // Left
+                    index === 3 ? 'turn_right' :     // Right
+                    index === 4 ? 'settings' :     // Engine
+                    index === 5 ? 'luggage' :        // Boot
+                    index === 6 ? 'airline_seat_recline_normal' : // Int Front
+                    'airline_seat_recline_extra'     // Int Rear
                   } 
                   size={index === currentStep ? 22 : 18} 
                   color={theme.colors.textLight} 
@@ -404,6 +510,3 @@ const CameraScreen: React.FC = () => {
 };
 
 export default CameraScreen;
-
-
-

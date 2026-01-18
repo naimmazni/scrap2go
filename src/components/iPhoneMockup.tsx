@@ -1,11 +1,33 @@
 // iPhone 15 Pro Mockup Component
-import React, { ReactNode } from 'react';
+import React, { ReactNode, useEffect, useState } from 'react';
 
+// Import the status bar icons from react library (Ionicons - iOS style)
+import { IoCellular, IoWifiSharp, IoBatteryFull } from "react-icons/io5";
 interface IPhoneMockupProps {
   children: ReactNode;
 }
 
 const IPhoneMockup: React.FC<IPhoneMockupProps> = ({ children }) => {
+
+  // --- Added Status Bar Logic ---
+  const [time, setTime] = useState<string | null>(null);
+
+  useEffect(() => {
+    const updateTime = () => {
+      const now = new Date();
+      const timeString = now.toLocaleTimeString('en-US', {
+        hour: 'numeric',
+        minute: '2-digit',
+        hour12: true,
+      }).replace(/ AM| PM/, '');
+      setTime(timeString);
+    };
+
+    updateTime();
+    const interval = setInterval(updateTime, 1000);
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <div style={{
       // Device frame outer container
@@ -83,7 +105,47 @@ const IPhoneMockup: React.FC<IPhoneMockupProps> = ({ children }) => {
           borderRadius: 43,
           overflow: 'hidden',
           position: 'relative',
+          backgroundColor: '#fff', // Ensure background is white for status bar visibility
         }}>
+
+          {/* --- NEW: iOS Status Bar --- */}
+          <div
+            style={{
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              right: 0,
+              height: 54,
+              padding: '0 26px',
+              display: 'flex',
+              alignItems: 'center', 
+              justifyContent: 'space-between',
+              color: '#000', 
+              zIndex: 900,
+              pointerEvents: 'none',
+              paddingTop: 12,
+              fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif',
+            }}
+          >
+            {/* Time */}
+            <div style={{ width: 60, textAlign: 'center', fontWeight: 600, fontSize: 17, letterSpacing: '-0.5px', marginLeft: 4 }}>
+              {time ?? '9:41'}
+            </div>
+
+            {/* ICONS - Using React Icons Library */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+               {/* Cellular */}
+               <IoCellular size={18} />
+               
+               {/* Wifi */}
+               <IoWifiSharp size={18} />
+               
+               {/* Battery - Rotated to match iOS horizontal style often needed */}
+               <IoBatteryFull size={22} style={{ opacity: 0.8 }} />
+            </div>
+          </div>
+          
+
           {/* Screen content - full height, behind Dynamic Island */}
           <div style={{
             width: '100%',
